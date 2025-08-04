@@ -473,21 +473,21 @@ export default function Projects() {
                   }}
                 />
                 <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
-                  {/* Project Title at Top */}
+                  {/* Project Title*/}
                   <div className="text-center mb-4">
                     <TextAnimate className="text-white text-base lg:text-lg font-bold">
                       Project Title
                     </TextAnimate>
                   </div>
                   
-                  {/* Description in Middle */}
+                  {/* Description*/}
                   <div className="flex-1 flex items-center justify-center text-center">
                     <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
                   </div>
                   
-                  {/* Developer and Published at Bottom */}
+                  {/* Developer and Published*/}
                   <div className="mt-auto pt-4 border-t border-white/20 text-center">
                     <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
                       Developer: JUAN DELA CRUZ
@@ -536,21 +536,21 @@ export default function Projects() {
                   }}
                 />
                 <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
-                  {/* Project Title at Top */}
+                  {/* Project Title*/}
                   <div className="text-center mb-4">
                     <TextAnimate className="text-white text-base lg:text-lg font-bold">
                       Project Title
                     </TextAnimate>
                   </div>
                   
-                  {/* Description in Middle */}
+                  {/* Description */}
                   <div className="flex-1 flex items-center justify-center text-center">
                     <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
                   </div>
                   
-                  {/* Developer and Published at Bottom */}
+                  {/* Developer and Published*/}
                   <div className="mt-auto pt-4 border-t border-white/20 text-center">
                     <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
                       Developer: JUAN DELA CRUZ
@@ -599,21 +599,21 @@ export default function Projects() {
                   }}
                 />
                 <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
-                  {/* Project Title at Top */}
+                  {/* Project Title*/}
                   <div className="text-center mb-4">
                     <TextAnimate className="text-white text-base lg:text-lg font-bold">
                       Project Title
                     </TextAnimate>
                   </div>
                   
-                  {/* Description in Middle */}
+                  {/* Description*/}
                   <div className="flex-1 flex items-center justify-center text-center">
                     <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
                   </div>
                   
-                  {/* Developer and Published at Bottom */}
+                  {/* Developer and Published*/}
                   <div className="mt-auto pt-4 border-t border-white/20 text-center">
                     <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
                       Developer: JUAN DELA CRUZ
