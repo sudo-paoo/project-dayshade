@@ -1,24 +1,5 @@
  "use client"
- {/* 
-  Dear Web Developer/Programmer,
-  When I wrote this code, Me, God, Blessed Carlo Acutis Our Patron for Web Development, and Terry A. Davis, God's Lonely Programmer understood it.
-  Now only God, Blessed Carlo Acutis, and Terry A. Davis understand it.
-  If you are reading this, I am sorry.
-  Sincerely,
-  A humble web developer  
-
-  P.S Dont worry code is full of comments and documentation.
-
-
--LIBRARY USED:
-  - Next.js
-  - React
-  - Tailwind CSS
-  -magic ui/text-animate.tsx
-
-
-  */}
-
+ 
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
