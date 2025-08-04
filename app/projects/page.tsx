@@ -7,6 +7,8 @@ import { GlassContainer } from "@/components/shared/glass-container"
 import { TextAnimate } from "@/components/magicui/text-animate";
 
 export default function Projects() {
+  //THE NAVIGATION MENU IS SUBJECT TO CHANGE DUE TO THE FACT OF THE USE CLIENT COMPONENTS GLASS CONTAINER IS
+  //NOT LOADING PROPERLY IN SERVER COMPONENTS
   // START OF THE MOBILE MENU
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
@@ -26,7 +28,7 @@ export default function Projects() {
   const navigationItems = [
     {
       name: "Home",
-      href: "#",
+      href: "/home",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
@@ -456,7 +458,7 @@ export default function Projects() {
                   />
                 </div>
               </GlassContainer>
-              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
                 <div
                   style={{ 
                     backgroundColor: "var(--color-pd-dark-grey)",
@@ -470,23 +472,29 @@ export default function Projects() {
                     borderRadius: "16px",
                   }}
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
-                  <div className="text-center">
-                    <TextAnimate className="text-white text-base lg:text-lg font-bold mb-4">
+                <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
+                  {/* Project Title at Top */}
+                  <div className="text-center mb-4">
+                    <TextAnimate className="text-white text-base lg:text-lg font-bold">
                       Project Title
                     </TextAnimate>
-                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto mb-4">
+                  </div>
+                  
+                  {/* Description in Middle */}
+                  <div className="flex-1 flex items-center justify-center text-center">
+                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
-                    
-                    <div className="mt-6 pt-4 border-t border-white/20">
-                      <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
-                        Developer: JUAN DELA CRUZ
-                      </TextAnimate>
-                      <TextAnimate className="text-white/70 text-xs">
-                        Published: November 20, 2024
-                      </TextAnimate>
-                    </div>
+                  </div>
+                  
+                  {/* Developer and Published at Bottom */}
+                  <div className="mt-auto pt-4 border-t border-white/20 text-center">
+                    <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
+                      Developer: JUAN DELA CRUZ
+                    </TextAnimate>
+                    <TextAnimate className="text-white/70 text-xs">
+                      Published: November 20, 2024
+                    </TextAnimate>
                   </div>
                 </div>
               </GlassContainer>
@@ -513,7 +521,7 @@ export default function Projects() {
                   />
                 </div>
               </GlassContainer>
-              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
                 <div
                   style={{ 
                     backgroundColor: "var(--color-pd-dark-grey)",
@@ -527,23 +535,29 @@ export default function Projects() {
                     borderRadius: "16px",
                   }}
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
-                  <div className="text-center">
-                    <TextAnimate className="text-white text-base lg:text-lg font-bold mb-4">
+                <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
+                  {/* Project Title at Top */}
+                  <div className="text-center mb-4">
+                    <TextAnimate className="text-white text-base lg:text-lg font-bold">
                       Project Title
                     </TextAnimate>
-                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto mb-4">
+                  </div>
+                  
+                  {/* Description in Middle */}
+                  <div className="flex-1 flex items-center justify-center text-center">
+                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
-                    
-                    <div className="mt-6 pt-4 border-t border-white/20">
-                      <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
-                        Developer: JUAN DELA CRUZ
-                      </TextAnimate>
-                      <TextAnimate className="text-white/70 text-xs">
-                        Published: October 10, 2024
-                      </TextAnimate>
-                    </div>
+                  </div>
+                  
+                  {/* Developer and Published at Bottom */}
+                  <div className="mt-auto pt-4 border-t border-white/20 text-center">
+                    <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
+                      Developer: JUAN DELA CRUZ
+                    </TextAnimate>
+                    <TextAnimate className="text-white/70 text-xs">
+                      Published: October 10, 2024
+                    </TextAnimate>
                   </div>
                 </div>
               </GlassContainer>
@@ -570,7 +584,7 @@ export default function Projects() {
                   />
                 </div>
               </GlassContainer>
-              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
                 <div
                   style={{ 
                     backgroundColor: "var(--color-pd-dark-grey)",
@@ -584,23 +598,29 @@ export default function Projects() {
                     borderRadius: "16px",
                   }}
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
-                  <div className="text-center">
-                    <TextAnimate className="text-white text-base lg:text-lg font-bold mb-4">
+                <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
+                  {/* Project Title at Top */}
+                  <div className="text-center mb-4">
+                    <TextAnimate className="text-white text-base lg:text-lg font-bold">
                       Project Title
                     </TextAnimate>
-                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto mb-4">
+                  </div>
+                  
+                  {/* Description in Middle */}
+                  <div className="flex-1 flex items-center justify-center text-center">
+                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
-                    
-                    <div className="mt-6 pt-4 border-t border-white/20">
-                      <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
-                        Developer: JUAN DELA CRUZ
-                      </TextAnimate>
-                      <TextAnimate className="text-white/70 text-xs">
-                        Published: December 15, 2024
-                      </TextAnimate>
-                    </div>
+                  </div>
+                  
+                  {/* Developer and Published at Bottom */}
+                  <div className="mt-auto pt-4 border-t border-white/20 text-center">
+                    <TextAnimate className="text-[var(--color-pd-green)] text-sm font-semibold mb-1">
+                      Developer: JUAN DELA CRUZ
+                    </TextAnimate>
+                    <TextAnimate className="text-white/70 text-xs">
+                      Published: December 15, 2024
+                    </TextAnimate>
                   </div>
                 </div>
               </GlassContainer>
