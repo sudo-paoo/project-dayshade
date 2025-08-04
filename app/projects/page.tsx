@@ -439,8 +439,8 @@ export default function Projects() {
           {/* Project Cards */}
           <div className="space-y-8">
             {/* Project Card 1 */}
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-              <GlassContainer className="w-full md:w-[36rem] h-96 md:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200">
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
+              <GlassContainer className="w-full lg:w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200">
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                    {/* PLACE IMAGE HERE */}
                   <Image
@@ -456,7 +456,7 @@ export default function Projects() {
                   />
                 </div>
               </GlassContainer>
-              <GlassContainer variant="card" className="flex-1 h-96 md:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
                 <div
                   style={{ 
                     backgroundColor: "var(--color-pd-dark-grey)",
@@ -470,12 +470,12 @@ export default function Projects() {
                     borderRadius: "16px",
                   }}
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 md:p-8">
+                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
                   <div className="text-center">
-                    <TextAnimate className="text-white text-base md:text-lg font-bold mb-4">
+                    <TextAnimate className="text-white text-base lg:text-lg font-bold mb-4">
                       Project Title
                     </TextAnimate>
-                    <TextAnimate className="text-white text-sm sm:text-base md:text-lg font-medium leading-relaxed break-words hyphens-auto overflow-hidden mb-4">
+                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto mb-4">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
                     
@@ -496,8 +496,8 @@ export default function Projects() {
 
 
             {/* Project Card 2 */}
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-              <GlassContainer className="w-full md:w-[36rem] h-96 md:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200">
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
+              <GlassContainer className="w-full lg:w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200">
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                    {/* PLACE IMAGE HERE */}
                   <Image
@@ -513,7 +513,7 @@ export default function Projects() {
                   />
                 </div>
               </GlassContainer>
-              <GlassContainer variant="card" className="flex-1 h-96 md:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
                 <div
                   style={{ 
                     backgroundColor: "var(--color-pd-dark-grey)",
@@ -527,12 +527,12 @@ export default function Projects() {
                     borderRadius: "16px",
                   }}
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 md:p-8">
+                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
                   <div className="text-center">
-                    <TextAnimate className="text-white text-base md:text-lg font-bold mb-4">
+                    <TextAnimate className="text-white text-base lg:text-lg font-bold mb-4">
                       Project Title
                     </TextAnimate>
-                    <TextAnimate className="text-white text-sm sm:text-base md:text-lg font-medium leading-relaxed break-words hyphens-auto overflow-hidden mb-4">
+                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto mb-4">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
                     
@@ -553,8 +553,8 @@ export default function Projects() {
 
 
             {/* Project Card 3 */}
-            <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-              <GlassContainer className="w-full md:w-[36rem] h-96 md:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200">
+            <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
+              <GlassContainer className="w-full lg:w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200">
                 <div className="w-full h-full rounded-2xl overflow-hidden relative">
                        {/* PLACE IMAGE HERE */}
                   <Image
@@ -570,7 +570,7 @@ export default function Projects() {
                   />
                 </div>
               </GlassContainer>
-              <GlassContainer variant="card" className="flex-1 h-96 md:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
+              <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex items-center justify-center relative overflow-hidden">
                 <div
                   style={{ 
                     backgroundColor: "var(--color-pd-dark-grey)",
@@ -584,12 +584,12 @@ export default function Projects() {
                     borderRadius: "16px",
                   }}
                 />
-                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 md:p-8">
+                <div className="relative z-10 w-full h-full flex items-center justify-center p-4 sm:p-6 lg:p-8">
                   <div className="text-center">
-                    <TextAnimate className="text-white text-base md:text-lg font-bold mb-4">
+                    <TextAnimate className="text-white text-base lg:text-lg font-bold mb-4">
                       Project Title
                     </TextAnimate>
-                    <TextAnimate className="text-white text-sm sm:text-base md:text-lg font-medium leading-relaxed break-words hyphens-auto overflow-hidden mb-4">
+                    <TextAnimate className="text-white text-xs sm:text-sm md:text-base lg:text-lg font-medium leading-relaxed break-words hyphens-auto mb-4">
                       Brief description of the project goes here. It should be concise yet informative, giving an overview of what the project is about and its key features.
                     </TextAnimate>
                     
