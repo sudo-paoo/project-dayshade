@@ -405,7 +405,7 @@ export default function Projects() {
                   Developers
                 </TextAnimate>
                 <TextAnimate className="text-white/70 text-sm md:text-base lg:text-lg">
-                  Put Developer names here
+                  Juan, Maria, and Jose
                 </TextAnimate>
               </div>
             </div>
