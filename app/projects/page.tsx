@@ -371,12 +371,12 @@ export default function Projects() {
           {/* Content Layout */}
           <div className="relative z-10 flex flex-col lg:flex-row gap-4 lg:gap-8 h-full">
             {/* Left Side - Text Content */}
-            <div className="flex-1 lg:flex-[1.2] flex flex-col justify-between pr-0 lg:pr-4">
+            <div className="flex-1 lg:flex-[2] flex flex-col justify-between pr-0 lg:pr-4">
               <div>
                 <TextAnimate className="text-white text-3xl md:text-4xl lg:text-5xl font-bold mb-3 lg:mb-4">
                   Featured Projects
                 </TextAnimate>
-                <TextAnimate className="text-white/90 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-8 max-w-none lg:max-w-2xl leading-relaxed">
+                <TextAnimate className="text-white/90 text-lg md:text-xl lg:text-2xl mb-6 lg:mb-8 max-w-none leading-relaxed">
                  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.
                 </TextAnimate>
               </div>
@@ -392,8 +392,8 @@ export default function Projects() {
             </div>
             
             {/* Right Side - Project Card */}
-            <div className="flex-1 lg:flex-[0.8] flex justify-center lg:justify-end">
-              <div className="w-full max-w-sm lg:max-w-md xl:max-w-lg">
+            <div className="flex-1 lg:flex-[1] flex justify-center lg:justify-end">
+              <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl">
                 <div className="mb-3 lg:mb-4">
                   <TextAnimate className="text-white text-lg md:text-xl lg:text-2xl font-semibold mb-2 text-center">
                     TITLE OF THE PROJECT
