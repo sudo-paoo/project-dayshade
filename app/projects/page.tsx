@@ -460,15 +460,14 @@ export default function Projects() {
               </GlassContainer>
               <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
                 <div
-                  style={{ 
+                  style={{
                     backgroundColor: "var(--color-pd-dark-grey)",
-                    pointerEvents: "none",
                     position: "absolute",
                     inset: 0,
                     backgroundImage: "url(/assets/pattern.png)",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    opacity: 0.03,
+                    backgroundRepeat: "repeat",
+                    backgroundSize: "auto",
+                    opacity: 0.18,
                     borderRadius: "16px",
                   }}
                 />
@@ -522,16 +521,15 @@ export default function Projects() {
                 </div>
               </GlassContainer>
               <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-                <div
-                  style={{ 
+               <div
+                  style={{
                     backgroundColor: "var(--color-pd-dark-grey)",
-                    pointerEvents: "none",
                     position: "absolute",
                     inset: 0,
                     backgroundImage: "url(/assets/pattern.png)",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    opacity: 0.03,
+                    backgroundRepeat: "repeat",
+                    backgroundSize: "auto",
+                    opacity: 0.18,
                     borderRadius: "16px",
                   }}
                 />
@@ -586,15 +584,14 @@ export default function Projects() {
               </GlassContainer>
               <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
                 <div
-                  style={{ 
+                  style={{
                     backgroundColor: "var(--color-pd-dark-grey)",
-                    pointerEvents: "none",
                     position: "absolute",
                     inset: 0,
                     backgroundImage: "url(/assets/pattern.png)",
-                    backgroundRepeat: "no-repeat",
-                    backgroundSize: "cover",
-                    opacity: 0.03,
+                    backgroundRepeat: "repeat",
+                    backgroundSize: "auto",
+                    opacity: 0.18,
                     borderRadius: "16px",
                   }}
                 />
