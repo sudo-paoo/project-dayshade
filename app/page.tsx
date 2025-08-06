@@ -62,10 +62,10 @@ const officerData = [
 export default function Page() {
   return (
     <>
-      <div className="min-h-screen h-auto w-full bg-black text-white container mx-auto px-4 py-4 bg-[url('/assets/circles.png')] bg-cover">
+      <div className="min-h-screen h-auto w-full bg-black text-white container mx-auto px-4 py-4 bg-[url('/assets/circles.png')] bg-[length:150%] ">
         {/* Mobile View  of Home*/}
         {/* Opening Div*/}
-        <GlassContainer className="md:hidden flex flex-col m-3 p-2 items-center justify-between">
+        <GlassContainer className="md:hidden flex flex-col m-3 p-2 items-center justify-between bg-gradient-to-b from-black/50 from-90% via-black via-100%">
           <div className="flex items-center justify-center p-4">
             <Image
               src="/assets/pd-logo.png"
@@ -126,7 +126,7 @@ export default function Page() {
               </div>
               {/* Fourth Row */}
               <div className="flex basis-full items-center justify-center">
-                {officerData.slice(5, 9).map((officer) => (
+                {officerData.slice(9, 14).map((officer) => (
                   <SimpleProfile
                     key={officer.title}
                     title={officer.title}
@@ -135,6 +135,18 @@ export default function Page() {
                 ))}
               </div>
             </div>
+          </div>
+          <div className="flex flex-col ">
+            <Button variant="gradient" size="sm">
+              Show Members
+            </Button>
+          </div>
+          <div className="flex flex-col py-4 mx-6">
+            <p className="font-bold text-[0.6rem] text-center">
+              Programmer's Den - The computer technology-focused college
+              organization preparing students for industry practices in Design
+              and Development
+            </p>
           </div>
         </GlassContainer>
       </div>
