@@ -1,8 +1,9 @@
 import { Separator } from "@/components/ui/separator";
 import { GlassContainer } from "@/components/shared/glass-container";
 import Image from "next/image";
-import Button from "@/components/button";
-import SimpleProfile from "@/components/profileui/SimpleProfile";
+import Button from "@/components/global/button";
+import SimpleProfile from "@/components/profile-ui/SimpleProfile";
+import MonthlyProjectShowcase from "@/components/projects-ui/MonthlyProjectShowcase";
 
 const officerData = [
   {
@@ -62,7 +63,7 @@ const officerData = [
 export default function Page() {
   return (
     <>
-      <div className="min-h-screen h-auto w-full bg-black text-white container mx-auto px-4 py-4 bg-[url('/assets/circles.png')] bg-[length:150%]">
+      <div className="min-h-screen h-auto w-full pt-4 bg-black text-white container bg-[url('/assets/circles.png')] bg-cover">
         {/* Mobile View  of Home*/}
         {/* Opening Div*/}
         <GlassContainer className="md:hidden bg-black/60 flex flex-col m-3 p-2 items-center justify-between mask-b-from-95% mask-b-to-99%">
@@ -149,6 +150,14 @@ export default function Page() {
             </p>
           </div>
         </GlassContainer>
+        {/* Monthly Project Showcase */}
+        <div className="flex flex-col justify-center items-center h-auto w-full pb-8 bg-black bg-gradient-to-b from-black via-[var(--color-pd-dark-grey)] to-black">
+          <MonthlyProjectShowcase></MonthlyProjectShowcase>
+
+          <Button variant="gradient" size="sm">
+            View All
+          </Button>
+        </div>
       </div>
     </>
   );
