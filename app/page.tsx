@@ -4,59 +4,61 @@ import Image from "next/image";
 import Button from "@/components/global/button";
 import SimpleProfile from "@/components/profile-ui/SimpleProfile";
 import MonthlyProjectShowcase from "@/components/projects-ui/MonthlyProjectShowcase";
+import { FeatherIcon } from "lucide-react";
+import FeaturedProject from "@/components/projects-ui/FeaturedProject";
 
 const officerData = [
   {
     title: "President",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Executive Secretary",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Vice President of Development",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Vice President of Comp. Prog.",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Vice President of Multimedia",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Head of Development",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Head of Human Resources",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Head of Recruitment",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Head of Communication",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Head of Finances",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Secretary of Finances",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Audit",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
   {
     title: "Social Media Manager",
-    imgSrc: "/assets/about-pics/carousel-1.png",
+    imgSrc: "/assets/400x400.png",
   },
 ];
 
@@ -66,7 +68,7 @@ export default function Page() {
       <div className="min-h-screen h-auto w-full pt-4 bg-black text-white container bg-[url('/assets/circles.png')] bg-cover">
         {/* Mobile View  of Home*/}
         {/* Opening Div*/}
-        <GlassContainer className="md:hidden bg-black/60 flex flex-col m-3 p-2 items-center justify-between mask-b-from-95% mask-b-to-99%">
+        <GlassContainer className="md:hidden bg-black/50 flex flex-col m-3 p-2 items-center justify-between mask-b-from-99%">
           <div className="flex items-center justify-center p-4">
             <Image
               src="/assets/pd-logo.png"
@@ -150,14 +152,23 @@ export default function Page() {
             </p>
           </div>
         </GlassContainer>
-        {/* Monthly Project Showcase */}
-        <div className="flex flex-col justify-center items-center h-auto w-full pb-8 bg-black bg-gradient-to-b from-black via-[var(--color-pd-dark-grey)] to-black">
-          <MonthlyProjectShowcase></MonthlyProjectShowcase>
-
-          <Button variant="gradient" size="sm">
-            View All
-          </Button>
+        {/* Projects Section */}
+        <div className="flex flex-col relative top-[-30px] justify-center items-center h-auto w-full py-8 bg-black bg-gradient-to-b from-black via-[#252323] to-black mask-y-from-98% mask-y-to-90%">
+          {/* Monthly Project Showcase */}
+          <div className="flex flex-col justify-center items-center pb-8">
+            <MonthlyProjectShowcase></MonthlyProjectShowcase>
+            <Button variant="gradient" size="xs">
+              View All
+            </Button>
+          </div>
+          {/* Featured Project */}
+          <div className="flex flex-col justify-center items-center pb-8">
+            <FeaturedProject></FeaturedProject>
+          </div>
         </div>
+        <GlassContainer variant="default">
+          <div></div>
+        </GlassContainer>
       </div>
     </>
   );

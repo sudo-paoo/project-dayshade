@@ -13,7 +13,7 @@ const SimpleProfile = ({ title, imageSrc, className }: Props) => {
       <div
         className={`flex min-h-25 max-w-50 flex-col items-center justify-start gap-y-3 p-2 ${className}`}
       >
-        <div className="flex flex-shrink-0 w-12 h-12">
+        <div className="flex flex-shrink-0 w-14 h-14">
           <Image
             className="rounded-full object-cover"
             src={imageSrc}

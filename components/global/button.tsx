@@ -5,7 +5,7 @@ interface Props {
   children: ReactNode;
   onClick?: () => void;
   variant?: "default" | "gradient" | "glass";
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   className?: string;
 }
 
@@ -26,6 +26,7 @@ const Button = ({
   };
 
   const sizes = {
+    xs: "h-2 py-3 px-6 text-xs",
     sm: "h-2 py-4 px-6 text-xs",
     md: "h-10 px-4 py-2",
     lg: "h-11 px-8",
