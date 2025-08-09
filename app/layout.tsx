@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Footer from "@/components/global/footer";
-import "./globals.css";
-
+import "@/styles/globals.css";
+import Navbar from "@/components/global/navbar";
 
 export const metadata: Metadata = {
   title: "Programmers' Den",
@@ -15,9 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}>
-        {children}
+      <body className={`antialiased`}>
+        <Navbar />
+        {<main className="min-h-screen">{children}</main>}
         <Footer />
       </body>
     </html>
