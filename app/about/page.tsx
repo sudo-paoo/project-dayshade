@@ -22,7 +22,7 @@ export default function About() {
 				<Navbar />
 			</div>
 			{/* Panel 1 */}
-			<div className='min-h-screen  flex flex-col overflow-hidden items-center justify-around text-slate-100 relative p-24'>
+			<div className='min-h-screen  flex flex-col overflow-hidden items-center justify-around text-slate-100 relative py-24'>
 
 				{/* BACKGROUND IMAGES [TODO: PARALLAX MOVEMENT] */}
 				<div className='absolute inset-0 bg-[#1b1b1b] z-[-1]'>
@@ -35,17 +35,17 @@ export default function About() {
 					<img className='size-56 rotate-150 absolute bottom-[-5rem] left-[-5rem]' src="/assets/circle-purple.png" alt="Purple circle" />
 				</div>
 				{/* CTA */}
-				<div className='flex items-center justify-center gap-8 my-12'>
-					<img src="/assets/about-pics/about-hero-img.png" alt="" />
-					<div className='border-gray-800 border p-6 rounded-2xl max-w-2xl bg-black/60'>
-						<h1 className='text-6xl font-bold'>ONLY THE <span className='text-[#43DAA1]'>BEST
+				<div className='flex items-center justify-center gap-8 my-12 flex-col sm:flex-row'>
+					<img src="/assets/about-pics/about-hero-img.png" alt="about-hero" className='w-3/4 sm:w-1/2' />
+					<div className='border-gray-800 border p-6 mx-6 rounded-2xl sm:max-w-2xl bg-black/60'>
+						<h1 className='sm:text-6xl text-2xl font-bold'>ONLY THE <span className='text-[#43DAA1]'>BEST
 							<br /> </span>AMONG THE REST</h1>
 						<h3 className='text-2xl font-bold my-2'>Elite Programmers from BSIT, BSIS and BSCS</h3>
-						<p className='text-lg'>
+						<p className='sm:text-lg'>
 							We are the Programmers’ Den, an organization of Tarlac State University - College of Computer Studies that was founded in 2013.
 						</p>
 						<br />
-						<p className='text-lg'>The organization focuses on design and programming-related activities, competitions, and development projects. Our goal is to enhance its member capabilities to learn, adapt, and perform in desired skillsets.</p>
+						<p className='sm:text-lg'>The organization focuses on design and programming-related activities, competitions, and development projects. Our goal is to enhance its member capabilities to learn, adapt, and perform in desired skillsets.</p>
 					</div>
 				</div>
 
@@ -53,27 +53,29 @@ export default function About() {
 				<div className='text-center'>
 
 					{/* TECHNOLOGIES */}
-					<div className='flex flex-row gap-3 bg-black/60 items-center justify-center p-6 rounded-2xl mb-6'>
+					<div className='flex flex-row gap-3 bg-black/60 items-center justify-center p-6 rounded-2xl mb-6 mx-6'>
 						{technologies.map((tech) =>
 						(
-							<div key={tech.id} className='size-16 '>
-								<img src={tech.src} alt={tech.alt} />
+							<div key={tech.id} >
+								<img className='size-8 sm:size-16' src={tech.src} alt={tech.alt} />
 							</div>
 						))}
 					</div>
-					<h3 className=''>UTILIZING THE LATEST TECHNOLOGIES BEYOND THE CLASSROOM</h3>
+					<h3 className='text-sm'>UTILIZING THE LATEST TECHNOLOGIES BEYOND THE CLASSROOM</h3>
 				</div>
 			</div>
 
 			{/* Panel 2 */}
 			<div className='min-h-screen flex flex-col items-center justify-center relative'>
 				<ImageCarousel />
-				<h1 className='text-white text-9xl font-bold z-10'> TOGETHER, FOREVER</h1>
+				<img src="/assets/about-pics/about-pd-logo-3.png" alt="pd logo"
+					className='sm:size-128' />
+				<h1 className='text-white sm:text-9xl text-4xl font-bold z-10'> TOGETHER, FOREVER</h1>
 			</div >
 
 			{/* Panel 3 */}
 			<section className='p-12 bg-[#1b1b1b] text-slate-100 '>
-				<div className='flex items-center justify-center border border-gray-700 rounded-4xl bg-black/50 p-6'>
+				<div className='flex flex-col sm:flex-row items-center justify-center border border-gray-700 rounded-4xl bg-black/60 p-6 gap-12'>
 
 					<div className='flex items-center justify-center'>
 						<div >
@@ -97,14 +99,14 @@ export default function About() {
 			{/* TEAM MEMBERS*/}
 			<div className='bg-[#1B1B1B]' >
 				{/* Top 2 Members Grid */}
-				<section className="grid grid-cols-1 md:grid-cols-2 gap-8 justify-items-center mb-8">
+				<section className="grid grid-cols-2 md:grid-cols-2 justify-items-center mb-8">
 					{topMembers.map((member) => (
 						<TeamMemberCard key={member.id} member={member} />
 					))}
 				</section>
 
 				{/* Remaining Members Grid */}
-				<section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+				<section className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-8 justify-items-center">
 					{otherMembers.map((member) => (
 						<TeamMemberCard key={member.id} member={member} />
 					))}
@@ -114,8 +116,8 @@ export default function About() {
 			{/* PD OFFICERS*/}
 			<div className='bg-[#1b1b1b] py-12'>
 				<h1 className='text-[#4AEE98] text-3xl text-center font-bold'>PD Officers {new Date().getFullYear()} - {new Date().getFullYear() + 1}</h1>
-
-				{/* TODO: FIND COMPONENT FOR ANIMATION OR MANUALLY MAKE IT */}
+				{/* TODO: CAROUSEL */}
+				{/* TODO: FIND COMPONENT FOR POP UP ANIMATION OR MANUALLY MAKE IT */}
 				<div className='flex flex-col items-center justify-center  my-6 overflow-hidden'>
 					<TeamMemberCircles />
 				</div>
@@ -141,22 +143,22 @@ export default function About() {
 			{/* PROGDEN STATUS */}
 			<div className='bg-[#1b1b1b] flex flex-row justify-around items-center py-16'>
 				<div className='flex items-center justify-center flex-col gap-2'>
-					<UsersRound className='size-24 text-white' />
+					<UsersRound className='sm:size-24 size-12 text-white' />
 					{/* TODO: GET ACTIVE COUNT DYNAMIC COUNTING MEMBER*/}
-					<p className='text-[#4AEE98] text-6xl font-bold'>100+</p>
-					<p className='text-[#4AEE98] text-xl'>Active Members</p>
+					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>100+</p>
+					<p className='text-[#4AEE98] m-0 text-sm sm:text-xl'>Active Members</p>
 				</div>
 				<div className='flex items-center justify-center flex-col gap-2'>
-					<UsersRound className='size-24 text-white' />
+					<UsersRound className='sm:size-24 size-12 text-white' />
 					{/* TODO: GET DYNAMIC COUNTINGR*/}
-					<p className='text-[#4AEE98] text-6xl font-bold'>50+</p>
-					<p className='text-[#4AEE98] text-xl'>PROJECTS</p>
+					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>50+</p>
+					<p className='text-[#4AEE98] m-0 text-sm sm:text-xl'>PROJECTS</p>
 				</div>
 				<div className='flex items-center justify-center flex-col gap-2'>
-					<UsersRound className='size-24 text-white' />
+					<UsersRound className='sm:size-24 size-12 text-white' />
 					{/* TODO: GET DYNAMIC COUNTINGR*/}
-					<p className='text-[#4AEE98] text-6xl font-bold'>13</p>
-					<p className='text-[#4AEE98] text-xl'>Years of Excellence</p>
+					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>13</p>
+					<p className='text-[#4AEE98] m-0 text-sm sm:text-xl'>Years of Excellence</p>
 				</div>
 			</div>
 
@@ -171,7 +173,7 @@ export default function About() {
 				/>
 				{/* Content, positioned on top of the background */}
 				<div className='relative z-10 flex flex-col items-center justify-center text-center '>
-					<h1 className='text-6xl font-bold mb-8 text-white'>BE A PART OF OUR STORY</h1>
+					<h1 className='sm:text-6xl text-2xl font-bold mb-8 text-white'>BE A PART OF OUR STORY</h1>
 					<div className='flex gap-4'>
 						<button className='rounded-full border-2 border-white px-8 py-3 font-semibold hover:bg-white hover:text-purple-600 transition-colors duration-300 text-white'>
 							Membership Perks
@@ -185,8 +187,8 @@ export default function About() {
 
 			{/* WEBSITE CREATED BY:  */}
 			<div className='bg-[#1b1b1b] text-white text-center py-24'>
-				<h4 className='font-semibold text-3xl'>ProgDen Website created by: </h4>
-				<p>
+				<h4 className='font-semibold sm:text-3xl text-2xl'>ProgDen Website created by: </h4>
+				<p className='px-6'>
 					King Paolo Franco, John Andrei Tacujan, Paula Joyce Ucol, Mark Louis Cadiente, Marc Jersey Castro,
 					<br />
 					Brigitte Tamondong, Jenny Jane Flores, Kyran Emmanuel Solomon, and Kharl Asuncion

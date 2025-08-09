@@ -10,7 +10,7 @@ interface TeamMemberCardProps {
 
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
 	return (
-		<div className='flex flex-col items-center justify-center p-6 bg-[#2e2e2e] border border-gray-800 rounded-2xl w-72 h-80'>
+		<div className='flex flex-col items-center justify-center p-6 bg-[#2e2e2e] border border-gray-800 rounded-2xl w-52 h-80'>
 			{/* Profile Picture with Placeholder */}
 			<div className='relative w-28 h-28 rounded-full bg-gray-700 overflow-hidden mb-4'>
 				<Image
@@ -22,7 +22,7 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
 			</div>
 
 			{/* Name and Title */}
-			<h5 className='text-lg font-bold text-white'>{member.name}</h5>
+			<h5 className='text-lg font-bold text-white text-center'>{member.name}</h5>
 			<p className='text-sm p-1 px-4 rounded-full text-center font-semibold bg-[#d9d9d9] text-gray-800 my-2'>{member.title}</p>
 
 			{/* Social Icons */}
