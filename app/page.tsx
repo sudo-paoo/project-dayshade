@@ -36,7 +36,10 @@ export default function Page() {
         </div>
         <div className="flex flex-col items-center gap-4">
           <p className="text-xs font-bold">where great minds compile.</p>
-          <Button variant="default" size="sm">
+          <Button
+            variant="default"
+            size="sm"
+          >
             Join
           </Button>
         </div>
@@ -89,7 +92,10 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-col ">
-          <Button variant="gradient" size="sm">
+          <Button
+            variant="gradient"
+            size="sm"
+          >
             Show Members
           </Button>
         </div>
@@ -106,7 +112,10 @@ export default function Page() {
           {/* Monthly Project Showcase */}
           <div className="flex flex-col justify-center items-center pb-8">
             {/* <MonthlyProjectShowcase></MonthlyProjectShowcase> */}
-            <Button variant="gradient" size="xs">
+            <Button
+              variant="gradient"
+              size="xs"
+            >
               View All
             </Button>
           </div>
