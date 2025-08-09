@@ -1,4 +1,6 @@
-import React from 'react'
+"use client";
+
+import React, { useState, useEffect } from 'react';
 import { technologies } from '@/data/technologies'
 import Navbar from '@/components/global/navbar'
 import { ImageCarousel } from '@/components/ui/ImageCarousel'
@@ -7,17 +9,57 @@ import TeamMemberCard from '@/components/ui/TeamMemberCard'
 import { TeamMemberCircles } from '@/components/ui/TeamMemberCircles'
 import { UsersRound } from 'lucide-react'
 import Image from 'next/image'
+import { AboutUsData } from '@/types';
+
+
 
 export default function About() {
+	const [data, setData] = useState<AboutUsData | null>(null);
+	const [loading, setLoading] = useState<boolean>(true);
+	const [error, setError] = useState<string | null>(null);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await fetch('/api/about');
+				if (!response.ok) {
+					throw new Error('Failed to fetch about page data');
+				}
+				const result = await response.json();
+				setData(result);
+			} catch (err) {
+				setError((err as Error).message);
+			} finally {
+				setLoading(false);
+			}
+		};
+		fetchData();
+	}, []); // The empty dependency array ensures this runs once on mount
+
+	if (loading) {
+		return (
+			<div className='min-h-screen flex items-center justify-center bg-[#1b1b1b] text-white'>
+				<p>Loading...</p> {/* FIND LOADING COMPONENTS SA MGA LIBRARY STACK LATER */}
+			</div>
+		);
+	}
 
 	// TEAM MEMBERS
-	const topMembers = teamMembers.slice(0, 2);
-	const otherMembers = teamMembers.slice(2);
+	const topMembers = data?.team.slice(0, 2) || [];
+	const otherMembers = data?.team.slice(2) || [];
+	const stats = data?.stats;
+	const technologies = data?.technologies || [];
+	if (error) {
+		return (
+			<div className='min-h-screen flex items-center justify-center bg-[#1b1b1b] text-red-500'>
+				<p>Error fetching data: {error}</p>
+			</div>
+		);
+	}
 
 
 	return (
-		/* Dont add bg-color here */
-		<div className='relative min-h-screen '>
+		<div className='relative min-h-screen'>
 			<div className='inset-0 absolute'>
 				<Navbar />
 			</div>
@@ -49,15 +91,14 @@ export default function About() {
 					</div>
 				</div>
 
-
 				<div className='text-center'>
 
+					{/* TODO: MAKE IT REAL TIME UPDATES */}
 					{/* TECHNOLOGIES */}
 					<div className='flex flex-row gap-3 bg-black/60 items-center justify-center p-6 rounded-2xl mb-6 mx-6'>
-						{technologies.map((tech) =>
-						(
+						{technologies.map((tech) => (
 							<div key={tech.id} >
-								<img className='size-8 sm:size-16' src={tech.src} alt={tech.alt} />
+								<img className='size-8 sm:size-16' src={tech.icon} alt={tech.alt} />
 							</div>
 						))}
 					</div>
@@ -65,6 +106,10 @@ export default function About() {
 				</div>
 			</div>
 
+
+
+
+			{/* TODO: BACKEND FOR ADDING MORE IMAGES */}
 			{/* Panel 2 */}
 			<div className='min-h-screen flex flex-col items-center justify-center relative'>
 				<ImageCarousel />
@@ -96,6 +141,7 @@ export default function About() {
 				</div>
 			</section>
 
+			{/* TODO: MAKE IT REAL TIME UPDATES */}
 			{/* TEAM MEMBERS*/}
 			<div className='bg-[#1B1B1B]' >
 				{/* Top 2 Members Grid */}
@@ -140,24 +186,23 @@ export default function About() {
 				<div className='bg-gradient-to-r to-[#2B5B3B] from-[#73FFC5] h-12 w-full'></div>
 			</div>
 
+
+			{/* TODO: MAKE IT REAL TIME UPDATES */}
 			{/* PROGDEN STATUS */}
 			<div className='bg-[#1b1b1b] flex flex-row justify-around items-center py-16'>
 				<div className='flex items-center justify-center flex-col gap-2'>
 					<UsersRound className='sm:size-24 size-12 text-white' />
-					{/* TODO: GET ACTIVE COUNT DYNAMIC COUNTING MEMBER*/}
-					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>100+</p>
+					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>{stats?.activeMembers || '0'}+</p>
 					<p className='text-[#4AEE98] m-0 text-sm sm:text-xl'>Active Members</p>
 				</div>
 				<div className='flex items-center justify-center flex-col gap-2'>
 					<UsersRound className='sm:size-24 size-12 text-white' />
-					{/* TODO: GET DYNAMIC COUNTINGR*/}
-					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>50+</p>
+					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>{stats?.projectsCount || '0'}+</p>
 					<p className='text-[#4AEE98] m-0 text-sm sm:text-xl'>PROJECTS</p>
 				</div>
 				<div className='flex items-center justify-center flex-col gap-2'>
 					<UsersRound className='sm:size-24 size-12 text-white' />
-					{/* TODO: GET DYNAMIC COUNTINGR*/}
-					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>13</p>
+					<p className='text-[#4AEE98] sm:text-6xl m-0 text-2xl font-bold'>{stats?.yearsOfExcellence || '0'}</p>
 					<p className='text-[#4AEE98] m-0 text-sm sm:text-xl'>Years of Excellence</p>
 				</div>
 			</div>
@@ -197,5 +242,5 @@ export default function About() {
 
 
 		</div >
-	)
+	);
 }

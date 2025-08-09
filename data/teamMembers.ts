@@ -1,4 +1,4 @@
-
+/// THIS IS A HARDCODED DATA [UPDATE LATER WHEN DATABASE IS INITIALIZED]
 export interface TeamMember {
 	id: number;
 	name: string;
