@@ -18,7 +18,7 @@ export default function Navbar() {
   const navigationItems = [
     {
       name: "Home",
-      href: "/home",
+      href: "/",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {

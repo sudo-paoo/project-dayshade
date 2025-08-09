@@ -56,7 +56,7 @@ export default function Projects() {
 
       
       {/* Navbar */}
-      <Navbar />
+
 
       {/* Members Project View */}
       <MembersProjectView />
