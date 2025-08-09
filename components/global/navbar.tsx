@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
 import { GlassContainer } from "@/components/shared/glass-container"
@@ -23,27 +23,27 @@ export default function Navbar() {
     },
     {
       name: "About",
-      href: "#",
+      href: "/about",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Perks",
-      href: "#",
+      href: "/perks",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Projects",
-      href: "#",
+      href: "/projects",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Toot",
-      href: "#",
+      href: "/toot",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Join",
-      href: "#",
+      href: "/join",
       className: "font-bold text-[var(--color-pd-purple)] hover:text-[var(--color-pd-green)] transition-colors",
     },
   ]
