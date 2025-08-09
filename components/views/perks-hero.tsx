@@ -5,11 +5,11 @@ import { Button } from '../ui/button'
 function PerksHero() {
   return (
     <>
-      <div className='bg-pd-black flex flex-col lg:flex-row text-white w-full justify-between items-center p-8'>
-        <div>
-          <h1 className='text-xl lg:text-6xl font-bold uppercase'>Sign up for<br /> exclusive <br /> <span className='text-pd-green'>Membership perks</span></h1>
+      <div className='bg-pd-black flex flex-col-reverse md:flex-row text-white w-full justify-between items-center'>
+        <div className='p-4 md:pl-8'>
+          <h1 className='text-xl lg:text-5xl font-bold uppercase'>Sign up for<br /> exclusive <br /> <span className='text-pd-green'>Membership perks</span></h1>
           <p>Join our community of passionate programmers and unlock amazing benefits</p>
-        <Button className='mt-4 px-8 py-6 bg-gradient-to-r from-[#67FFAF] via-100% to-[#0D4D2C] rounded-full hover:bg-pd-green-dark cursor-pointer text-black font-bold text-xl'>Get Started</Button>
+        <Button className='mt-4 px-4 md:px-6 py-6 bg-gradient-to-r from-[#67FFAF] via-100% to-[#0D4D2C] rounded-full hover:bg-pd-green-dark cursor-pointer text-black font-bold text-xl'>Get Started</Button>
         </div>
 
         <Image
