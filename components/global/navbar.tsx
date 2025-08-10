@@ -8,7 +8,6 @@ import { GlassContainer } from "@/components/shared/glass-container"
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
-  
   // Handle image error
   const handleImageError = (imageName: string) => {
     console.log(`Image ${imageName} failed to load, using fallback`)
@@ -37,8 +36,8 @@ export default function Navbar() {
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
-      name: "Toot",
-      href: "/toot",
+      name: "Leaderboard",
+      href: "/leaderboard",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
@@ -54,11 +53,11 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <GlassContainer className="hidden md:flex items-center justify-between rounded-full px-12 py-3 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-dark-grey)] w-full max-w-[95vw]">
           <div className="flex items-center">
-            <Image 
+            <Image
               src={imageErrors['desktop-logo'] ? "/placeholder.png" : "/assets/pd-logo-sm.png"}
-              alt="Logo" 
-              width={40} 
-              height={40} 
+              alt="Logo"
+              width={40}
+              height={40}
               className="mr-4"
               unoptimized
               onLoad={() => {
@@ -85,10 +84,10 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         <GlassContainer className="md:hidden flex items-center justify-between rounded-2xl px-8 py-4 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-dark-grey)] w-full max-w-none mx-4">
           <div className="flex items-center">
-            <Image 
+            <Image
               src={imageErrors['mobile-logo'] ? "/placeholder.png" : "/assets/pd-logo-sm.png"}
-              alt="Logo" 
-              width={40} 
+              alt="Logo"
+              width={40}
               height={40}
               unoptimized
               onLoad={() => {
@@ -114,10 +113,10 @@ export default function Navbar() {
               {/* Mobile Menu Header */}
               <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center">
-                  <Image 
+                  <Image
                     src={imageErrors['mobile-menu-logo'] ? "/placeholder.png" : "/assets/pd-logo-sm.png"}
-                    alt="Logo" 
-                    width={40} 
+                    alt="Logo"
+                    width={40}
                     height={40}
                     unoptimized
                     onLoad={() => {
