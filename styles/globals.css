@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -113,9 +113,9 @@
 }
 
 @theme {
-  --color-pd-purple: #B351E3;
-  --color-pd-green: #4AEE98;
-  --color-pd-dark-grey: #39393B;
+  --color-pd-purple: #b351e3;
+  --color-pd-green: #4aee98;
+  --color-pd-dark-grey: #39393b;
   --color-pd-light-grey: #787878;
   --color-pd-black: #191919;
 }
@@ -127,6 +127,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
   }
 }
 

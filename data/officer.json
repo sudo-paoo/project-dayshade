@@ -1,0 +1,45 @@
+[
+  { "title": "President", "imgSrc": "https://placeholder.co/400x400" },
+  {
+    "title": "Executive Secretary",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Vice President of Development",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Vice President of Comp. Prog.",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Vice President of Multimedia",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Head of Development",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Head of Human Resources",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Head of Recruitment",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  {
+    "title": "Head of Communication",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  { "title": "Head of Finances", "imgSrc": "https://placeholder.co/400x400" },
+  {
+    "title": "Secretary of Finances",
+    "imgSrc": "https://placeholder.co/400x400"
+  },
+  { "title": "Audit", "imgSrc": "https://placeholder.co/400x400" },
+  {
+    "title": "Social Media Manager",
+    "imgSrc": "https://placeholder.co/400x400"
+  }
+]

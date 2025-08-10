@@ -8,7 +8,6 @@ import { GlassContainer } from "@/components/shared/glass-container"
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [imageErrors, setImageErrors] = useState<Record<string, boolean>>({})
-
   // Handle image error
   const handleImageError = (imageName: string) => {
     console.log(`Image ${imageName} failed to load, using fallback`)
@@ -18,32 +17,32 @@ export default function Navbar() {
   const navigationItems = [
     {
       name: "Home",
-      href: "/home",
+      href: "/",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "About",
-      href: "#",
+      href: "/about",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Perks",
-      href: "#",
+      href: "/perks",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Projects",
-      href: "#",
+      href: "/projects",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
-      name: "Toot",
-      href: "#",
+      name: "Leaderboard",
+      href: "/leaderboard",
       className: "font-bold text-[var(--color-pd-green)] hover:text-[var(--color-pd-purple)] transition-colors",
     },
     {
       name: "Join",
-      href: "#",
+      href: "/join",
       className: "font-bold text-[var(--color-pd-purple)] hover:text-[var(--color-pd-green)] transition-colors",
     },
   ]
@@ -141,12 +140,13 @@ export default function Navbar() {
                     <li key={item.name}>
                       <GlassContainer
                         variant="card"
-                        className={`rounded-2xl px-8 py-4 border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 ${idx === 0
-                          ? "bg-[var(--color-pd-green)]/20 border-[var(--color-pd-green)]/30"
-                          : idx === navigationItems.length - 1
-                            ? "bg-[var(--color-pd-purple)]/20 border-[var(--color-pd-purple)]/30"
-                            : "bg-white/10"
-                          }`}
+                        className={`rounded-2xl px-8 py-4 border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 ${
+                          idx === 0
+                            ? "bg-[var(--color-pd-green)]/20 border-[var(--color-pd-green)]/30"
+                            : idx === navigationItems.length - 1
+                              ? "bg-[var(--color-pd-purple)]/20 border-[var(--color-pd-purple)]/30"
+                              : "bg-white/10"
+                        }`}
                       >
                         <a
                           href={item.href}
