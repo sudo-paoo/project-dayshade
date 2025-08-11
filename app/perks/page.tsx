@@ -1,4 +1,5 @@
 import React from 'react'
+import Navbar from "@/components/global/navbar"
 import PerksHero from '@/components/views/perks-hero'
 import PerksBento from '@/components/views/perks-bento'
 import PerksWorkHard from '@/components/views/perks-work-hard'
@@ -10,7 +11,7 @@ export default function PerksPage() {
       <div className='absolute inset-0 bg-[url(/assets/pattern.png)] bg-cover bg-center opacity-15 z-0'></div>
       {/* Star 1 */}
       <div 
-        className="absolute -right-10 top-20 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[600px] lg:h-[600px] bg-[url('/assets/star-1.png')] bg-contain bg-no-repeat bg-center opacity-80 z-0"
+        className="absolute -right-10 top-1 w-[300px] h-[300px] md:w-[450px] md:h-[450px] lg:w-[600px] lg:h-[600px] bg-[url('/assets/star-1.png')] bg-contain bg-no-repeat bg-center opacity-80 z-0"
       ></div>
       
       {/* Star 2 */}
@@ -24,6 +25,8 @@ export default function PerksPage() {
       ></div>
       
       <div className='relative z-10 w-full flex flex-col items-center justify-center'>
+        <Navbar />
+    <div style={{ height: '32px' }} />
         <PerksHero />
         <PerksBento />
         <PerksWorkHard />

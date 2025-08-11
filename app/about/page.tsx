@@ -59,9 +59,10 @@ export default function About() {
 
 
 	return (
+		
 		<div className='relative min-h-screen'>
-			<div className='inset-0 absolute'>
-				<Navbar />
+			<div className='inset-0 absolute z-10'>
+			<Navbar />
 			</div>
 			{/* Panel 1 */}
 			<div className='min-h-screen  flex flex-col overflow-hidden items-center justify-around text-slate-100 relative py-24'>

@@ -1,4 +1,5 @@
 import React from "react";
+import Navbar from "@/components/global/navbar"
 import { JoinForm } from "@/components/join-ui/JoinForm";
 import GradientBackground from "@/components/shared/GradientBackground";
 import {
@@ -16,6 +17,7 @@ import { SquareUser } from "lucide-react";
 const page = () => {
   return (
     <GradientBackground>
+      <Navbar />
       <section className="w-full max-w-7xl mx-auto grid md:grid-cols-2 h-screen gap-5">
         <div className="grid md:grid-rows-2 gap-5">
           <GlassContainer className="">d</GlassContainer>

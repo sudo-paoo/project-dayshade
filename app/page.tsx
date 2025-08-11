@@ -8,6 +8,7 @@ import { FeatherIcon } from "lucide-react";
 import FeaturedProject from "@/components/projects-ui/FeaturedProject";
 import officerDataJson from "@/data/officer.json";
 import { Officers } from "@/type/zod/officer";
+import WWU from "@/components/views/home-page-WWU";
 
 const officerData: Officers = officerDataJson;
 

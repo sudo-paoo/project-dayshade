@@ -51,7 +51,7 @@ export default function Navbar() {
     <>
       <nav className="w-full mt-8 flex justify-center px-4">
         {/* Desktop Navigation */}
-        <GlassContainer className="hidden md:flex items-center justify-between rounded-full px-12 py-3 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-dark-grey)] w-full max-w-[95vw]">
+        <GlassContainer className="hidden md:flex items-center justify-between rounded-full px-12 py-3 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-black)] w-full max-w-[95vw]">
           <div className="flex items-center">
             <Image
               src={imageErrors['desktop-logo'] ? "/placeholder.png" : "/assets/pd-logo-sm.png"}
@@ -71,9 +71,9 @@ export default function Navbar() {
               <li key={item.name}>
                 <GlassContainer
                   variant="card"
-                  className={`rounded-full px-6 py-2 border border-white/30 backdrop-blur-md bg-white/20 transition-all duration-200 hover:scale-105`}
+                  className={`rounded-full px-6 py-2 border border-white/30 backdrop-blur-md bg-[var(--color-pd-black)] transition-all duration-200 hover:scale-105 shadow-lg shadow-white/10 hover:bg-[var(--color-pd-green)] group`}
                 >
-                  <a href={item.href} className={item.className}>
+                  <a href={item.href} className={`${item.className} group-hover:text-[var(--color-pd-purple)]`}>
                     {item.name}
                   </a>
                 </GlassContainer>
@@ -82,7 +82,7 @@ export default function Navbar() {
           </ul>
         </GlassContainer>
         {/* Mobile Navigation */}
-        <GlassContainer className="md:hidden flex items-center justify-between rounded-2xl px-8 py-4 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-dark-grey)] w-full max-w-none mx-4">
+        <GlassContainer className="md:hidden flex items-center justify-between rounded-2xl px-8 py-4 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-black)] w-full max-w-none mx-4">
           <div className="flex items-center">
             <Image
               src={imageErrors['mobile-logo'] ? "/placeholder.png" : "/assets/pd-logo-sm.png"}
@@ -140,17 +140,11 @@ export default function Navbar() {
                     <li key={item.name}>
                       <GlassContainer
                         variant="card"
-                        className={`rounded-2xl px-8 py-4 border border-white/30 backdrop-blur-md transition-all duration-200 hover:scale-105 active:scale-95 ${
-                          idx === 0
-                            ? "bg-[var(--color-pd-green)]/20 border-[var(--color-pd-green)]/30"
-                            : idx === navigationItems.length - 1
-                              ? "bg-[var(--color-pd-purple)]/20 border-[var(--color-pd-purple)]/30"
-                              : "bg-white/10"
-                        }`}
+                        className={`rounded-2xl px-8 py-4 border border-white/30 backdrop-blur-md bg-[var(--color-pd-black)] transition-all duration-200 hover:scale-105 active:scale-95 hover:bg-[var(--color-pd-green)] group`}
                       >
                         <a
                           href={item.href}
-                          className={`block text-center text-xl font-bold ${item.className}`}
+                          className={`block text-center text-xl font-bold ${item.className} group-hover:text-[var(--color-pd-purple)]`}
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {item.name}

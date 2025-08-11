@@ -4,9 +4,9 @@
 
 @custom-variant dark (&:is(.dark *));
 
-* {
+/* * {
   outline: solid red 1px;
-}
+} */
 
 @theme inline {
   --color-background: var(--background);
