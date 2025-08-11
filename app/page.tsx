@@ -62,19 +62,7 @@ export default function Page() {
         </GlassContainer>
         {/* Sample Background for Transition */}
         {/* Projects Section */}
-        <div className=" min-h-80 flex flex-col relative top-[-30px] justify-center items-center h-auto w-full py-8 bg-black bg-gradient-to-b from-black via-[#252323] to-black mask-y-from-90% mask-y-to-100%">
-          {/* Monthly Project Showcase */}
-          <div className="flex flex-col justify-center items-center pb-8">
-            {/* <MonthlyProjectShowcase></MonthlyProjectShowcase> */}
-          </div>
-          {/* Featured Project */}
-          <div className="flex flex-col justify-center items-center pb-8">
-            {/* <FeaturedProject></FeaturedProject> */}
-          </div>
-        </div>
-        <GlassContainer variant="default">
-          <div></div>
-        </GlassContainer>
+        <div className=" min-h-80 flex flex-col relative top-[-30px] justify-center items-center h-auto w-full py-8 bg-black bg-gradient-to-b from-black via-[#252323] to-black mask-y-from-90% mask-y-to-100%"></div>
       </div>
     </>
   );
