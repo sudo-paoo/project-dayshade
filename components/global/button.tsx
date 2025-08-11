@@ -16,26 +16,20 @@ const Button = ({
   size = "sm",
   className,
 }: Props) => {
-  const baseStyles =
-    "inline-flex items-center justify-center rounded-full font-bold";
+  const baseStyles = "items-center justify-center rounded-full font-bold";
   const variants = {
-    default: "bg-[var(--color-pd-green)] text-[var(--color-pd-black)]",
+    default:
+      "bg-[var(--color-pd-green)] text-[var(--color-pd-black)] hover:bg-[#36b381] transition-colors duration-300",
     gradient:
-      "bg-[var(--color-pd-green)] text-[var(--color-pd-black)] bg-gradient-to-r from-[var(--color-pd-green)] to-[#298555]",
-    glass: "bg-gradient-to-b from-white/30 to-black/10 border border-white/20",
-  };
-
-  const sizes = {
-    xs: "h-2 py-3 px-6 text-xs",
-    sm: "h-2 py-4 px-6 text-xs",
-    md: "h-10 px-4 py-2",
-    lg: "h-11 px-8",
+      "bg-[var(--color-pd-green)] text-[var(--color-pd-black)] bg-gradient-to-r from-[var(--color-pd-green)] to-[#37A169]",
+    glass:
+      "hover:bg-white/10 bg-white/5 bg-gradient-to-b from-black/5 to-[var(--color-pd-green)]/11 backdrop-blur-sm hover:backdrop-blur-lg border border-white/20",
   };
 
   return (
     <button
       onClick={onClick}
-      className={`${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`}
+      className={`${baseStyles} ${variants[variant]} ${className}`}
     >
       {children}
     </button>
