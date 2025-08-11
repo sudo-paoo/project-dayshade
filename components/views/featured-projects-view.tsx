@@ -14,19 +14,7 @@ export default function FeaturedProjectsView({ imageErrors, handleImageError }: 
         className="p-6 md:p-8 relative overflow-hidden rounded-3xl border border-white/20 backdrop-blur-lg bg-gradient-to-br from-[var(--color-pd-purple)] via-[var(--color-pd-purple)]/80 to-[var(--color-pd-black)]/60 min-h-[400px]"
       >
         {/* Pattern Overlay */}
-        <div
-          style={{ 
-            backgroundColor: "var(--color-pd-dark-grey)",
-            pointerEvents: "none",
-            position: "absolute",
-            inset: 0,
-            backgroundImage: "url(/assets/pattern.png)",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover",
-            opacity: 0.05,
-            borderRadius: "24px",
-          }}
-        />
+        <div className="pointer-events-none absolute inset-0 rounded-[24px] bg-[url(/assets/pattern.png)] bg-cover bg-no-repeat opacity-5 [background-color:var(--color-pd-dark-grey)]" />
 
         {/* Content Layout */}
         <div className="relative z-10 flex flex-col lg:flex-row gap-4 lg:gap-8 h-full">
