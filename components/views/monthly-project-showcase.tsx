@@ -17,14 +17,7 @@ export default function MonthlyProjectShowcase({ imageErrors, handleImageError }
         </TextAnimate>
         
         {/* TSU Campus Showcase Title */}
-        <TextAnimate
-          className="text-center font-bold mb-4"
-          style={{
-            fontSize: "clamp(1.5rem, 4vw, 3rem)",
-            color: "var(--color-pd-green)",
-            letterSpacing: "2px",
-          }}
-        >
+        <TextAnimate className="mb-4 text-center font-bold tracking-[2px] text-pd-green [font-size:clamp(1.5rem,4vw,3rem)]">
           TARLAC STATE UNIVERSITY CAMPUS SHOWCASE
         </TextAnimate>
       </div>
@@ -34,15 +27,12 @@ export default function MonthlyProjectShowcase({ imageErrors, handleImageError }
         <div className="flex justify-center items-center">
           <div className="flex flex-row items-center gap-4 md:gap-6">
             {/* Main Image */}
-            <div className="w-[400px] sm:w-[500px] md:w-[600px] lg:w-[700px] xl:w-[800px] h-64 sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px] rounded-2xl overflow-hidden relative">
+            <div className="relative h-64 w-[400px] overflow-hidden rounded-2xl sm:h-80 sm:w-[500px] md:h-96 md:w-[600px] lg:h-[500px] lg:w-[700px] xl:h-[600px] xl:w-[800px]">
               <Image
                 src={imageErrors['main-showcase'] ? "/placeholder.png" : "/assets/about-pics/carousel-1.png"}
                 alt="Campus Showcase"
                 fill
-                className="object-cover"
-                style={{
-                  borderRadius: "16px",
-                }}
+                className="rounded-[16px] object-cover"
                 priority
                 unoptimized
                 onLoad={() => {
@@ -54,16 +44,7 @@ export default function MonthlyProjectShowcase({ imageErrors, handleImageError }
 
             {/* Vertical Date Section */}
             <div className="flex items-center">
-              <div 
-                className="text-white/80 font-bold tracking-wider text-center"
-                style={{
-                  writingMode: "vertical-rl",
-                  textOrientation: "mixed",
-                  fontSize: "clamp(12px, 1.5vw, 18px)",
-                  letterSpacing: "1px",
-                  color: "var(--color-pd-green)",
-                }}
-              >
+              <div className="text-center font-bold tracking-wider text-pd-green [font-size:clamp(12px,1.5vw,18px)] [letter-spacing:1px] [text-orientation:mixed] [writing-mode:vertical-rl]">
                 November 2024
               </div>
             </div>
