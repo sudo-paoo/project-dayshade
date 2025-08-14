@@ -52,7 +52,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="w-full pt-8 flex justify-center px-4 bg-[#363636]">
+      <nav className="w-full flex justify-center px-4 bg-transparent fixed">
         {/* Desktop Navigation */}
         <GlassContainer className="hidden md:flex items-center justify-between rounded-full px-12 py-3 shadow-xl border border-white/20 backdrop-blur-lg bg-[var(--color-pd-dark-grey)] w-full max-w-[95vw]">
           <Logo imageKey="desktop-logo" />
