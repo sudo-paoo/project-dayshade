@@ -36,7 +36,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="px-8 mb-4 space-y-2">
+    <div className="my-4 space-y-2">
       <Table className="border-collapse">
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -48,7 +48,7 @@ export function DataTable<TData, TValue>({
                 return (
                   <TableHead
                     key={header.id}
-                    className="border-r last:border-r-0 text-white text-2xl md:text-32xl lg:text-4xl text-center font-extralight pt-5 pb-4 "
+                    className="border-r last:border-r-0 text-white text-lg md:text-2xl lg:text-3xl text-center font-extralight pt-5 pb-4 "
                   >
                     {header.isPlaceholder
                       ? null
@@ -68,12 +68,12 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                className="border-b last:border-b-0 hover:bg-red-900/30"
+                className="border-b last:border-b-0 hover:bg-red-900/20"
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell
                     key={cell.id}
-                    className="border-r last:border-r-0 font-bold text-lg lg:text-2xl text-center"
+                    className="border-r last:border-r-0 md:font-bold text-base md:text-lg lg:text-2xl text-center"
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))
           ) : (
-            <TableRow className="hover:bg-red-900/30">
+            <TableRow className="hover:bg-red-900/20">
               <TableCell
                 colSpan={columns.length}
                 className="h-24 text-center text-lg lg:text-2xl "
@@ -92,12 +92,12 @@ export function DataTable<TData, TValue>({
           )}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-end space-x-2 py-4">
+      <div className="flex items-center justify-center md:justify-end space-x-3 pt-5 md:pt-2">
         <Button
           variant="outline"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-          className="bg-pd-black/50 text-lg"
+          className="bg-pd-black/50 md:text-lg"
         >
           Previous
         </Button>
@@ -105,7 +105,7 @@ export function DataTable<TData, TValue>({
           variant="outline"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-          className="text-black text-lg hover:brightness-60"
+          className="text-black md:text-lg hover:brightness-60"
         >
           Next
         </Button>

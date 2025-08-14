@@ -1,4 +1,4 @@
-import { Leaderboard } from "@/components/leaderboards-ui/leaderboards-table/columns";
+import { Leaderboard } from "@/type/zod/leaderboard";
 
 export const rankings: Leaderboard[] = [
   {

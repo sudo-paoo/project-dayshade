@@ -1,6 +1,3 @@
-"use client";
-
-import { ColumnDef } from "@tanstack/react-table";
 import { z } from "zod";
 
 // Zod schema
@@ -12,18 +9,3 @@ export const LeaderboardSchema = z.object({
 });
 
 export type Leaderboard = z.infer<typeof LeaderboardSchema>;
-
-export const columns: ColumnDef<Leaderboard>[] = [
-  {
-    accessorKey: "rank",
-    header: "Rank",
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-  },
-  {
-    accessorKey: "points",
-    header: "Points",
-  },
-];

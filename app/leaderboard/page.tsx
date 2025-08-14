@@ -1,7 +1,5 @@
-import React from "react";
+import LeaderboardView from "@/components/views/leaderboard-view";
 
-const page = () => {
-  return <div>page</div>;
-};
-
-export default page;
+export default function LeaderboardsPage() {
+  return <LeaderboardView />;
+}

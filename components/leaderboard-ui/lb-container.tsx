@@ -9,7 +9,7 @@ type Props = {
 
 // utilize className later when necessary
 
-const LeaderboardsContainer = ({ topText, children }: Props) => {
+const LeaderboardsContainer = ({ className, topText, children }: Props) => {
   return (
     <GlassContainer className="rounded-none">
       <div className="my-5 md:my-10 lg:my-18 lb-content-width">
@@ -20,7 +20,7 @@ const LeaderboardsContainer = ({ topText, children }: Props) => {
         >
           {topText?.content}
         </p>
-        <GlassContainer className={`rounded-4xl bg-stone-600/10`}>
+        <GlassContainer className={`rounded-4xl p-3 md:p-5 ${className}`}>
           {children}
         </GlassContainer>
       </div>
