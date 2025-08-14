@@ -36,3 +36,33 @@ export interface ApiRequest {
 	technologies: Technology[];
   }
 
+// PROJECT SHOWCASE TYPES
+export interface MonthlyProject {
+  id: string
+  title: string
+  name: string
+  image: string
+  description: string
+  credits: string
+}
+
+export interface FeaturedProject {
+  id: string
+  title: string
+  name: string
+  image: string
+  description: string
+}
+
+// API Response Types
+export interface MonthlyProjectResponse {
+  success: boolean
+  data: MonthlyProject
+  message?: string
+}
+
+export interface FeaturedProjectsResponse {
+  success: boolean
+  data: FeaturedProject[]
+  message?: string
+}
