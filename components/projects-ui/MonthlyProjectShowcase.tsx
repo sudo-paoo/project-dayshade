@@ -1,66 +1,93 @@
-import React from "react";
-import { GlassContainer } from "../shared/glass-container";
-import Image from "next/image";
+"use client"
 
-interface Props {
-  projectName: string;
-  imgSrc: string;
-  devNames: string[];
-  date: Date;
-  description: string;
-}
-// Project info object will be fetched from database
-// Sample of names, later fetch from database
-const names = [
-  "Ethan James Miller",
-  "Olivia Rose Carter",
-  "Mason David Wright",
-  "Ava Grace Davis",
-  "Noah William Wilson",
-];
-// Sample date
-const dateNow = new Date();
+import * as React from "react"
+import { Button } from "@/components/ui/button"
+import Image from "next/image"
+import type { MonthlyProject, MonthlyProjectResponse } from "@/types"
 
-const MonthlyProjectShowcase = ({
-  projectName = "Project Name",
-  imgSrc = "/assets/600x400.png",
-  devNames = names,
-  date = dateNow,
-  description = "Description of the project showcase",
-}: Props) => {
-  const joinedNames = devNames.join(", ");
+export function MonthlyShowcase() {
+  const [project, setProject] = React.useState<MonthlyProject | null>(null)
+  const [loading, setLoading] = React.useState<boolean>(true)
+  const [error, setError] = React.useState<string | null>(null)
+
+  React.useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await fetch("/api/home/monthly-project")
+        if (!response.ok) {
+          throw new Error("Failed to fetch monthly project")
+        }
+        const result: MonthlyProjectResponse = await response.json()
+        setProject(result.data)
+      } catch (err) {
+        setError((err as Error).message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProject()
+  }, [])
+
+  if (loading) {
+    return (
+      <section className="w-full py-12 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-white">Loading...</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (error || !project) {
+    return (
+      <section className="w-full py-12 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-red-500">Error loading monthly project</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center gap-2 pb-6">
-      <GlassContainer
-        variant="card"
-        className="rounded-full text-center min-w-70 text-[var(--color-pd-green)] text-lg font-black italic m-4 px-7"
-      >
-        <p>Monthly Project Showcase</p>
-      </GlassContainer>
-      <div className="flex flex-col justify-center items-center text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#BB86DC] to-[var(--color-pd-purple)]">
-        <p>{projectName}</p>
-      </div>
-      <div className="relative flex aspect-video min-w-58">
-        <Image
-          className="rounded-2xl"
-          src={imgSrc}
-          alt="Project Image"
-          fill
-        ></Image>
-      </div>
-      <div className="flex text-center max-w-65">
-        <p className="text-[0.5rem]">
-          {joinedNames} ({" "}
-          {date.toLocaleDateString("en-PH", { year: "numeric", month: "long" })}{" "}
-          )
-        </p>
-      </div>
-      {/*  Project Description*/}
-      <div className="flex">
-        <p className="text-[0.6rem] font-bold">{description}</p>
-      </div>
-    </div>
-  );
-};
+    <section className="w-full py-12 px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-green-400 mb-4">Monthly Project Showcase</h2>
+        </div>
 
-export default MonthlyProjectShowcase;
+        {/* Project Card */}
+        <div className="bg-gray-900/50 rounded-2xl p-6 md:p-8 border border-gray-800">
+          <div className="text-center mb-6">
+            <h3 className="text-xl md:text-2xl font-bold text-purple-400 mb-4">{project.title}</h3>
+          </div>
+
+          {/* Project Image */}
+          <div className="relative w-full max-w-2xl mx-auto mb-6 rounded-lg overflow-hidden">
+            <Image
+              src={project.image || "/placeholder.svg"}
+              alt={project.name}
+              width={500}
+              height={300}
+              className="w-full h-auto object-cover"
+            />
+          </div>
+
+          {/* Credits */}
+          <p className="text-gray-400 text-sm text-center mb-4 leading-relaxed">{project.credits}</p>
+
+          {/* Description */}
+          <p className="text-gray-300 text-center mb-6">{project.description}</p>
+
+          {/* View All Button */}
+          <div className="text-center">
+            <Button className="bg-green-500 hover:bg-green-600 text-black font-semibold px-8 py-2 rounded-full">
+              View All
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

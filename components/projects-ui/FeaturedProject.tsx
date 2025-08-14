@@ -1,47 +1,130 @@
-import React from "react";
-import { GlassContainer } from "../shared/glass-container";
-import Image from "next/image";
+"use client"
 
-interface Props {
-  projectName: string;
-  imgSrc: string;
-  devNames: string[];
-  date: Date;
-  description: string;
-}
-// Project info object will be fetched from database
+import * as React from "react"
+import Image from "next/image"
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
+import type { FeaturedProject } from "@/types"
 
-const FeaturedProject = ({
-  projectName = "Project Name",
-  imgSrc = "/assets/600x400.png",
-  description = "Description of the project showcase",
-}: Props) => {
+export function FeaturedProjects() {
+  const [api, setApi] = React.useState<CarouselApi>()
+  const [projects, setProjects] = React.useState<FeaturedProject[]>([])
+  const [loading, setLoading] = React.useState(true)
+  const [error, setError] = React.useState<string | null>(null)
+  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+
+  React.useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("/api/home/featured-project")
+        if (!response.ok) {
+          throw new Error("Failed to fetch featured projects")
+        }
+        const result = await response.json()
+        setProjects(result.data)
+      } catch (err) {
+        setError((err as Error).message)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProjects()
+  }, [])
+
+  React.useEffect(() => {
+    if (!api) return
+
+    const play = () => {
+      stop()
+      timeoutRef.current = setTimeout(() => {
+        api.scrollNext()
+      }, 4000)
+    }
+
+    const stop = () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+    }
+
+    play()
+    api.on("pointerDown", stop)
+    api.on("pointerUp", play)
+    api.on("select", play)
+
+    return () => {
+      stop()
+      api.off("pointerDown", stop)
+      api.off("pointerUp", play)
+      api.off("select", play)
+    }
+  }, [api])
+
+  if (loading) {
+    return (
+      <section className="w-full py-12 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-white">Loading featured projects...</p>
+        </div>
+      </section>
+    )
+  }
+
+  if (error) {
+    return (
+      <section className="w-full py-12 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-red-500">Error loading featured projects: {error}</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <div className="flex flex-col justify-center items-center gap-2 pb-6">
-      <GlassContainer
-        variant="card"
-        className="rounded-full text-center min-w-70 text-[var(--color-pd-green)] text-lg font-black italic m-4 px-7"
-      >
-        <p>Featured Project</p>
-      </GlassContainer>
-      <div className="flex flex-col justify-center items-center text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#BB86DC] to-[var(--color-pd-purple)]">
-        <p>{projectName}</p>
-      </div>
-      <div className="relative flex aspect-video min-w-58">
-        <Image
-          className="rounded-2xl"
-          src={imgSrc}
-          alt="Project Image"
-          fill
-        ></Image>
-      </div>
-      <div className="flex text-center max-w-65"></div>
-      {/*  Project Description*/}
-      <div className="flex">
-        <p className="text-[0.6rem] font-bold">{description}</p>
-      </div>
-    </div>
-  );
-};
+    <section className="w-full py-12 px-4">
+      <div className="w-full mx-auto">
+        <div className="flex justify-center">
+          <div className="px-6 py-2">
+            <h2 className="text-lg md:text-3xl lg:text-4xl italic font-bold text-pd-green">Featured Projects</h2>
+          </div>
+        </div>
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          setApi={setApi}
+          className="w-full"
+        >
+          <CarouselContent>
+            {projects.map((project, index) => (
+              <CarouselItem key={index}>
+                <div className="flex flex-col items-center space-y-6">
+                  <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
+                    <div className="space-y-4 text-center md:text-left order-2 md:order-1">
+                      <h3 className="text-xl md:text-3xl font-bold text-purple-400">{project.title}</h3>
+                      <p className="text-white leading-relaxed text-sm md:text-xl px-4 md:px-0">
+                        {project.description}
+                      </p>
+                    </div>
 
-export default FeaturedProject;
+                    <div className="relative w-full rounded-lg overflow-hidden order-1 md:order-2">
+                      <Image
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.name}
+                        width={500}
+                        height={300}
+                        className="w-full h-auto object-cover"
+                        priority={index === 0}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+    </section>
+  )
+}
