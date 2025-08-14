@@ -1,8 +1,8 @@
 import React from 'react'
-import PerksHero from '@/components/views/perks-hero'
-import PerksBento from '@/components/views/perks-bento'
-import PerksWorkHard from '@/components/views/perks-work-hard'
-import PerksMember from '@/components/views/perks-member'
+import PerksHero from '@/components/sections/perks/perks-hero'
+import PerksBento from '@/components/sections/perks/perks-bento'
+import PerksWorkHard from '@/components/sections/perks/perks-work-hard'
+import PerksMember from '@/components/sections/perks/perks-member'
 
 export default function PerksPage() {
   return (
