@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/global/footer";
 import "@/styles/globals.css";
 import Navbar from "@/components/global/navbar";
+import GradientBackground from "@/components/shared/GradientBackground";
 
 export const metadata: Metadata = {
   title: "Programmers' Den",
@@ -17,7 +18,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={`antialiased`}>
         <Navbar />
-        {<main className="min-h-screen">{children}</main>}
+        <main className="min-h-screen">
+          {/* {children} */}
+          <GradientBackground className="py-10">{children}</GradientBackground>
+        </main>
         <Footer />
       </body>
     </html>

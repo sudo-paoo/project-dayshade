@@ -1,16 +1,8 @@
-import { Separator } from "@/components/ui/separator";
-import { GlassContainer } from "@/components/shared/glass-container";
-import Image from "next/image";
-import Button from "@/components/global/button";
-import SimpleProfile from "@/components/profile-ui/SimpleProfile";
-import MonthlyProjectShowcase from "@/components/projects-ui/MonthlyProjectShowcase";
-import { FeatherIcon } from "lucide-react";
-import FeaturedProject from "@/components/projects-ui/FeaturedProject";
-import officerDataJson from "@/data/officer.json";
-import { Officers } from "@/type/zod/officer";
-
-const officerData: Officers = officerDataJson;
-
+import React from "react";
+import HomeHero from "@/components/sections/home/home-hero";
+import { MonthlyShowcase } from "@/components/sections/home/monthly-showcase";
+import { FeaturedProjects } from "@/components/sections/home/featured-projects";
+import ProgrammersDenPage from "@/components/sections/home/work-with-us";
 export default function Page() {
   return (
     <>
@@ -124,9 +116,8 @@ export default function Page() {
             {/* <FeaturedProject></FeaturedProject> */}
           </div>
         </div>
-        <GlassContainer variant="default">
-          <div></div>
-        </GlassContainer>
+        {/* Programmers Den Section */}
+        <ProgrammersDenPage />
       </div>
     </>
   );

@@ -1,7 +1,11 @@
+import { cn } from "@/lib/utils";
+
 export default function GradientBackground({
   children,
+  className,
 }: {
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
     <div
@@ -11,7 +15,10 @@ export default function GradientBackground({
         minHeight: "100vh",
         position: "relative",
       }}
-      className="flex flex-col items-center px-4 sm:px-6 lg:px-8 overflow-x-hidden"
+      className={cn(
+        "",
+        className
+      )}
     >
       <div
         style={{

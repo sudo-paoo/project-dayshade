@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator"
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#363636] text-white px-4 md:px-8 lg:px-16">
+    <footer className="relative bg-[#363636] text-white px-4 md:px-8 lg:px-16 ">
 
       <div className="max-w-7xl mx-auto py-8">
         <div className="flex flex-col md:flex-row justify-between gap-8 md:gap-16 lg:gap-24">
