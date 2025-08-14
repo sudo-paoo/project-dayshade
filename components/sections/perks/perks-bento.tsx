@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import { GlassContainer } from '../shared/glass-container'
+import { GlassContainer } from '../../shared/glass-container'
 
 function PerksBento() {
   return (
