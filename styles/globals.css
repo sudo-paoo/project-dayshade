@@ -140,4 +140,13 @@
     @apply backdrop-blur-sm border shadow-xl rounded-lg;
     @apply transition-all duration-300 ease-in-out;
   }
+
+  /* leaderboards */
+  .lb-glass-plus {
+    @apply rounded-none backdrop-blur-xl bg-black/20;
+  }
+
+  .lb-content-width {
+    @apply max-w-7xl mx-auto px-4 md:px-8;
+  }
 }
