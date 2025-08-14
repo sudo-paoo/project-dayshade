@@ -50,8 +50,8 @@ const memberData = [
 
 const page = () => {
   return (
-    <section className="w-full max-w-7xl mx-auto grid md:grid-cols-2 h-ful gap-5">
-      <div className="flex flex-col gap-8">
+    <section className="w-full max-w-7xl mx-auto grid md:grid-cols-2 h-full gap-5 py-20 ">
+      <div className="flex flex-col gap-8 ">
         <Card className="flex items-center gap-5 p-6 rounded-2xl shadow-lg bg-gradient-to-br from-[var(--color-pd-green)]/20 to-[var(--color-pd-purple)]/20 border border-white/10 hover:scale-[1.04] transition-transform duration-200 relative overflow-hidden">
           <h2 className="text-3xl font-extrabold text-[var(--color-pd-green)] mb-2 tracking-tight flex gap-2">
             <span className="inline-flex items-center">
