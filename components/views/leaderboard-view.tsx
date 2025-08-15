@@ -69,7 +69,7 @@ export default function LeaderboardView() {
 
           {/* CCS PAGE PROMOTION */}
           <GlassContainer className="rounded-none">
-            <div className="my-5 md:my-10 lg:mb-20 lg:mt-12 flex justify-center flex-col items-center">
+            <div className="lb-content-width my-5 md:my-10 lg:mb-20 lg:mt-12 flex justify-center flex-col items-center">
               <p className="text-base md:text-lg mb-2">
                 For updates, follow the official CCS Student Council Page!
               </p>
