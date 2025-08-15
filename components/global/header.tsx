@@ -20,7 +20,7 @@ export function NavbarDemo() {
     { name: "Perks", link: "/perks" },
     { name: "Projects", link: "/projects" },
     { name: "Leaderboard", link: "/leaderboard" },
-    // { name: "Join", link: "/join" },
+    { name: "Design System", link: "/design" },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

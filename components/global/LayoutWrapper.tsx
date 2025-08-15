@@ -11,7 +11,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
   return (
     <>
       {!hideNavAndFooter && <NavbarDemo />}
-      <main className="bg-foreground min-h-screen text-background">
+      <main className="min-h-screen">
         {children}
       </main>
       {!hideNavAndFooter && <Footer />}

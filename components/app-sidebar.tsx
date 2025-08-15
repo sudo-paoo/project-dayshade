@@ -23,9 +23,9 @@ import { NavUser } from "./ui/nav-user";
 // Put files in /public/assets/...
 const data = {
   user: {
-    name: "shadcn",
+    name: "Progden Main",
     email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
+    avatar: "/assets/pd-logo-sm.png",
   },
   navMain: [
     {
@@ -47,12 +47,12 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
     <Sidebar {...props}>
       <SidebarHeader>
         <div className="flex items-center gap-2 p-2">
-          <Image src="/assets/pd-logo.png" alt="logo" width={30} height={30} />
+          <Image src="/assets/pd-logo.png" alt="logo" width={50} height={50} />
           <Image
             src="/assets/pd-banner.png"
             alt="banner"
             width={150}
-            height={150}
+            height={30}
           />
         </div>
       </SidebarHeader>
