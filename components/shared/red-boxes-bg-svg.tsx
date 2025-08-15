@@ -94,11 +94,11 @@ const BackgroundSvg = ({ className }: Props) => {
           y2="387.93"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DA1717" />
+          <stop stopColor="#DA1717" />
           <stop
             offset="1"
-            stop-color="#740C0C"
-            stop-opacity="0.8"
+            stopColor="#740C0C"
+            stopOpacity="0.8"
           />
         </linearGradient>
         <linearGradient
@@ -109,11 +109,11 @@ const BackgroundSvg = ({ className }: Props) => {
           y2="344.3"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DA1717" />
+          <stop stopColor="#DA1717" />
           <stop
             offset="1"
-            stop-color="#740C0C"
-            stop-opacity="0.8"
+            stopColor="#740C0C"
+            stopOpacity="0.8"
           />
         </linearGradient>
         <linearGradient
@@ -124,11 +124,11 @@ const BackgroundSvg = ({ className }: Props) => {
           y2="340.3"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DA1717" />
+          <stop stopColor="#DA1717" />
           <stop
             offset="1"
-            stop-color="#740C0C"
-            stop-opacity="0.8"
+            stopColor="#740C0C"
+            stopOpacity="0.8"
           />
         </linearGradient>
         <linearGradient
@@ -139,11 +139,11 @@ const BackgroundSvg = ({ className }: Props) => {
           y2="354.3"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DA1717" />
+          <stop stopColor="#DA1717" />
           <stop
             offset="1"
-            stop-color="#740C0C"
-            stop-opacity="0.8"
+            stopColor="#740C0C"
+            stopOpacity="0.8"
           />
         </linearGradient>
         <linearGradient
@@ -154,11 +154,11 @@ const BackgroundSvg = ({ className }: Props) => {
           y2="360.752"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DA1717" />
+          <stop stopColor="#DA1717" />
           <stop
             offset="1"
-            stop-color="#740C0C"
-            stop-opacity="0.8"
+            stopColor="#740C0C"
+            stopOpacity="0.8"
           />
         </linearGradient>
         <linearGradient
@@ -169,11 +169,11 @@ const BackgroundSvg = ({ className }: Props) => {
           y2="332.358"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DA1717" />
+          <stop stopColor="#DA1717" />
           <stop
             offset="1"
-            stop-color="#740C0C"
-            stop-opacity="0.8"
+            stopColor="#740C0C"
+            stopOpacity="0.8"
           />
         </linearGradient>
         <image
