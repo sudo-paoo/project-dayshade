@@ -4,7 +4,7 @@ import { GlassContainer } from '../../shared/glass-container'
 
 function PerksBento() {
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 lg:p-36'>
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 lg:p-36 lg:pb-12'>
       {/* join compe card */}
       <GlassContainer className='col-span-1 lg:col-span-2 flex flex-col lg:flex-row items-center justify-between p-4 lg:p-8 text-white'>
         <div className='w-full lg:w-[60%] py-4 lg:py-0'>

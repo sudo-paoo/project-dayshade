@@ -6,7 +6,7 @@ import PerksMember from '@/components/sections/perks/perks-member'
 
 export default function PerksPage() {
   return (
-    <div className='container-fluid flex flex-col items-center justify-center bg-pd-dark-grey relative min-h-screen overflow-hidden'>
+    <div className='container-fluid pt-12 md:pt-16 flex flex-col items-center justify-center bg-pd-dark-grey relative min-h-screen overflow-hidden'>
       <div className='absolute inset-0 bg-[url(/assets/pattern.png)] bg-cover bg-center opacity-15 z-0'></div>
       {/* Star 1 */}
       <div 
