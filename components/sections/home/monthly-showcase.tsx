@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react";
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import type { MonthlyProject, MonthlyProjectResponse } from "@/types";
+import { GlassContainer } from "@/components/shared/glass-container";
 
 export function MonthlyShowcase() {
   const [project, setProject] = React.useState<MonthlyProject | null>(null)
@@ -50,7 +50,7 @@ export function MonthlyShowcase() {
   }
 
   return (
-    <section className="w-full min-h-screen py-6 px-4">
+    <section className="w-full md:min-h-screen py-6 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center">
