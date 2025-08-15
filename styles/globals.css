@@ -149,4 +149,22 @@
   .lb-content-width {
     @apply max-w-7xl mx-auto px-4 md:px-8;
   }
+
+ 
+  .animate-spin-slow {
+    animation: spin-slow 6s linear infinite;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .animate-spin-slow-reverse {
+    animation: spin-slow 8s linear infinite reverse;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  @keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
 }
