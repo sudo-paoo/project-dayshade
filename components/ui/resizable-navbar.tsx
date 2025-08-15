@@ -234,11 +234,11 @@ export const MobileNavToggle = ({
 export const NavbarLogo = () => {
   return (
     <Link
-      href="#"
+      href="/"
       className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <Image src="./assets/pd-logo.png" alt="logo" width={30} height={30} />
-      <Image src="./assets/pd-banner.png" alt="logo" width={150} height={150} />
+      <Image src="./assets/pd-banner.png" alt="logo" width={150} height={30} />
       {/* <span className="font-medium ">ProgDen</span> */}
     </Link>
   );
