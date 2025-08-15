@@ -48,6 +48,9 @@ const formSchema = z.object({
   }),
   team: z.array(z.enum(["WADT", "GDT", "CPT", "MMT"]))
     .min(1, { message: "Please select at least one team." }),
+  status: z.enum(["accepted", "rejected"], {
+    message: "Please select a valid status."
+  })
 });
 
 const checkboxItems = [
