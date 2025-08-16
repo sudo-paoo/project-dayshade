@@ -42,12 +42,15 @@ export function DataTable<TData, TValue>({
         <Table className="border-collapse text-center">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
+              <TableRow
+                className="hover:bg-white/10"
+                key={headerGroup.id}
+              >
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
                       key={header.id}
-                      className="text-white text-lg md:text-2xl border-b border-white/60 text-center pt-2"
+                      className="text-white text-lg md:text-2xl border-b border-white/60 text-center pt-2 pb-1"
                     >
                       {header.isPlaceholder
                         ? null
@@ -67,7 +70,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="border-b border-white/20 last:border-b-0 md:text-base"
+                  className="border-b border-white/20 last:border-b-0 md:text-base hover:bg-white/10"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -96,7 +99,7 @@ export function DataTable<TData, TValue>({
             variant="outline"
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
-            className="bg-pd-black/50 md:text-lg z-50"
+            className="bg-pd-black/50 md:text-lg z-50 hover:brightness-60 hover:bg-foreground"
           >
             Previous
           </Button>
@@ -104,7 +107,7 @@ export function DataTable<TData, TValue>({
             variant="outline"
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
-            className="text-black md:text-lg hover:brightness-60 z-50"
+            className="text-black md:text-lg z-50 hover:brightness-60  bg-foreground hover:bg-foreground"
           >
             Next
           </Button>
