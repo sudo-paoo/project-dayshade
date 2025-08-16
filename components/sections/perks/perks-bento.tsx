@@ -1,13 +1,13 @@
 import React from 'react'
 import Image from 'next/image'
-import { GlassContainer } from '../shared/glass-container'
+import { GlassContainer } from '../../shared/glass-container'
 
 function PerksBento() {
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 lg:p-36'>
+    <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 p-4 lg:p-36 lg:pb-12'>
       {/* join compe card */}
       <GlassContainer className='col-span-1 lg:col-span-2 flex flex-col lg:flex-row items-center justify-between p-4 lg:p-8 text-white'>
-        <div className='w-full lg:w-[40%] py-4 lg:py-0'>
+        <div className='w-full lg:w-[60%] py-4 lg:py-0'>
           <h1 className='text-pd-green text-2xl lg:text-4xl font-bold uppercase text-center'>Join Competitions and Events</h1>
           <p className='text-wrap text-xl lg:text-2xl'>Get offered more opportunities to participate in competitions and experience your college-life attending both National and International events.
           <br /> <br />
@@ -17,7 +17,7 @@ function PerksBento() {
         <Image
           src="/assets/perks-pics/perks-2.png"
           alt="Perks Bento Image"
-          width={500}
+          width={400}
           height={400}
         />
       </GlassContainer>

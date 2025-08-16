@@ -35,18 +35,7 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
               </div>
             </GlassContainer>
             <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-              <div
-                style={{
-                  backgroundColor: "var(--color-pd-dark-grey)",
-                  position: "absolute",
-                  inset: 0,
-                  backgroundImage: "url(/assets/pattern.png)",
-                  backgroundRepeat: "repeat",
-                  backgroundSize: "auto",
-                  opacity: 0.18,
-                  borderRadius: "16px",
-                }}
-              />
+              <div className="absolute inset-0 rounded-[16px] bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
               <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
                 {/* Project Title*/}
                 <div className="text-center mb-4">
@@ -75,6 +64,7 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
             </GlassContainer>
           </div>
 
+
           {/* Project Card 2 */}
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
             <GlassContainer className="w-full lg:w-1/2 lg:max-w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200 flex-shrink-0">
@@ -93,18 +83,7 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
               </div>
             </GlassContainer>
             <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-              <div
-                style={{
-                  backgroundColor: "var(--color-pd-dark-grey)",
-                  position: "absolute",
-                  inset: 0,
-                  backgroundImage: "url(/assets/pattern.png)",
-                  backgroundRepeat: "repeat",
-                  backgroundSize: "auto",
-                  opacity: 0.18,
-                  borderRadius: "16px",
-                }}
-              />
+              <div className="absolute inset-0 rounded-[16px] bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
               <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
                 {/* Project Title*/}
                 <div className="text-center mb-4">
@@ -133,6 +112,7 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
             </GlassContainer>
           </div>
 
+
           {/* Project Card 3 */}
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
             <GlassContainer className="w-full lg:w-1/2 lg:max-w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200 flex-shrink-0">
@@ -151,18 +131,7 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
               </div>
             </GlassContainer>
             <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-              <div
-                style={{
-                  backgroundColor: "var(--color-pd-dark-grey)",
-                  position: "absolute",
-                  inset: 0,
-                  backgroundImage: "url(/assets/pattern.png)",
-                  backgroundRepeat: "repeat",
-                  backgroundSize: "auto",
-                  opacity: 0.18,
-                  borderRadius: "16px",
-                }}
-              />
+              <div className="absolute inset-0 rounded-[16px] bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
               <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
                 {/* Project Title*/}
                 <div className="text-center mb-4">

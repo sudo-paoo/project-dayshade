@@ -1,12 +1,12 @@
 import React from 'react'
-import PerksHero from '@/components/views/perks-hero'
-import PerksBento from '@/components/views/perks-bento'
-import PerksWorkHard from '@/components/views/perks-work-hard'
-import PerksMember from '@/components/views/perks-member'
+import PerksHero from '@/components/sections/perks/perks-hero'
+import PerksBento from '@/components/sections/perks/perks-bento'
+import PerksWorkHard from '@/components/sections/perks/perks-work-hard'
+import PerksMember from '@/components/sections/perks/perks-member'
 
 export default function PerksPage() {
   return (
-    <div className='container-fluid flex flex-col items-center justify-center bg-pd-dark-grey relative min-h-screen overflow-hidden'>
+    <div className='container-fluid pt-12 md:pt-16 flex flex-col items-center justify-center bg-pd-dark-grey relative min-h-screen overflow-hidden'>
       <div className='absolute inset-0 bg-[url(/assets/pattern.png)] bg-cover bg-center opacity-15 z-0'></div>
       {/* Star 1 */}
       <div 

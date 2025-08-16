@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Footer from "@/components/global/footer";
 import "@/styles/globals.css";
-import Navbar from "@/components/global/navbar";
+import LayoutWrapper from "@/components/global/LayoutWrapper";
 
 export const metadata: Metadata = {
   title: "Programmers' Den",
@@ -10,15 +9,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`antialiased`}>
-        <Navbar />
-        {<main className="min-h-screen">{children}</main>}
-        <Footer />
+      <body className="antialiased">
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
