@@ -12,7 +12,6 @@ export const TeamMemberCircles = () => {
 		<div className='relative flex flex-col items-center '>
 			<div className='flex flex-row items-start justify-center gap-2'>
 
-				{/* TODO: CAROUSEL */}
 				{teamMembers.map((member) => (
 					<div
 						key={member.id}
