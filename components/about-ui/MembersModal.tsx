@@ -1,12 +1,11 @@
 import React from 'react'
-import Button from '../global/button'
+import { Button } from "@/components/ui/button";
 
 export default function MembersModal() {
 	return (
-		<div className=' flex items-center justify-center flex-col  max-w-lg rounded-2xl'>
-
-			<h1 className='text-5xl font-semibold text-primary mb-6'>Members (75)</h1>
-			<section className='bg-background p-6 rounded-md w-full '>
+		<div className='w-full max-w-lg mx-auto'>
+			<h1 className='text-5xl font-semibold text-primary mb-6 text-center'>Members (75)</h1>
+			<section className='bg-background p-6 rounded-md w-full'>
 				<h4 className='text-primary text-center text-lg font-semibold'>Adivser</h4>
 				<h2 className='text-3xl font-semibold text-center mb-2'>Nomar Lapitan</h2>
 
@@ -55,9 +54,6 @@ export default function MembersModal() {
 					</ol>
 				</div>
 			</section>
-
-
 		</div>
-
 	)
 }

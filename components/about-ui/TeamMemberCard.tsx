@@ -19,7 +19,6 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
             transition-all duration-300
             hover:shadow-2xl hover:border-white/20
         '>
-			{/* Profile Picture with a sleek border */}
 			<div className='relative w-32 h-32 rounded-full overflow-hidden mb-4 border-2  shadow-md'>
 				<Image
 					src={member.image}
@@ -29,11 +28,9 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
 				/>
 			</div>
 
-			{/* Name and Title */}
 			<h5 className='text-xl font-bold text-center tracking-wide'>{member.name}</h5>
 			<p className='text-sm p-1 px-4 rounded-full text-center font-semibold bg-white/10  my-2'>{member.title}</p>
 
-			{/* Social Icons with improved hover effects */}
 			<div className='flex flex-row gap-4 text-gray-400 mt-4'>
 				{member.socials.github && (
 					<a href={member.socials.github} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
