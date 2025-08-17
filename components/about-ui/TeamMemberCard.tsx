@@ -3,6 +3,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 import React from 'react';
 import Image from 'next/image';
 import { TeamMember } from '@/data/teamMembers';
+import { MagicCard } from '../magicui/magic-card';
 
 interface TeamMemberCardProps {
 	member: TeamMember;
@@ -10,44 +11,38 @@ interface TeamMemberCardProps {
 
 export default function TeamMemberCard({ member }: TeamMemberCardProps) {
 	return (
-		<div className='
-            relative
-            flex flex-col items-center justify-center
-            p-6 rounded-2xl
-            bg-white/5 border border-white/10 shadow-lg backdrop-blur-sm
-            w-56 h-88
-            transition-all duration-300
-            hover:shadow-2xl hover:border-white/20
-        '>
-			<div className='relative w-32 h-32 rounded-full overflow-hidden mb-4 border-2  shadow-md'>
-				<Image
-					src={member.image}
-					alt={member.name}
-					fill
-					style={{ objectFit: 'cover' }}
-				/>
-			</div>
+		<MagicCard className='rounded-2xl'>
+			<div className='flex items-center justify-between  h-88 flex-col p-6 '>
 
-			<h5 className='text-xl font-bold text-center tracking-wide'>{member.name}</h5>
-			<p className='text-sm p-1 px-4 rounded-full text-center font-semibold bg-white/10  my-2'>{member.title}</p>
+				<div className='relative  size-32 rounded-full overflow-hidden mb-4 border-2 shadow-md  object-cover'>
+					<Image
+						src={member.image}
+						alt={member.name}
+						fill
+					/>
+				</div>
 
-			<div className='flex flex-row gap-4 text-gray-400 mt-4'>
-				{member.socials.github && (
-					<a href={member.socials.github} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
-						<Github className='w-6 h-6' />
-					</a>
-				)}
-				{member.socials.linkedin && (
-					<a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
-						<Linkedin className='w-6 h-6' />
-					</a>
-				)}
-				{member.socials.email && (
-					<a href={`mailto:${member.socials.email}`} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
-						<Mail className='w-6 h-6' />
-					</a>
-				)}
+				<h5 className='text-xl font-bold text-center tracking-wide'>{member.name}</h5>
+				<p className='text-sm p-1 px-4 rounded-full text-center font-semibold bg-white/10 my-2'>{member.title}</p>
+
+				<div className='flex flex-row gap-4 items-center justify-center text-gray-400 mt-4'>
+					{member.socials.github && (
+						<a href={member.socials.github} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
+							<Github className='w-6 h-6' />
+						</a>
+					)}
+					{member.socials.linkedin && (
+						<a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
+							<Linkedin className='w-6 h-6' />
+						</a>
+					)}
+					{member.socials.email && (
+						<a href={`mailto:${member.socials.email}`} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-[#43DAA1]'>
+							<Mail className='w-6 h-6' />
+						</a>
+					)}
+				</div>
 			</div>
-		</div>
+		</MagicCard>
 	);
 }
