@@ -96,7 +96,7 @@ const AdminDashboard = () => {
       {/* Main Cards */}
       <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
         {cards.map((card) => (
-          <Card key={card.id} >
+          <Card key={card.id}  >
             <CardHeader className="flex flex-row justify-between items-start">
               <div className="flex gap-2 items-center">
                 {card.icon}
@@ -111,7 +111,7 @@ const AdminDashboard = () => {
               </div>
             </CardHeader>
 
-            <CardContent className='min-h-32' >
+            <CardContent >
 
               {/* Content renderer depending on card type */}
               {card.content && (
