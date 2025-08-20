@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "@/styles/globals.css";
 import LayoutWrapper from "@/components/global/LayoutWrapper";
+import { Toaster } from "@/components/ui/sonner"
+
 
 export const metadata: Metadata = {
   title: "Programmers' Den",
@@ -14,6 +16,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <LayoutWrapper>{children}</LayoutWrapper>
+        <Toaster />
       </body>
     </html>
   );
