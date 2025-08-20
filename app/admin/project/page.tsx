@@ -50,17 +50,23 @@ const Page = () => {
             Add, edit, or remove featured projects
           </p>
         </div>
+
+         {/* Add Project Button */}
+          <AddProjectMenu />
       </header>
 
       {/* Top Section */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Active Projects */}
         <Card>
-          <CardHeader>
+          <CardHeader >
             <CardTitle className="text-lg font-semibold">
               Active Projects -
               <span className="text-sm text-muted-foreground"> Aug 20, 2025</span>
             </CardTitle>
+
+
+
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             {activeProjects.map((title, i) => (
@@ -83,12 +89,6 @@ const Page = () => {
           </CardContent>
         </Card>
 
-        {/* Add Project Button */}
-        <Card>
-          <CardContent className="flex items-center justify-center h-full">
-            <AddProjectMenu />
-          </CardContent>
-        </Card>
       </section>
 
       {/* Main Projects List */}

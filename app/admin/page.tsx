@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Star, Film, Users, Trophy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-// Static UI Config (id, icon, title, description, header if needed, button)
+// Static UI Config
 const uiCards = [
   {
     id: 'featured-projects',
@@ -37,51 +37,58 @@ const uiCards = [
     title: 'Leaderboards',
     description: 'Latest rankings',
     button: { label: 'Manage Board', route: '/admin/leaderboard' },
-    header: { left: 'Rank', right: 'Points' }, // <- UI-only header
+    header: { left: 'Rank', right: 'Points' },
   },
 ];
 
 const AdminDashboard = () => {
   const router = useRouter();
   const [Active, isActive] = useState(false);
-  const [backendData, setBackendData] = useState<Record<string, any>>({});
 
-  // Simulated backend fetch
+  // 🔹 Separate Mock Data Sets
+  const [featuredProjects, setFeaturedProjects] = useState<any>(null);
+  const [projectShowcase, setProjectShowcase] = useState<any>(null);
+  const [activeMembers, setActiveMembers] = useState<any>(null);
+  const [leaderboards, setLeaderboards] = useState<any>(null);
+
   useEffect(() => {
-    // Replace this with your real API call
-    const fetchData = async () => {
-      const mockResponse = {
-        'featured-projects': {
-          stat: { value: 10, label: 'total' },
-          content: [
-            { left: 'Project #1', right: 'Dev Name' },
-            { left: 'Project #2', right: 'Dev Name' },
-            { left: 'Project #3', right: 'Dev Name' },
-          ],
-        },
-        'project-showcase': {
-          stat: { value: 5, label: 'showcases' },
-          showcase: { name: 'Spooky Sprout!', devs: 'Dev Names' },
-        },
-        'active-members': {
-          stat: { value: 98, label: 'members' },
-          extra: { pending: 10, lastApp: 'Aug 15, 2025' },
-        },
-        'leaderboards': {
-          stat: { value: 'Aug 18, 2025', label: 'last update' },
-          content: [
-            { left: '1. John Doe', right: '2500' },
-            { left: '2. Jane Doe', right: '2300' },
-            { left: '3. Sam Smith', right: '2100' },
-          ],
-        },
-      };
+    // Simulate fetch per card
+    setFeaturedProjects({
+      stat: { value: 10, label: 'total' },
+      content: [
+        { left: 'Project #1', right: 'Dev Name' },
+        { left: 'Project #2', right: 'Dev Name' },
+        { left: 'Project #3', right: 'Dev Name' },
+      ],
+    });
 
-      setBackendData(mockResponse);
-    };
+    setProjectShowcase({
+      stat: { value: 5, label: 'showcases' },
+      showcase: { name: 'Spooky Sprout!', devs: 'Dev Names' },
+    });
 
-    fetchData();
+    setActiveMembers({
+      stat: { value: 98, label: 'members' },
+      extra: { pending: 10, lastApp: 'Aug 15, 2025' },
+    });
+
+    setLeaderboards({
+      stat: { value: 'Aug 18, 2025', label: 'last update' },
+      content: [
+        { left: '1. John Doe', right: '2500' },
+        { left: '2. Jane Doe', right: '2300' },
+        { left: '3. Sam Smith', right: '2100' },
+      ],
+    });
   }, []);
+
+  // 🔹 Map IDs to individual states
+  const dataMap: Record<string, any> = {
+    'featured-projects': featuredProjects,
+    'project-showcase': projectShowcase,
+    'active-members': activeMembers,
+    'leaderboards': leaderboards,
+  };
 
   return (
     <section>
@@ -112,7 +119,7 @@ const AdminDashboard = () => {
       {/* Main Cards */}
       <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 p-4">
         {uiCards.map((card) => {
-          const data = backendData[card.id] || {};
+          const data = dataMap[card.id];
           return (
             <Card key={card.id}>
               <CardHeader className="flex flex-row justify-between items-start">
@@ -123,7 +130,7 @@ const AdminDashboard = () => {
                     <CardDescription>{card.description}</CardDescription>
                   </div>
                 </div>
-                {data.stat && (
+                {data?.stat && (
                   <div className="flex flex-col items-center">
                     <span className="text-2xl font-bold">{data.stat.value}</span>
                     <span className="text-xs text-muted-foreground">{data.stat.label}</span>
@@ -133,9 +140,8 @@ const AdminDashboard = () => {
 
               <CardContent>
                 {/* Leaderboards + Featured Projects */}
-                {data.content && (
+                {data?.content && (
                   <div className="flex flex-col gap-2 rounded-md p-3 bg-card border">
-                    {/* Show static header ONLY for leaderboards */}
                     {card.id === 'leaderboards' && card.header && (
                       <div className="flex justify-between text-sm text-muted-foreground font-medium">
                         <span>{card.header.left}</span>
@@ -152,7 +158,7 @@ const AdminDashboard = () => {
                 )}
 
                 {/* Project Showcase */}
-                {data.showcase && (
+                {data?.showcase && (
                   <div className="flex flex-col gap-2 rounded-md p-3 bg-card border">
                     <span className="font-light">Active Showcase</span>
                     <Label className="text-2xl font-bold">{data.showcase.name}</Label>
@@ -161,7 +167,7 @@ const AdminDashboard = () => {
                 )}
 
                 {/* Active Members */}
-                {data.extra && (
+                {data?.extra && (
                   <div className="flex flex-col gap-2 rounded-md p-3 bg-card border">
                     <Label className="text-lg font-light">
                       Pending Applications: <span className="font-medium">{data.extra.pending}</span>
