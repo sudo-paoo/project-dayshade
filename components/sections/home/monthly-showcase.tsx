@@ -69,7 +69,7 @@ export function MonthlyShowcase() {
               <iframe
                 className="w-full h-50 md:h-96"
                 src={project.embed_link || "https://www.youtube.com/embed/dQw4w9WgXcQ?si=zrlkSWI5oODbQC56"}
-                title="YouTube video player"
+                title={project.title || "YouTube video player"}
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
