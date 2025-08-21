@@ -109,15 +109,18 @@ export function FeaturedProjects() {
                           {project.description}
                         </p>
                       </div>
-                      <div className="relative w-full rounded-lg overflow-hidden order-1 md:order-2">
-                        <Image
-                          src={project.image || "/placeholder.svg"}
-                          alt={project.name}
-                          width={500}
-                          height={300}
-                          className="w-full h-auto object-cover"
-                          priority={index === 0}
-                        />
+                      <div className="relative w-full mx-auto mb-6 rounded-lg overflow-hidden">
+                        <div className=" w-full"> 
+                          <iframe
+                            className="w-full h-50 md:h-96"
+                            src={project.embed_link || "https://www.youtube.com/embed/dQw4w9WgXcQ?si=zrlkSWI5oODbQC56"}
+                            title="YouTube video player"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerPolicy="strict-origin-when-cross-origin"
+                            allowFullScreen
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

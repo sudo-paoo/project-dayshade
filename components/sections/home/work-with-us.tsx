@@ -9,49 +9,18 @@ import {
   Users,
   Brain,
   ChevronRight,
-} from "lucide-react"
+} from "lucide-react";
+import SocialLinksSection from "./social-links";
 
-export default function ProgrammersDenPage() {
+export default function ConnectWithUsSection() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
       <GlassContainer className="w-full max-w-8xl rounded-xl p-4 sm:p-8 space-y-8">
-        /*
-        * to change embed to image
-         */
-        {/* desktop view of facebook page */}
-        <div className="w-full items-center hidden md:flex">
-          {/* Header */}
-          <div className="text-white text-center text-xl md:text-6xl font-bold mb-8">
-            Official <span className="text-pd-green">Programmers&apos; Den</span> Facebook Page
-          </div>
-          {/* Facebook Page Section */}
-          <div className="w-full flex justify-center items-center">
-            <iframe
-            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fccsprogrammersden&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=535938404643040"
-            width="500"
-            height="500"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-          </div>
-        </div>
-
-        {/* Mobile view of facebook page */}
-        <div className="w-full items-center flex-col md:hidden">
-          {/* Header */}
-          <div className="text-white text-center text-xl md:text-6xl font-bold mb-8">
-            Official <span className="text-pd-green">Programmers&apos; Den</span> Facebook Page
-          </div>
-          {/* Facebook Page Section */}
-          <div className="w-full flex justify-center items-center">
-            <iframe
-            src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fccsprogrammersden&tabs=timeline&width=250&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=535938404643040"
-            width="250"
-            height="500"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-          </div>
-        </div>
+        {/* Social links section */}
+        <SocialLinksSection />
 
         {/* Work with us section */}
-        <div className="text-center mt-12">
+        <div className="text-center">
           <h2 className="text-white text-4xl sm:text-5xl font-bold">Work with us!</h2>
           <p className="text-gray-300 text-lg mt-2">All Red Hawks are welcome!</p>
         </div>

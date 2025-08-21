@@ -41,7 +41,7 @@ export interface MonthlyProject {
   id: string
   title: string
   name: string
-  image: string
+  embed_link: string
   description: string
   credits: string
 }
@@ -50,7 +50,7 @@ export interface FeaturedProject {
   id: string
   title: string
   name: string
-  image: string
+  embed_link: string
   description: string
 }
 
