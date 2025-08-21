@@ -23,6 +23,10 @@ export type RecruitmentEntity = {
 };
 
 export const columns: ColumnDef<RecruitmentEntity>[] = [
+  { accessorKey: "rowNumber",
+    header: "#",
+    cell: ({row}) => row.index + 1,
+  },
   {
     accessorKey: "name",
     header: "Name",

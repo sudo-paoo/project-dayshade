@@ -100,7 +100,7 @@ const Page = () => {
   return (
     <section className="container mx-auto py-10 space-y-6">
 
-        <Label className="text-2xl font-bold">Recruitment</Label>
+        <Label className="text-3xl font-bold text-primary">Recruitment</Label>
         {/* Future filter/search or add button goes here */}
 
           <DataTable columns={columns} data={mockData} />
