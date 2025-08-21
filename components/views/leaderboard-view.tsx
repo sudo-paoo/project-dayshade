@@ -3,12 +3,12 @@ import { GlassContainer } from "@/components/shared/glass-container";
 import { X } from "lucide-react";
 import Image from "next/image";
 
-import { columns } from "@/components/leaderboard-ui/leaderboard-table/columns";
+import { columns } from "@/components/sections/leaderboard/leaderboard-table/columns";
 import { rankings } from "@/data/mockLeaderboard";
-import { DataTable } from "../leaderboard-ui/leaderboard-table/data-table";
+import { DataTable } from "../sections/leaderboard/leaderboard-table/data-table";
 import { Leaderboard } from "@/type/zod/leaderboard";
 
-import FacebookPostEmbed from "../leaderboard-ui/fb-embed";
+import FacebookPostEmbed from "../sections/leaderboard/fb-embed";
 
 // TODO: insert logic for fetching rankings here
 async function getData(): Promise<Leaderboard[]> {

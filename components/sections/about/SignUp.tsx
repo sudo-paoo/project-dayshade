@@ -3,8 +3,8 @@
 import { ChevronRight } from 'lucide-react'
 import React from 'react'
 import { Button } from "@/components/ui/button";
-import { GlassContainer } from '../shared/glass-container'
-import { Card, CardHeader, CardTitle, CardContent } from '../ui/card'
+import { GlassContainer } from '@/components/shared/glass-container'
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion'

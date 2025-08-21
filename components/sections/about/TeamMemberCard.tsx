@@ -3,7 +3,7 @@ import { Github, Linkedin, Mail } from 'lucide-react';
 import React from 'react';
 import Image from 'next/image';
 import { TeamMember } from '@/data/teamMembers';
-import { MagicCard } from '../magicui/magic-card';
+import { MagicCard } from '@/components/magicui/magic-card';
 
 interface TeamMemberCardProps {
 	member: TeamMember;

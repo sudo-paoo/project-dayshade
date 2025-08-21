@@ -1,38 +1,16 @@
-
 import React from "react";
-import { technologies } from "@/data/technologies";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
-import { teamMembers } from "@/data/teamMembers";
-import TeamMemberCard from "@/components/about-ui/TeamMemberCard";
-import { TeamMemberCircles } from "@/components/about-ui/TeamMemberCircles";
-import { ChevronRight, Code, FileCode, Medal, SquareCode, UsersRound } from "lucide-react";
+import { TeamMemberCircles } from "@/components/sections/about/TeamMemberCircles";
 import Image from "next/image";
-import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { GlassContainer } from "@/components/shared/glass-container";
-import { Button } from "@/components/ui/button";
-import MembersModal from "@/components/about-ui/MembersModal";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import HeroSection from "@/components/about-ui/HeroSection";
-import ProgdenStory from "@/components/about-ui/ProgdenStory";
-import TeamSection from "@/components/about-ui/TeamSection";
-import ProgdenStats from "@/components/about-ui/ProgdenStats";
-import SignUp from "@/components/about-ui/SignUp";
+import HeroSection from "@/components/sections/about/HeroSection";
+import ProgdenStory from "@/components/sections/about/ProgdenStory";
+import TeamSection from "@/components/sections/about/TeamSection";
+import ProgdenStats from "@/components/sections/about/ProgdenStats";
+import SignUp from "@/components/sections/about/SignUp";
 
 export default function About() {
-
   return (
     <div className="relative ">
-
       <HeroSection />
 
       {/* Panel 2 */}
@@ -65,8 +43,6 @@ export default function About() {
         </div>
       </div>
 
-
-
       {/* SEPARATOR */}
       <div className="flex items-center justify-center w-full ">
         <div className="bg-gradient-to-r to-[#73FFC5] from-[#2B5B3B] h-12 w-full"></div>
@@ -86,9 +62,6 @@ export default function About() {
       <ProgdenStats />
 
       <SignUp />
-
-
-
-    </div >
+    </div>
   );
 }

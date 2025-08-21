@@ -1,5 +1,5 @@
 import React from "react";
-import { JoinForm } from "@/components/join-ui/JoinForm";
+import { JoinForm } from "@/components/sections/join/JoinForm";
 import {
   Card,
   CardAction,

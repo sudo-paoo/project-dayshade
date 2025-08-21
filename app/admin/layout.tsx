@@ -1,4 +1,5 @@
 import { AppSidebar } from "@/components/app-sidebar";
+import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
@@ -21,7 +22,6 @@ export default function AdminLayout({
             orientation="vertical"
             className="mr-2 data-[orientation=vertical]:h-4"
           />
-          {/* //! DAPAT HINDI TEXT-WHITE */}
           <h1 className="text-lg font-semibold ">Progden Admin Panel</h1>
         </header>
 

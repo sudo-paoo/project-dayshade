@@ -3,7 +3,7 @@
 import { teamMembers } from '@/data/teamMembers'
 import React from 'react'
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogTitle, DialogTrigger, DialogClose, DialogFooter, DialogContent } from '../ui/dialog'
+import { Dialog, DialogTitle, DialogTrigger, DialogClose, DialogFooter, DialogContent } from '@/components/ui/dialog'
 import MembersModal from './MembersModal'
 import TeamMemberCard from './TeamMemberCard'
 
