@@ -1,5 +1,4 @@
 import BackgroundSvg from "@/components/shared/red-boxes-bg-svg";
-import LeaderboardsContainer from "@/components/leaderboard-ui/lb-container";
 import { GlassContainer } from "@/components/shared/glass-container";
 import { X } from "lucide-react";
 import Image from "next/image";
@@ -9,7 +8,6 @@ import { rankings } from "@/data/mockLeaderboard";
 import { DataTable } from "../leaderboard-ui/leaderboard-table/data-table";
 import { Leaderboard } from "@/type/zod/leaderboard";
 
-import Script from "next/script";
 import FacebookPostEmbed from "../leaderboard-ui/fb-embed";
 
 // TODO: insert logic for fetching rankings here
