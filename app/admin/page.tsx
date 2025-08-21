@@ -95,7 +95,7 @@ const AdminDashboard = () => {
       {/* Header */}
       <header className="flex justify-between p-4">
         <div className="flex flex-col gap-2">
-          <Label className="text-2xl font-bold" htmlFor="dashboard">
+          <Label className="text-3xl font-bold text-primary" htmlFor="dashboard">
             Dashboard
           </Label>
           <p className="text-muted-foreground">Manage the Page</p>

@@ -11,13 +11,20 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
-import {Card, CardContent} from "@/components/ui/card"
-import { Label } from "@/components/ui/label"
+import { Card, CardContent } from "@/components/ui/card"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Checkbox } from '@/components/ui/checkbox'
 import { useForm } from "react-hook-form"
 import { z } from 'zod'
 import { toast } from 'sonner'
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
 
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
@@ -26,26 +33,30 @@ const ProjectSchema = z.object({
   Year: z.string().min(4, { message: "Enter a valid year" }),
   Month: z.string().min(2, { message: "Month is required" }),
   Description: z.string().min(5, { message: "Description is required" }),
+  MonthlyShowcase: z.boolean().optional(),
 })
 
 const AddProjectMenu = () => {
   const [open, setOpen] = useState(false)
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid },
-    reset,
-  } = useForm<z.infer<typeof ProjectSchema>>({
+  const form = useForm<z.infer<typeof ProjectSchema>>({
     resolver: zodResolver(ProjectSchema),
+    defaultValues: {
+      Title: "",
+      Developers: "",
+      YTLinks: "",
+      Year: "",
+      Month: "",
+      Description: "",
+      MonthlyShowcase: false,
+    },
+    mode: "onChange",
   })
 
   function onSubmit(values: z.infer<typeof ProjectSchema>) {
     console.log(values)
-
     toast.success("Project added successfully!")
-
-    reset()
+    form.reset()
     setOpen(false)
   }
 
@@ -56,64 +67,128 @@ const AddProjectMenu = () => {
           Add Project +
         </Button>
       </DialogTrigger>
+
       <DialogContent>
-        <DialogHeader className='flex items-center'>
-          <DialogTitle className='text-primary font-bold'>ADD PROJECT</DialogTitle>
+        <DialogHeader className="flex items-center">
+          <DialogTitle className="text-primary font-bold">
+            ADD PROJECT
+          </DialogTitle>
         </DialogHeader>
 
         <Card>
-            <CardContent>
-                        <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                <div>
-                    <Label className='text-primary font-bold'>Title*</Label>
-                    <Input {...register("Title")} />
-                    {errors.Title && <p className="text-red-500 text-sm">{errors.Title.message}</p>}
-                </div>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+                <FormField
+                  control={form.control}
+                  name="Title"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Title*</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter project title" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div>
-                    <Label className='text-primary font-bold'>Developers*</Label>
-                    <Input {...register("Developers")} />
-                    {errors.Developers && <p className="text-red-500 text-sm">{errors.Developers.message}</p>}
-                </div>
+                <FormField
+                  control={form.control}
+                  name="Developers"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Developers*</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter developer names" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div>
-                    <Label className='text-primary font-bold'>YT Embed Link*</Label>
-                    <Input {...register("YTLinks")} />
-                    {errors.YTLinks && <p className="text-red-500 text-sm">{errors.YTLinks.message}</p>}
-                </div>
+                <FormField
+                  control={form.control}
+                  name="YTLinks"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">YT Embed Link*</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter YouTube embed link" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
                 <div className="flex gap-4">
-                    <div className="flex-1">
-                    <Label className='text-primary font-bold'>Year</Label>
-                    <Input {...register("Year")} />
-                    {errors.Year && <p className="text-red-500 text-sm">{errors.Year.message}</p>}
-                    </div>
-                    <div className="flex-1">
-                    <Label className='text-primary font-bold'>Month</Label>
-                    <Input {...register("Month")} />
-                    {errors.Month && <p className="text-red-500 text-sm">{errors.Month.message}</p>}
-                    </div>
+                  <FormField
+                    control={form.control}
+                    name="Year"
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel className="text-primary font-bold">Year*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. 2025" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="Month"
+                    render={({ field }) => (
+                      <FormItem className="flex-1">
+                        <FormLabel className="text-primary font-bold">Month*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. August" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
-                <div>
-                    <Label className='text-primary font-bold'>Description*</Label>
-                    <Input {...register("Description")} />
-                    {errors.Description && <p className="text-red-500 text-sm">{errors.Description.message}</p>}
-                </div>
+                <FormField
+                  control={form.control}
+                  name="Description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Description*</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Enter project description" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                <div className='flex justify-end'>
-                    <Label className='text-primary font-bold'>Monthly Showcase <Checkbox /></Label>
-                </div>
+                <FormField
+                  control={form.control}
+                  name="MonthlyShowcase"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-end gap-2">
+                      <FormLabel className="text-primary font-bold">Monthly Showcase</FormLabel>
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
 
                 <DialogFooter>
-                    <Button type="submit" disabled={!isValid}>
+                  <Button type="submit" disabled={!form.formState.isValid}>
                     Add Project
-                    </Button>
+                  </Button>
                 </DialogFooter>
-                </form>
-            </CardContent>
+              </form>
+            </Form>
+          </CardContent>
         </Card>
-
       </DialogContent>
     </Dialog>
   )
