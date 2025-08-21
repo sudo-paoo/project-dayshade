@@ -63,15 +63,19 @@ export function MonthlyShowcase() {
             <h3 className="text-xl md:text-2xl font-bold text-pd-purple mb-4">{project.title}</h3>
           </div>
 
-          {/* Project Image */}
-          <div className="relative w-full max-w-2xl mx-auto mb-6 rounded-lg overflow-hidden">
-            <Image
-              src={project.image || "/placeholder.svg"}
-              alt={project.name}
-              width={500}
-              height={300}
-              className="w-full h-auto object-cover"
-            />
+          {/* Project Youtube Embed */}
+          <div className="relative w-full mx-auto mb-6 rounded-lg overflow-hidden">
+            <div className=" w-full"> 
+              <iframe
+                className="w-full h-50 md:h-96"
+                src={project.embed_link || "https://www.youtube.com/embed/dQw4w9WgXcQ?si=zrlkSWI5oODbQC56"}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
           </div>
 
           {/* Credits */}
