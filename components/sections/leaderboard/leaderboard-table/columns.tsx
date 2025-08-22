@@ -1,6 +1,6 @@
 "use client";
 
-import { LeaderboardEntries } from "@/type/zod/leaderboard-entries";
+import { LeaderboardEntries } from "@/lib/validation/leaderboard-entries";
 import { ColumnDef } from "@tanstack/react-table";
 
 export const columns: ColumnDef<LeaderboardEntries>[] = [

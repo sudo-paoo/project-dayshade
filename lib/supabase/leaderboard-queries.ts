@@ -1,5 +1,5 @@
-import { LeaderboardEntries } from "@/type/zod/leaderboard-entries";
-import { Leaderboards } from "@/type/zod/leaderboards";
+import { LeaderboardEntries } from "@/lib/validation/leaderboard-entries";
+import { Leaderboards } from "@/lib/validation/leaderboards";
 import { createClient } from "@/utils/supabase/server";
 
 async function getActiveLeaderboard(): Promise<Leaderboards[]> {

@@ -1,24 +1,35 @@
 "use server";
 
+import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-
 import { createClient } from "@/utils/supabase/server";
+import { LoginSchema, LoginState } from "@/lib/validation/auth";
 
-export async function login(formData: FormData) {
+
+export async function login(
+  prevState: LoginState,
+  formData: FormData
+): Promise<LoginState> {
   const supabase = await createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get("email") as string,
-    password: formData.get("password") as string,
-  };
+  const validatedFields = LoginSchema.safeParse({
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 
-  const { error } = await supabase.auth.signInWithPassword(data);
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email, password } = validatedFields.data;
+
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    redirect("/error");
+    return { errors: {}, error: error.message };
   }
 
   revalidatePath("/admin", "layout");

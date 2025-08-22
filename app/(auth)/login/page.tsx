@@ -1,14 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { login } from "./actions";
+import { LoginForm } from "@/components/login-form";
 
 export default function LoginPage() {
   return (
-    <div className="flex justify-center">
-      <form action={login} className="mt-96">
-        <input type="hidden" name="email" value="pd_superadmin@test.com" />
-        <input type="hidden" name="password" value="Password123!" />
-        <Button type="submit">click to login</Button>
-      </form>
+    <div className="flex min-h-svh flex-col items-center justify-center p-6 md:p-10">
+      <div className="w-full max-w-sm md:max-w-3xl">
+        <LoginForm />
+      </div>
     </div>
   );
 }
