@@ -42,28 +42,7 @@ export default function LeaderboardView() {
           </div>
 
           {/* CCS PAGE PROMOTION */}
-          <GlassContainer className="rounded-none">
-            <div className="lb-content-width my-5 md:my-10 lg:mb-20 lg:mt-12 flex justify-center flex-col items-center">
-              <p className="text-base md:text-lg mb-2">
-                For updates, follow the official CCS Student Council Page!
-              </p>
-              <GlassContainer
-                className={`p-3 md:p-5 flex justify-center md:mx-10 lg:mx-0 rounded-lg`}
-              >
-                <div className="flex justify-center">
-                  <div className="flex justify-center flex-wrap lg:space-y-0 py-4 lg:py-0 gap-5">
-                    {/* TODO: change links later */}
-                    <span className="flex justify-center lg:-mb-16">
-                      <FacebookPostEmbed url="https://www.facebook.com/photo/?fbid=802338978987202&set=a.208136178407488" />
-                    </span>
-                    <span className="flex justify-center lg:-mr-18 lg:mt-14">
-                      <FacebookPostEmbed url="https://www.facebook.com/photo/?fbid=791025153451918&set=pb.100076333207528.-2207520000" />
-                    </span>
-                  </div>
-                </div>
-              </GlassContainer>
-            </div>
-          </GlassContainer>
+          <CSCPromotion />
         </section>
       </div>
     </main>
