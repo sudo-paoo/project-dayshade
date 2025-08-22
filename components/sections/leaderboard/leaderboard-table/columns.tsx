@@ -1,9 +1,9 @@
 "use client";
 
-import { Leaderboard } from "@/type/zod/leaderboard";
+import { LeaderboardEntries } from "@/type/zod/leaderboard-entries";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const columns: ColumnDef<Leaderboard>[] = [
+export const columns: ColumnDef<LeaderboardEntries>[] = [
   {
     accessorKey: "rank",
     header: "Rank",

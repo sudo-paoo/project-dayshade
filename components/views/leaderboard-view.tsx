@@ -5,8 +5,15 @@ import { DataTable } from "../sections/leaderboard/leaderboard-table/data-table"
 
 import CSCPromotion from "../sections/leaderboard/csc-promotion";
 import SubHeader from "../sections/leaderboard/sub-header";
+import {
+  getActiveLeaderboard,
+  getEntries,
+} from "@/lib/supabase/leaderboard-queries";
 
-export default function LeaderboardView() {
+export default async function LeaderboardView() {
+  const [leaderboard] = await getActiveLeaderboard();
+  const entries = await getEntries(leaderboard);
+
   return (
     <main className="relative min-h-screen z-30 text-white overflow-hidden pt-18 md:pt-24 pb-16 md:pb-32">
       <div className="absolute inset-0 -z-10 flex items-center justify-center overflow-x-clip">
@@ -26,7 +33,8 @@ export default function LeaderboardView() {
               </h2>
               <DataTable
                 columns={columns}
-                data={data}
+                data={entries}
+                dateUpdated={leaderboard.created_at}
               />
             </div>
           </div>
