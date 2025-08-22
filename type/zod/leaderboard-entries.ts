@@ -1,11 +1,12 @@
 import { z } from "zod";
 
 // Zod schema
-export const LeaderboardSchema = z.object({
+export const LeaderboardEntriesSchema = z.object({
   id: z.string().min(1, "ID is required"),
+  leaderboard_id: z.uuid("ID must be a valid UUID"),
   name: z.string().min(1, "Name is required"),
   rank: z.number().int().positive(), // positive = at least 1
   points: z.number().int().nonnegative(), // nonneg = 0 or more
 });
 
-export type Leaderboard = z.infer<typeof LeaderboardSchema>;
+export type LeaderboardEntries = z.infer<typeof LeaderboardEntriesSchema>;
