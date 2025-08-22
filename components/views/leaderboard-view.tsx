@@ -1,20 +1,10 @@
 import BackgroundSvg from "@/components/shared/red-boxes-bg-svg";
-import { GlassContainer } from "@/components/shared/glass-container";
-import { X } from "lucide-react";
-import Image from "next/image";
 
 import { columns } from "@/components/sections/leaderboard/leaderboard-table/columns";
-import { rankings } from "@/data/mockLeaderboard";
 import { DataTable } from "../sections/leaderboard/leaderboard-table/data-table";
-import { Leaderboard } from "@/type/zod/leaderboard";
 
-import FacebookPostEmbed from "../sections/leaderboard/fb-embed";
-
-// TODO: insert logic for fetching rankings here
-async function getData(): Promise<Leaderboard[]> {
-  return rankings;
-}
-const data = await getData();
+import CSCPromotion from "../sections/leaderboard/csc-promotion";
+import SubHeader from "../sections/leaderboard/sub-header";
 
 export default function LeaderboardView() {
   return (
