@@ -23,11 +23,13 @@ import { GlassContainer } from "@/components/shared/glass-container";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  dateUpdated: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  dateUpdated,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -91,8 +93,16 @@ export function DataTable<TData, TValue>({
         </Table>
       </GlassContainer>
       <div className="flex items-center justify-between">
-        <p className="text-base md:text-lg mb-2 z-50">
-          Last updated: August 14, 2025
+        <p className="text-base md:text-lg mb-2 z-50 italic">
+          Last updated:{" "}
+          {dateUpdated
+            ? new Date(dateUpdated).toLocaleDateString("en-US", {
+                weekday: "short",
+                month: "short",
+                day: "numeric",
+                year: "numeric",
+              })
+            : "-"}
         </p>
         <span className="flex items-center justify-center md:justify-end space-x-3 pt-2">
           <Button
