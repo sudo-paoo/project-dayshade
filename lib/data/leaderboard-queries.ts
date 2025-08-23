@@ -8,7 +8,7 @@ function sleep(ms: number) {
 
 
 async function getEntries(): Promise<LeaderboardEntries[]> {
-  await sleep(3000);
+  // await sleep(3000);
   const supabase = await createClient();
   const { data: leaderboard_entries } = await supabase
     .from("leaderboard_entries")
