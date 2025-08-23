@@ -4,7 +4,6 @@ import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-
 import {
   Sidebar,
   SidebarContent,
@@ -19,29 +18,26 @@ import {
   SidebarFooter,
 } from "@/components/ui/sidebar";
 import { NavUser } from "./ui/nav-user";
+import { User } from "@supabase/supabase-js";
 
-// Put files in /public/assets/...
-const data = {
-  user: {
-    name: "Progden Main",
-    email: "m@example.com",
-    avatar: "/assets/pd-logo-sm.png",
+const navMain = [
+  {
+    title: "PD Admin Panel",
+    url: "",
+    items: [
+      { title: "Dashboard", url: "/admin" },
+      { title: "Recruitment", url: "/admin/recruitment" },
+      { title: "Project", url: "/admin/project" },
+      { title: "Leaderboard", url: "/admin/leaderboard" },
+    ],
   },
-  navMain: [
-    {
-      title: "PD Admin Panel",
-      url: "",
-      items: [
-        { title: "Dashboard", url: "/admin" },
-        { title: "Recruitment", url: "/admin/recruitment" },
-        { title: "Project", url: "/admin/project" },
-        { title: "Leaderboard", url: "/admin/leaderboard" },
-      ],
-    },
-  ],
+];
+
+type AppSidebarProps = React.ComponentProps<typeof Sidebar> & {
+  user: User | null;
 };
 
-export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ user, ...props }: AppSidebarProps) {
   const pathname = usePathname();
 
   return (
@@ -59,7 +55,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
       </SidebarHeader>
 
       <SidebarContent>
-        {data.navMain.map((group) => (
+        {navMain.map((group) => (
           <SidebarGroup key={group.title}>
             <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
             <SidebarGroupContent>
@@ -84,7 +80,7 @@ export function AppSidebar(props: React.ComponentProps<typeof Sidebar>) {
         ))}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
