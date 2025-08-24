@@ -34,7 +34,7 @@ export default function RootLayout({
           <link rel="icon" href="/assets/pd-logo.png" />
         </head>
         <LayoutWrapper>{children}</LayoutWrapper>
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   );
