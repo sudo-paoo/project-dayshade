@@ -1,4 +1,4 @@
-import { LeaderboardEntries } from "@/lib/validation/leaderboard-entries";
+import { LeaderboardEntry } from "@/lib/validation/leaderboard-entries";
 import { createClient } from "@/utils/supabase/server";
 
 // !FOR DEBUG PURPOSE
@@ -7,7 +7,7 @@ function sleep(ms: number) {
 }
 
 
-async function getEntries(): Promise<LeaderboardEntries[]> {
+async function getEntries(): Promise<LeaderboardEntry[]> {
   // await sleep(3000);
   const supabase = await createClient();
   const { data: leaderboard_entries } = await supabase

@@ -1,24 +1,72 @@
-import React from "react";
+import LeaderboardView from "@/components/views/leaderboard-view";
+import { Button } from "@/components/ui/button";
 import {
-  columns,
-  leaderboard_entities,
-} from "@/components/sections/admin/leaderboards/columns";
-import { DataTable } from "@/components/sections/admin/leaderboards/data-table";
-import { LeaderboardEntriesSchema } from "@/lib/validation/leaderboard-entries";
+  Card,
+  CardHeader,
+  CardContent,
+  CardDescription,
+  CardTitle,
+} from "@/components/ui/card";
+import FileUploadForms from "@/components/sections/admin/leaderboards/FileUploadForms";
 
-
-const page = () => {
+export default function LeaderboardPage() {
   return (
-    <div className="container mx-auto py-10">
-      <h1 className="text-2xl font-bold">PD x CSC Toot Leaderboards</h1>
-      <p>
-        Here you can view the leaderboards for the PD x CSC Toot integration.
-      </p>
-      {/* <p>Last updated: 2 hours ago</p> */}
+    <div className="container mx-auto py-10 space-y-8">
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-bold tracking-tight">
+          PD x CSC Toot Leaderboards
+        </h1>
+        <Button variant="outline" size="sm">
+          Refresh Data
+        </Button>
+      </div>
 
-      {/* <DataTable columns={columns} data={mockData} /> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Update Leaderboard</CardTitle>
+            <CardDescription>
+              Upload new leaderboard data or refresh the current standings
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <FileUploadForms />
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle>Statistics</CardTitle>
+            <CardDescription>
+              Quick overview of the leaderboard statistics
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-4 text-center">
+              <div className="space-y-1">
+                <p className="text-2xl font-bold">0</p>
+                <p className="text-sm text-muted-foreground">Total Players</p>
+              </div>
+              <div className="space-y-1">
+                <p className="text-2xl font-bold">0</p>
+                <p className="text-sm text-muted-foreground">Total Points</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Current Standings</CardTitle>
+          <CardDescription>
+            Live leaderboard showing current player rankings
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <LeaderboardView />
+        </CardContent>
+      </Card>
     </div>
   );
-};
-
-export default page;
+}
