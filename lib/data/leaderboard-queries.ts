@@ -1,3 +1,5 @@
+"use server"
+
 import { LeaderboardEntry } from "@/lib/validation/leaderboard-entries";
 import { createClient } from "@/utils/supabase/server";
 

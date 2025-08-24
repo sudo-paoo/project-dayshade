@@ -1,7 +1,9 @@
+"use server";
+
 import { LeaderboardEntrySchema } from "../validation/leaderboard-entries";
 import { parse } from "csv-parse/sync";
-import { createClient } from "@/utils/supabase/client";
-
+import { createClient } from "@/utils/supabase/server";
+import { revalidatePath } from "next/cache";
 
 interface LeaderboardCheckResult {
   success: boolean;
@@ -66,7 +68,7 @@ const updateLeaderboards = async (
     );
   }
 
-  const supabase = createClient();
+  const supabase = await createClient();
 
   // Delete all existing records first
   const { error: deleteError } = await supabase
@@ -87,6 +89,7 @@ const updateLeaderboards = async (
     throw new Error("Database update failed: " + error.message);
   }
 
+  revalidatePath("admin/leaderboards");
   return { validation: result, db: data };
 };
 
