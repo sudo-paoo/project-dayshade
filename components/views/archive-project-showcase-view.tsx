@@ -19,23 +19,22 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
         <div className="space-y-8">
           {/* Project Card 1 */}
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
-            <GlassContainer className="w-full lg:w-1/2 lg:max-w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200 flex-shrink-0">
-              <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                <Image
-                  src={imageErrors['project-1'] ? "/placeholder.png" : "/assets/about-pics/carousel-1.png"}
-                  alt="Project Image 1"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                  onLoad={() => {
-                    console.log("Project image 1 loaded successfully")
-                  }}
-                  onError={() => handleImageError('project-1')}
-                />
-              </div>
-            </GlassContainer>
-            <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-              <div className="absolute inset-0 rounded-[16px] bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
+            <div className="w-full lg:w-1/2 lg:max-w-2xl h-64 md:h-80 lg:h-96 xl:h-96 bg-white/20 rounded-2xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 overflow-hidden relative flex-shrink-0">
+              <Image
+                src={imageErrors['project-1'] ? "/placeholder.png" : "/assets/about-pics/carousel-1.png"}
+                alt="Project Image 1"
+                fill
+                className="object-cover w-full h-full rounded-2xl"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                unoptimized
+                onLoad={() => {
+                  console.log("Project image 1 loaded successfully")
+                }}
+                onError={() => handleImageError('project-1')}
+              />
+            </div>
+            <GlassContainer variant="card" className="flex-1 h-64 md:h-80 lg:h-96 xl:h-96 rounded-2xl flex flex-col relative overflow-hidden">
+              <div className="absolute inset-0 rounded-2xl bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
               <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
                 {/* Project Title*/}
                 <div className="text-center mb-4">
@@ -67,23 +66,22 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
 
           {/* Project Card 2 */}
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
-            <GlassContainer className="w-full lg:w-1/2 lg:max-w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200 flex-shrink-0">
-              <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                <Image
-                  src={imageErrors['project-2'] ? "/placeholder.png" : "/assets/about-pics/carousel-3.png"}
-                  alt="Project Image 2"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                  onLoad={() => {
-                    console.log("Project image 2 loaded successfully")
-                  }}
-                  onError={() => handleImageError('project-2')}
-                />
-              </div>
-            </GlassContainer>
-            <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-              <div className="absolute inset-0 rounded-[16px] bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
+            <div className="w-full lg:w-1/2 lg:max-w-2xl h-64 md:h-80 lg:h-96 xl:h-96 bg-white/20 rounded-2xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 overflow-hidden relative flex-shrink-0">
+              <Image
+                src={imageErrors['project-2'] ? "/placeholder.png" : "/assets/about-pics/carousel-3.png"}
+                alt="Project Image 2"
+                fill
+                className="object-cover w-full h-full rounded-2xl"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                unoptimized
+                onLoad={() => {
+                  console.log("Project image 2 loaded successfully")
+                }}
+                onError={() => handleImageError('project-2')}
+              />
+            </div>
+            <GlassContainer variant="card" className="flex-1 h-64 md:h-80 lg:h-96 xl:h-96 rounded-2xl flex flex-col relative overflow-hidden">
+              <div className="absolute inset-0 rounded-2xl bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
               <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
                 {/* Project Title*/}
                 <div className="text-center mb-4">
@@ -115,23 +113,22 @@ export default function DarkProjectShowcaseView({ imageErrors, handleImageError 
 
           {/* Project Card 3 */}
           <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
-            <GlassContainer className="w-full lg:w-1/2 lg:max-w-[36rem] h-96 lg:h-[28rem] rounded-2xl border border-white/20 backdrop-blur-lg bg-gray-200 flex-shrink-0">
-              <div className="w-full h-full rounded-2xl overflow-hidden relative">
-                <Image
-                  src={imageErrors['project-3'] ? "/placeholder.png" : "/assets/about-pics/carousel-5.png"}
-                  alt="Project Image 3"
-                  fill
-                  className="object-cover"
-                  unoptimized
-                  onLoad={() => {
-                    console.log("Project image 3 loaded successfully")
-                  }}
-                  onError={() => handleImageError('project-3')}
-                />
-              </div>
-            </GlassContainer>
-            <GlassContainer variant="card" className="flex-1 h-96 lg:h-[28rem] rounded-2xl flex flex-col relative overflow-hidden">
-              <div className="absolute inset-0 rounded-[16px] bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
+            <div className="w-full lg:w-1/2 lg:max-w-2xl h-64 md:h-80 lg:h-96 xl:h-96 bg-white/20 rounded-2xl flex items-center justify-center transition-all duration-300 hover:bg-white/30 overflow-hidden relative flex-shrink-0">
+              <Image
+                src={imageErrors['project-3'] ? "/placeholder.png" : "/assets/about-pics/carousel-5.png"}
+                alt="Project Image 3"
+                fill
+                className="object-cover w-full h-full rounded-2xl"
+                style={{ objectFit: 'cover', objectPosition: 'center' }}
+                unoptimized
+                onLoad={() => {
+                  console.log("Project image 3 loaded successfully")
+                }}
+                onError={() => handleImageError('project-3')}
+              />
+            </div>
+            <GlassContainer variant="card" className="flex-1 h-64 md:h-80 lg:h-96 xl:h-96 rounded-2xl flex flex-col relative overflow-hidden">
+              <div className="absolute inset-0 rounded-2xl bg-[url(/assets/pattern.png)] bg-auto bg-repeat opacity-18 [background-color:var(--color-pd-dark-grey)]" />
               <div className="relative z-10 w-full h-full flex flex-col p-4 sm:p-6 lg:p-8">
                 {/* Project Title*/}
                 <div className="text-center mb-4">

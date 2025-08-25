@@ -25,14 +25,14 @@ export default function MonthlyProjectShowcase({ imageErrors, handleImageError }
       {/* Showcase Container */}
       <GlassContainer className="w-full rounded-3xl p-4 md:p-8 border border-white/20 backdrop-blur-lg bg-white/10">
         <div className="flex justify-center items-center">
-          <div className="flex flex-row items-center gap-4 md:gap-6">
+          <div className="relative flex flex-row flex-wrap items-center gap-4 md:gap-6 justify-center w-full">
             {/* Main Image */}
-            <div className="relative h-64 w-[400px] overflow-hidden rounded-2xl sm:h-80 sm:w-[500px] md:h-96 md:w-[600px] lg:h-[500px] lg:w-[700px] xl:h-[600px] xl:w-[800px]">
+            <div className="relative h-64 w-full max-w-[800px] overflow-hidden rounded-2xl sm:h-80 md:h-96 lg:h-[500px] xl:h-[600px]">
               <Image
                 src={imageErrors['main-showcase'] ? "/placeholder.png" : "/assets/about-pics/carousel-1.png"}
                 alt="Campus Showcase"
                 fill
-                className="rounded-[16px] object-cover"
+                className="rounded-[16px] object-cover w-full h-full"
                 priority
                 unoptimized
                 onLoad={() => {
@@ -40,13 +40,6 @@ export default function MonthlyProjectShowcase({ imageErrors, handleImageError }
                 }}
                 onError={() => handleImageError('main-showcase')}
               />
-            </div>
-
-            {/* Vertical Date Section */}
-            <div className="flex items-center">
-              <div className="text-center font-bold tracking-wider text-pd-green [font-size:clamp(12px,1.5vw,18px)] [letter-spacing:1px] [text-orientation:mixed] [writing-mode:vertical-rl]">
-                November 2024
-              </div>
             </div>
           </div>
         </div>
@@ -56,6 +49,10 @@ export default function MonthlyProjectShowcase({ imageErrors, handleImageError }
           <p className="text-white/70 text-xs sm:text-sm md:text-base italic">
             Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
           </p>
+        </div>
+   
+        <div className="text-center mt-3">
+          <div className="font-bold text-pd-green">November 2024</div>
         </div>
       </GlassContainer>
     </div>
