@@ -1,106 +1,87 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Image from "next/image"
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
+import * as React from "react";
+import Image from "next/image";
+import { Card } from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from "@/components/ui/carousel";
+import { motion, LazyMotion, domAnimation } from "framer-motion";
+import Autoplay from "embla-carousel-autoplay";
 
 function PerksWorkHard() {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+  const [api, setApi] = React.useState<CarouselApi>();
+  const plugin = React.useRef(
+    Autoplay({ delay: 2000, stopOnInteraction: true })
+  );
 
   const images = [
     { src: "/assets/perks-pics/perks-6.png", alt: "Virtual Dive" },
     { src: "/assets/perks-pics/perks-7.png", alt: "Super Smash Bros." },
     { src: "/assets/perks-pics/perks-8.png", alt: "Tekken" },
-  ]
-
-  React.useEffect(() => {
-    if (!api) return
-
-    const play = () => {
-      stop() 
-      timeoutRef.current = setTimeout(() => {
-        api.scrollNext()
-      }, 3000) 
-    }
-
-    const stop = () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current)
-      }
-    }
-
-    play()
-
-    api.on("pointerDown", stop)
-    api.on("pointerUp", play)
-    api.on("select", play)
-
-    return () => {
-      stop()
-      api.off("pointerDown", stop)
-      api.off("pointerUp", play)
-      api.off("select", play)
-    }
-  }, [api])
+    { src: "/assets/perks-pics/perks-5.png", alt: "PD Session" },
+  ];
 
   return (
-    <section className="w-full px-0 py-12 text-white">
-      <div className="container-fluid px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-2">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl text-pd-green">WORK HARD. PLAY HARD.</h2>
-            <p className="max-w-[900px] text-gray-300 text-lg md:text-xl lg:text-2xl">
-              Celebrate gaming as a platform. Engage in exciting organization Team Building activities that sprout
-              teamwork and healthy competition.
+    <LazyMotion features={domAnimation}>
+      <Card className="w-full px-0 py-12 mt-40 bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center justify-center space-y-8 text-center"
+        >
+          <div className="space-y-4 max-w-3xl">
+            <h2 className="text-4xl font-bold tracking-tight sm:text-6xl bg-gradient-to-r from-pd-green to-pd-purple bg-clip-text text-transparent">
+              WORK HARD. PLAY HARD.
+            </h2>
+            <p className="text-lg md:text-xl text-muted-foreground">
+              Celebrate gaming as a platform. Engage in exciting organization
+              Team Building activities that sprout teamwork and healthy
+              competition.
             </p>
           </div>
-        </div>
-        {/* Carousel - small to medium screens */}
-        <div className="mx-auto w-full max-w-4xl mt-8 lg:hidden">
+        </motion.div>
+        <div className="container mx-auto px-4">
           <Carousel
+            setApi={setApi}
             opts={{
               align: "start",
               loop: true,
             }}
-            setApi={setApi}
-            className="w-full"
+            plugins={[plugin.current]}
+            className="w-full max-w-5xl mx-auto mt-12"
           >
-            <CarouselContent>
+            <CarouselContent className="-ml-2 md:-ml-4">
               {images.map((image, index) => (
-                <CarouselItem key={index}>
-                  <Image
-                    src={image.src || "/placeholder.svg"}
-                    width={800}
-                    height={200}
-                    alt={image.alt}
-                    className="w-full h-[200px] object-cover rounded-lg"
-                    priority={index === 0}
-                  />
+                <CarouselItem key={index} className="pl-2 md:pl-4 basis-full sm:basis-1/2 md:basis-1/3">
+                  <div className="relative aspect-video group">
+                    <div className="absolute inset-0 bg-gradient-to-r from-pd-green/20 to-pd-purple/20 rounded-xl blur-xl 
+                      opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <Image
+                      src={image.src}
+                      alt={image.alt}
+                      width={800}
+                      height={400}
+                      className="w-full h-full object-cover rounded-xl shadow-xl 
+                        transform transition-all duration-500 group-hover:scale-105"
+                      priority={index === 0}
+                    />
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
         </div>
-
-        {/* Image for for large screeens */}
-        <div className="hidden lg:flex lg:flex-row lg:gap-0 lg:justify-center lg:mt-8">
-          {images.map((image, index) => (
-            <div key={index} className="w-full lg:w-1/3">
-              <Image
-                src={image.src || "/placeholder.svg"}
-                width={800}
-                height={300}
-                alt={image.alt}
-                className="w-full h-[300px] object-cover"
-                priority={index === 0}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
+      </Card>
+    </LazyMotion>
+  );
 }
 
-export default PerksWorkHard
+export default PerksWorkHard;
