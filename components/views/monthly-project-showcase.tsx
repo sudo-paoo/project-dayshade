@@ -1,6 +1,8 @@
 import Image from "next/image"
-import { GlassContainer } from "@/components/shared/glass-container"
-import { TextAnimate } from "@/components/magicui/text-animate"
+import { motion } from "framer-motion"
+import { Card } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { CalendarDays, ChevronRight } from "lucide-react"
 
 interface MonthlyProjectShowcaseProps {
   imageErrors: Record<string, boolean>
@@ -8,56 +10,89 @@ interface MonthlyProjectShowcaseProps {
 }
 
 export default function MonthlyProjectShowcase({ imageErrors, handleImageError }: MonthlyProjectShowcaseProps) {
+  const currentShowcase = {
+    title: "Tarlac State University Campus",
+    month: "August",
+    year: "2025",
+    description: "An innovative virtual tour system showcasing the beautiful campus of Tarlac State University, featuring interactive 3D models and real-time navigation.",
+    technologies: ["Three.js", "WebGL", "React"],
+    images: [
+      "/assets/about-pics/carousel-2.png",
+      "/assets/about-pics/carousel-2.png",
+      "/assets/about-pics/carousel-2.png"
+    ]
+  };
+
   return (
-    <div className="w-full px-4">
-      {/* Monthly Project Showcase Header */}
-      <div className="mb-4 max-w-7xl mx-auto">
-        <TextAnimate className="text-white text-2xl md:text-3xl font-bold mb-4">
-          Monthly Project Showcase
-        </TextAnimate>
-        
-        {/* TSU Campus Showcase Title */}
-        <TextAnimate className="mb-4 text-center font-bold tracking-[2px] text-pd-green [font-size:clamp(1.5rem,4vw,3rem)]">
-          TARLAC STATE UNIVERSITY CAMPUS SHOWCASE
-        </TextAnimate>
-      </div>
-
-      {/* Showcase Container */}
-      <GlassContainer className="w-full rounded-3xl p-4 md:p-8 border border-white/20 backdrop-blur-lg bg-white/10">
-        <div className="flex justify-center items-center">
-          <div className="flex flex-row items-center gap-4 md:gap-6">
-            {/* Main Image */}
-            <div className="relative h-64 w-[400px] overflow-hidden rounded-2xl sm:h-80 sm:w-[500px] md:h-96 md:w-[600px] lg:h-[500px] lg:w-[700px] xl:h-[600px] xl:w-[800px]">
-              <Image
-                src={imageErrors['main-showcase'] ? "/placeholder.png" : "/assets/about-pics/carousel-1.png"}
-                alt="Campus Showcase"
-                fill
-                className="rounded-[16px] object-cover"
-                priority
-                unoptimized
-                onLoad={() => {
-                  console.log("Main showcase image loaded successfully")
-                }}
-                onError={() => handleImageError('main-showcase')}
-              />
-            </div>
-
-            {/* Vertical Date Section */}
-            <div className="flex items-center">
-              <div className="text-center font-bold tracking-wider text-pd-green [font-size:clamp(12px,1.5vw,18px)] [letter-spacing:1px] [text-orientation:mixed] [writing-mode:vertical-rl]">
-                November 2024
-              </div>
-            </div>
+    <section className="py-24 w-full relative overflow-hidden">
+      {/* Background Accent */}
+      <div className="absolute inset-0 bg-pd-purple/5 -skew-y-6" />
+      
+      <div className="relative max-w-7xl mx-auto px-4">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <Badge variant="purple" className="mb-4">Project of the Month</Badge>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Monthly Spotlight
+          </h2>
+          <div className="flex items-center justify-center gap-2 text-white/60">
+            <CalendarDays className="w-5 h-5" />
+            <span>{currentShowcase.month} {currentShowcase.year}</span>
           </div>
-        </div>
+        </motion.div>
 
-        {/* CAPTIONS SHOULD BE PLACED HERE */}
-        <div className="text-center mt-4 md:mt-6">
-          <p className="text-white/70 text-xs sm:text-sm md:text-base italic">
-            Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-          </p>
-        </div>
-      </GlassContainer>
-    </div>
-  )
+        {/* Main Content */}
+        <Card className="relative overflow-hidden bg-gradient-to-br from-black/50 via-pd-dark-grey/30 to-black/50 border-white/10">
+          {/* Hero Image */}
+          <div className="relative h-[500px] md:h-[600px] overflow-hidden">
+            <Image
+              src={imageErrors['monthly-showcase'] ? "/placeholder.png" : currentShowcase.images[0]}
+              alt={currentShowcase.title}
+              fill
+              className="object-cover transition-transform duration-700 hover:scale-105"
+              onError={() => handleImageError('monthly-showcase')}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+          </div>
+
+          {/* Content Overlay */}
+          <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex flex-wrap gap-2 mb-4">
+                {currentShowcase.technologies.map(tech => (
+                  <Badge key={tech} variant="purple">
+                    {tech}
+                  </Badge>
+                ))}
+              </div>
+
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+                {currentShowcase.title}
+              </h3>
+              
+              <p className="text-white/80 text-lg md:text-xl max-w-3xl mb-6">
+                {currentShowcase.description}
+              </p>
+
+              <div className="flex items-center gap-2 text-white/60 group cursor-pointer hover:text-white transition-colors">
+                <span>View Project Details</span>
+                <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </div>
+            </motion.div>
+          </div>
+        </Card>
+      </div>
+    </section>
+  );
 }
