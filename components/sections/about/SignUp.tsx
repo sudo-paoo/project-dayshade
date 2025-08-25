@@ -18,8 +18,7 @@ export default function SignUp() {
 				<Image
 					src="/assets/about-pics/signUpBg.png"
 					alt="Sign Up Background"
-					layout="fill"
-					className="object-fill"
+					fill
 				/>
 				<div className="relative z-10 flex flex-col items-center justify-center text-center ">
 					<motion.h1

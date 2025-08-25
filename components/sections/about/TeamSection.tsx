@@ -89,7 +89,7 @@ export default function TeamSection() {
 										type: "spring",
 										stiffness: 260,
 										damping: 20,
-										delay: index * 0.2,
+										delay: index * 0.02,
 										duration: 1
 									}}
 								>
@@ -140,13 +140,13 @@ export default function TeamSection() {
 
 									initial={{ scale: 0.8, opacity: 0 }}
 									whileInView={{ scale: 1, opacity: 1 }}
-									viewport={{ amount: 0.2, once: true }}
+									viewport={{ amount: 0.1, once: true }}
 
 									transition={{
 										type: "spring",
 										stiffness: 260,
 										damping: 20,
-										delay: index * 0.2,
+										delay: index * 0.01,
 										duration: 1
 									}}
 

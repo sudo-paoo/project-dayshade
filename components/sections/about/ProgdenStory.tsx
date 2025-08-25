@@ -25,23 +25,25 @@ export default function ProgdenStory() {
                   <div>
                     <Image
                       src="/assets/about-pics/about-pd-logo-1.png"
-                      className="mb-8"
-                      width={200}
-                      height={200}
+                      height={0}
+                      width={0}
+                      style={{ width: '200px', height: "auto" }} // warning if inalis T_T
                       alt="PD Logo 1"
                     />
                     <Image
                       src="/assets/about-pics/about-pd-logo-2.png"
-                      width={200}
-                      height={200}
+                      height={0}
+                      width={0}
+                      style={{ width: '200px', height: "auto" }} // warning if inalis T_T
                       alt="PD Logo 2"
                     />
                   </div>
                   <Image
                     src="/assets/about-pics/about-pd-logo-3.png"
                     alt="PD Logo 3"
-                    width={200}
-                    height={200}
+                    height={0}
+                    width={0}
+                    style={{ width: '200px', height: "auto" }} // warning if inalis T_T
                   />
                 </motion.div>
                 <motion.div

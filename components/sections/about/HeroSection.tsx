@@ -78,8 +78,9 @@ export default function HeroSection() {
           <Image
             src="/assets/Star-1-full.png"
             alt="Abstract shape 1"
-            width={512}
-            height={512}
+            width={0}
+            height={0}
+            style={{ width: "512px", height: "auto" }}// warning if inalis T_T
           />
         </motion.div>
 
@@ -102,8 +103,9 @@ export default function HeroSection() {
           <Image
             src="/assets/shape-1.png"
             alt="Abstract shape 1"
-            width={1024}
-            height={1024}
+            height={0}
+            width={0}
+            style={{ width: '1024px', height: "auto" }}// warning if inalis T_T
           />
         </motion.div>
 
@@ -159,8 +161,10 @@ export default function HeroSection() {
           <Image
             src="/assets/about-pics/about-hero-img.png"
             alt="about-hero"
-            width={600}
-            height={400}
+            width={0}
+            height={0}
+            style={{ width: "600px", height: "auto" }}// warning if inalis T_T
+            priority
           />
         </motion.div>
         <motion.div

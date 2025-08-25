@@ -21,6 +21,10 @@ export const metadata: Metadata = {
       name: "John Andrei Tacujan",
       url: "https://dreidevs-portfolio.vercel.app",
     },
+     {
+      name: "Marc Jersey Castro",
+      url: "wala pa",
+    },
   ],
 };
 

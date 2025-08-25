@@ -10,12 +10,12 @@ export const TeamMemberCircles = () => {
 	return (
 		<TooltipProvider >
 			<div className='relative flex flex-col items-center '>
-				<div className='flex flex-row items-start justify-center gap-2'>
+				<div className='flex flex-row flex-wrap items-center justify-center gap-2'>
 					{teamMembers.map((member) => (
 						<Tooltip key={member.id}>
 							<TooltipTrigger asChild>
-								<div className='relative flex flex-col items-center justify-start p-2 cursor-pointer'>
-									<div className='size-24 rounded-full bg-red-400 border-2 border-gray-600 overflow-hidden relative'>
+								<div className='relative  flex flex-col items-center justify-start p-2 cursor-pointer'>
+									<div className='size-24 rounded-full bg-destructive border-2 border-gray-600 overflow-hidden relative'>
 										<Image
 											src={member.image}
 											alt={member.name}
