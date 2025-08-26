@@ -1,5 +1,9 @@
-import { Facebook, Youtube, MessageCircle, Mail } from "lucide-react"
-import { GlassContainer } from "@/components/shared/glass-container"
+import { Facebook, Youtube, MessageCircle, Mail } from "lucide-react";
+import { GlassContainer } from "@/components/shared/glass-container";
+import { motion } from "framer-motion";
+import { Card } from "@/components/ui/card";
+
+const MotionCard = motion(Card);
 
 export default function SocialLinksSection() {
   const socialLinks = [
@@ -52,9 +56,12 @@ export default function SocialLinksSection() {
             const IconComponent = link.icon
             return (
               <a key={link.name} href={link.url} target="_blank" rel="noopener noreferrer" className="block">
-                <GlassContainer
-                  variant="card"
-                  className="rounded-lg p-6 flex flex-col items-center text-center space-y-3 transform transition-transform duration-300 hover:scale-105"
+                <MotionCard
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  viewport={{ once: true }}
+                  className="rounded-lg p-6 flex flex-col items-center text-center bg-gradient-to-br from-background/95 to-background/50 border border-foreground/10 shadow-2xl transform transition-transform duration-300 hover:scale-105"
                 >
                   <div className={`${link.iconBg} p-3 rounded-full`}>
                     <IconComponent className={`w-6 h-6 md:w-8 md:h-8 ${link.iconColor}`} />
@@ -63,7 +70,7 @@ export default function SocialLinksSection() {
                     <h3 className="text-white text-base md:text-lg font-semibold mb-1">{link.name}</h3>
                     <p className="text-xs md:text-sm text-gray-300">{link.description}</p>
                   </div>
-                </GlassContainer>
+                </MotionCard>
               </a>
             )
           })}
