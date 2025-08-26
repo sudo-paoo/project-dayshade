@@ -1,45 +1,54 @@
 [
-  { "title": "President", "imgSrc": "https://placeholder.co/400x400" },
+  { 
+    "title": "President", 
+    "imgSrc": "assets/pres-kharl.jpg" 
+  },
   {
     "title": "Executive Secretary",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/sec-kyran.jpg"
   },
   {
     "title": "Vice President of Development",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/vp-dev-king.jpg"
   },
   {
     "title": "Vice President of Comp. Prog.",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/vp-compe-carl.png"
   },
   {
     "title": "Vice President of Multimedia",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/vp-mm-christian.png"
   },
   {
     "title": "Head of Development",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/head-dev-mark.jpg"
   },
   {
     "title": "Head of Human Resources",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/head-hr-neo.png"
   },
   {
     "title": "Head of Recruitment",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/head-recruitment-elton.png"
   },
   {
     "title": "Head of Communication",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/head-comm-mennard.png"
   },
-  { "title": "Head of Finances", "imgSrc": "https://placeholder.co/400x400" },
+  {
+    "title": "Head of Finances",
+    "imgSrc": "assets/head-finance-christian.jpg"
+  },
   {
     "title": "Secretary of Finances",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/sec-finance-luis.jpg"
   },
-  { "title": "Audit", "imgSrc": "https://placeholder.co/400x400" },
+  {
+    "title": "Audit",
+    "imgSrc": "assets/auditor-kelvin.png"
+  },
   {
     "title": "Social Media Manager",
-    "imgSrc": "https://placeholder.co/400x400"
+    "imgSrc": "assets/socmed-manager-mharl.png"
   }
 ]

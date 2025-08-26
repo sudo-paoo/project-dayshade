@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 export default function ProgdenStory() {
   return (
     <div>
-      <section className="p-12">
+      <section className="p-6">
         <GlassContainer>
           <Card className="bg-transparent border-0 shadow-none">
             <CardContent className="p-8">

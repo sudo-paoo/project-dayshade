@@ -178,7 +178,7 @@ export default function HeroSection() {
             duration: 2,
           }}
         >
-          <GlassContainer className="sm:max-w-2xl mx-6 p-">
+          <GlassContainer className="sm:max-w-2xl mx-6">
             <h1 className="sm:text-6xl text-2xl font-bold text-center">
               ONLY THE{" "}
               <span className="text-primary">
@@ -212,13 +212,13 @@ export default function HeroSection() {
         <GlassContainer className="mx-6 mb-6">
           <Card className="bg-transparent border-0 shadow-none">
             <CardContent>
-              <div className="flex flex-row gap-3 items-center justify-center">
+              <div className="grid grid-cols-3 md:grid-cols-9 gap-4 place-items-center">
                 {technologies.map((tech, index) => (
                   <motion.div
                     key={tech.id}
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ amount: 0.7, once: false }}
+                    viewport={{ amount: 0.7, once: true }}
                     whileHover={{
                       scale: 1.2,
                       transition: { duration: 0.2, ease: "easeOut" },
@@ -226,7 +226,6 @@ export default function HeroSection() {
                     transition={{
                       type: "spring",
                       stiffness: 260,
-                      delay: index * 0.2,
                       duration: 2,
                     }}
                   >
