@@ -156,10 +156,6 @@ export default function TeamSection() {
 							))}
 						</div>
 					</div>
-
-
-
-
 				</div>
 			</section ></div >
 	)

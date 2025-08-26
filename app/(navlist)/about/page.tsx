@@ -32,7 +32,8 @@ export default function About() {
 
       <TeamSection />
 
-      {/* PD OFFICERS*/}
+      {/* // ! Temp remove muna, balik nalang if kumpleto na imgs ng old officers */}
+      {/* PD OFFICERS
       <div className=" py-12">
         <h1 className="text-primary text-3xl text-center font-bold">
           PD Officers {new Date().getFullYear()} -{" "}
@@ -41,7 +42,7 @@ export default function About() {
         <div className="flex flex-col items-center justify-center  my-6 ">
           <TeamMemberCircles />
         </div>
-      </div>
+      </div> */}
 
       {/* SEPARATOR */}
       <div className="flex items-center justify-center w-full ">
