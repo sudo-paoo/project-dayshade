@@ -1,5 +1,5 @@
 // components/ui/team-member-card.tsx
-import { Github, Linkedin, Mail } from 'lucide-react';
+import { Github,  Mail } from 'lucide-react';
 import React from 'react';
 import Image from 'next/image';
 import { TeamMember } from '@/data/teamMembers';
@@ -13,7 +13,6 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
 	return (
 		<MagicCard className='rounded-2xl'>
 			<div className='flex items-center text-muted justify-between  h-88 flex-col p-6 '>{/*  // pag inalis text-muted nagiging black sa pd officer hovering*/}
-
 				<div className='relative  size-32 rounded-full overflow-hidden mb-4 border-2 shadow-md  object-cover'>
 					<Image
 						src={member.image}
@@ -21,19 +20,12 @@ export default function TeamMemberCard({ member }: TeamMemberCardProps) {
 						fill
 					/>
 				</div>
-
 				<h5 className='text-xl font-bold text-center tracking-wide'>{member.name}</h5>
 				<p className='text-sm p-1 px-4 rounded-full text-center font-semibold bg-white/10 my-2'>{member.title}</p>
-
 				<div className='flex flex-row gap-4 items-center justify-center text-primary  mt-4'>
 					{member.socials.github && (
 						<a href={member.socials.github} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-secondary'>
 							<Github className='w-6 h-6' />
-						</a>
-					)}
-					{member.socials.linkedin && (
-						<a href={member.socials.linkedin} target="_blank" rel="noopener noreferrer" className='transition-colors duration-300 hover:text-secondary'>
-							<Linkedin className='w-6 h-6' />
 						</a>
 					)}
 					{member.socials.email && (
