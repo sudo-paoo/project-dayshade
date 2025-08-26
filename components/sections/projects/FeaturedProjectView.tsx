@@ -12,7 +12,7 @@ export default function FeaturedProjectsView() {
       title: "Test 1",
       description: "Installation, Navigation, and Transformation",
       is_monthly: true,
-      is_featured: true,
+      is_featured: false,
       yt_id: "lppPHYvfjPk",
       published_date: new Date("2025-08-26"),
       tags: ["Unreal Engine 5", "Blender"],
@@ -22,7 +22,7 @@ export default function FeaturedProjectsView() {
       title: "Test 2",
       description: "Installation, Navigation, and Transformation",
       is_monthly: true,
-  is_featured: false,
+      is_featured: false,
       yt_id: "dQw4w9WgXcQ",
       published_date: new Date("2025-02-15"),
       tags: ["Unreal Engine 5", "Blender"],
@@ -32,7 +32,7 @@ export default function FeaturedProjectsView() {
       title: "Test 3",
       description: "Installation, Navigation, and Transformation",
       is_monthly: true,
-  is_featured: false,
+      is_featured: false,
       yt_id: "ly6YKz9UfQ4",
       published_date: new Date("2025-03-15"),
       tags: ["Unreal Engine 5", "Blender"],
@@ -52,7 +52,7 @@ export default function FeaturedProjectsView() {
         title: "TEST 5",
         description: "Installation, Navigation, and Transformation",
         is_monthly: true,
-  is_featured: false,
+        is_featured: false,
         yt_id: "IWZQB9zDD3Y",
         published_date: new Date("2025-08-15"),
         tags: ["Unreal Engine 5", "Blender"],
@@ -62,7 +62,7 @@ export default function FeaturedProjectsView() {
         title: "TEST 6",
         description: "Installation, Navigation, and Transformation",
         is_monthly: true,
-  is_featured: false,
+        is_featured: false,
         yt_id: "LtlyeDAJR7A",
         published_date: new Date("2025-06-15"),
         tags: ["Unreal Engine 5", "Blender"],
@@ -72,7 +72,7 @@ export default function FeaturedProjectsView() {
         title: "TEST 7",
         description: "Installation, Navigation, and Transformation",
         is_monthly: true,
-  is_featured: true,
+        is_featured: true,
         yt_id: "elfCDnMx3Ug",
         published_date: new Date("2025-07-15"),
         tags: ["Unreal Engine 5", "Blender"],
@@ -92,7 +92,7 @@ export default function FeaturedProjectsView() {
         title: "TEST 9",
         description: "Installation, Navigation, and Transformation",
         is_monthly: true,
-  is_featured: false,
+        is_featured: true,
         yt_id: "z4B3xSz42Gk",
         published_date: new Date("2025-07-15"),
         tags: ["Unreal Engine 5", "Blender"],
@@ -189,7 +189,19 @@ export default function FeaturedProjectsView() {
                   <h3 className="text-2xl font-bold text-white mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-white/70 mb-4">{project.description}</p>
+                  <p
+                    className="text-white/70 mb-4"
+                    style={{
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                    }}
+                    title={project.description}
+                  >
+                    {project.description}
+                  </p>
 
                   <div className="flex items-center justify-between mt-6">
                     <div className="flex items-center gap-2">
