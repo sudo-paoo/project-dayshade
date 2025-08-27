@@ -1,26 +1,28 @@
-import Image from "next/image";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays, ChevronRight } from "lucide-react";
 
 export default function MonthlyProjectShowcase() {
   // ! should fetch on server
   const currentShowcase = {
-    title: "UE5 PD Session Part 1",
-    description: "Installation, Navigation, and Transformation",
-    is_monthly: true,
-    is_featured: true,
-    yt_id: "lppPHYvfjPk",
-    published_date: new Date("2024-11-01"),
-    tags: ["Unreal Engine 5", "Blender"],
-    devs: ["Kharl Asuncion "],
+      title: "Simple Timer",
+      description:
+        "A simple timer with optional custom audio upload built with HTML, CSS, and JavaScript.",
+      is_monthly: true,
+      is_featured: false,
+      yt_id: "bne750Ylf0Y",
+      published_date: new Date("2025-08-01"),
+      tags: ["Web App", "Timer", "JavaScript"],
+      devs: ["Mennard Ezekiel M. Manlutac"],
   };
 
   return (
     <section className="py-24 w-full relative overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
         <div className="text-center mb-16">
-          <Badge variant="purple" className="mb-4">
+          <Badge variant="purple" className="mb-4 md:text-2xl">
             Project of the Month
           </Badge>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
@@ -66,8 +68,15 @@ export default function MonthlyProjectShowcase() {
             </p>
 
             <div className="flex items-center gap-2 text-white/60 group cursor-pointer hover:text-white transition-colors">
-              <span>View Project Details</span>
-              <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              <Link
+                href={`https://www.youtube.com/watch?v=${currentShowcase.yt_id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex text-center items-center justify-center gap-2"
+              >
+                View Project Details
+                <ChevronRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
             </div>
           </div>
         </Card>

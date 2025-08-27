@@ -7,9 +7,8 @@ export default function Projects() {
       {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="h-[70vh] min-h-[600px] relative flex items-center justify-center overflow-hidden">
+        <section className="relative flex items-center justify-center overflow-hidden pt-12 md:pt-16">
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black" />
-
           <div className="relative z-10 text-center px-4">
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-white to-secondary">

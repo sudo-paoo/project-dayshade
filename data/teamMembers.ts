@@ -12,7 +12,7 @@ export interface TeamMember {
 export const teamMembers: TeamMember[] = [
   {
     id: 1,
-    name: 'Namar Lapitan',
+    name: 'Nomar Lapitan',
     title: 'Adviser',
     image: '/assets/team-pictures/test-pic.jpg',
     socials: {
@@ -66,6 +66,7 @@ export const teamMembers: TeamMember[] = [
     title: 'VP of Competitive Programming',
     image: 'assets/profile/vp-compe-carl.png',
     socials: {
+      github: "https://github.com/RenceCLM"
     },
   },
   {
