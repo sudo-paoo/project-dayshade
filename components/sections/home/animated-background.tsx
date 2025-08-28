@@ -344,7 +344,7 @@ export default function AnimatedBackground() {
       <motion.div
         initial={{ scale: 0, opacity: 0, rotate: 0 }}
         animate={{
-          scale: 6,
+          scale: 5,
           opacity: 0.6,
           rotate: [0, 360],
         }}
@@ -369,7 +369,7 @@ export default function AnimatedBackground() {
       <motion.div
         initial={{ scale: 0, opacity: 0, rotate: 0 }}
         animate={{
-          scale: 8,
+          scale: 5,
           opacity: 0.5,
           rotate: [0, -360],
         }}
