@@ -16,7 +16,6 @@ export const teamMembers: TeamMember[] = [
     title: 'Adviser',
     image: '/assets/team-pictures/test-pic.jpg',
     socials: {
-      github: 'https://github.com',
       email: 'mailto:name@example.com',
     },
   },
