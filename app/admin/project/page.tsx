@@ -2,10 +2,9 @@
 
 import React from "react";
 import { Label } from "@/components/ui/label"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from '@/components/ui/card'
-import Image from 'next/image'
+import { Card, CardHeader, CardTitle, CardContent  } from '@/components/ui/card'
 import AddProjectMenu from "@/components/sections/admin/projects/AddProjectMenu";
-import EditProjectMenu from "@/components/sections/admin/projects/EditProjectMenu";
+import ProjectsListView from "@/components/sections/admin/projects/ProjectsListView";
 
 const Page = () => {
   // 🔹 Mock data
@@ -17,26 +16,7 @@ const Page = () => {
     month: "August",
   };
 
-  const projects = [
-    {
-      title: "Project Title",
-      developer: "Developer Name",
-      img: "https://via.placeholder.com/600x400",
-      date: "Aug 20, 2025",
-    },
-    {
-      title: "Another Project",
-      developer: "Another Dev",
-      img: "https://via.placeholder.com/600x400",
-      date: "Jul 12, 2025",
-    },
-    {
-      title: "Cool Game Project",
-      developer: "Team XYZ",
-      img: "https://via.placeholder.com/600x400",
-      date: "Jun 05, 2025",
-    },
-  ];
+
 
   return (
     <section className="p-6">
@@ -91,34 +71,9 @@ const Page = () => {
 
       </section>
 
-      {/* Main Projects List */}
-      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((p, i) => (
-          <Card key={i}>
-            <CardHeader className="flex flex-row justify-between items-start">
-              <div>
-                <CardTitle className="text-xl font-semibold">{p.title}</CardTitle>
-                <CardDescription className="text-sm">By: {p.developer}</CardDescription>
-              </div>
-              <div className="flex flex-col items-end gap-2">
-                <EditProjectMenu />
-              </div>
-            </CardHeader>
-            <CardContent>
-              <Image
-                src={p.img}
-                alt={p.title}
-                width={600}
-                height={400}
-                className="rounded-lg object-cover w-full h-60 border"
-              />
-            </CardContent>
-            <CardFooter className="flex justify-end text-sm text-muted-foreground">
-              Date: {p.date}
-            </CardFooter>
-          </Card>
-        ))}
-      </main>
+      {/* Project Cards */}
+      <ProjectsListView />
+
     </section>
   )
 };

@@ -56,7 +56,7 @@ const AddProjectMenu = () => {
     try {
       setLoading(true)
 
-      const res = await fetch("/api/projects", {
+      const res = await fetch("/api/POSTProjects", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(values),
