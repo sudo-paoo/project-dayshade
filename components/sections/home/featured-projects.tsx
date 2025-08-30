@@ -1,45 +1,52 @@
 "use client"
 
-import * as React from "react";
-import Image from "next/image";
-import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel";
-import type { FeaturedProject } from "@/types";
-import { GlassContainer } from "@/components/shared/glass-container";
+import * as React from "react"
+import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import { cn } from "@/lib/utils"
+import { ArrowUpRight } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+
+const MotionGlassContainer = motion.div
+
+const featuredProjects = [
+  {
+    id: 1,
+    title: "Nights in CCS",
+    description:
+      "Get ready to be spooked(or perhaps laugh) with Kharl Asuncion's Unreal Engine 5 horror game, where the goal is to find your lost Aquaflask in the CCS building while avoiding disastrous PNG monsters!",
+    yt_id: "I8WsKQK3bNk",
+    published_date: new Date("2024-11-01"),
+    tags: ["Unreal Engine 5", "Horror Game"],
+    devs: ["Kharl Asuncion"],
+  },
+  {
+    id: 2,
+    title: "Pebbles Virtual Robotics",
+    description:
+      "A software for learning robotics using virtual environments. Developed by alumni members of Programmers Den as their capstone project. With the help of current President Sigmund. Bringing robotics to life in the digital world",
+    site_link: "https://pebbles-robotics.web.app/",
+    imgPreview: "/assets/projects/pebbles.jpg",
+    published_date: new Date("2024-11-13"),
+    tags: ["Unity C#", "Blender", "Robotics"],
+    devs: ["Andrea Christela Adalem", "Iris", "Fernando", "Christler Neil Vinluan"],
+  },
+]
 
 export function FeaturedProjects() {
   const [api, setApi] = React.useState<CarouselApi>()
-  const [projects, setProjects] = React.useState<FeaturedProject[]>([])
-  const [loading, setLoading] = React.useState(true)
-  const [error, setError] = React.useState<string | null>(null)
   const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
 
   React.useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch("/api/home/featured-projects")
-        if (!response.ok) {
-          throw new Error("Failed to fetch featured projects")
-        }
-        const result = await response.json()
-        setProjects(result.data)
-      } catch (err) {
-        setError((err as Error).message)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchProjects()
-  }, [])
-
-  React.useEffect(() => {
-    if (!api) return
+    if (!api || featuredProjects.length <= 1) return
 
     const play = () => {
       stop()
       timeoutRef.current = setTimeout(() => {
         api.scrollNext()
-      }, 4000)
+      }, 10000) // 10 seconds for longer auto-play
     }
 
     const stop = () => {
@@ -61,75 +68,115 @@ export function FeaturedProjects() {
     }
   }, [api])
 
-  if (loading) {
-    return (
-      <section className="w-full py-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-white">Loading featured projects...</p>
-        </div>
-      </section>
-    )
-  }
-
-  if (error) {
-    return (
-      <section className="w-full py-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-red-500">Error loading featured projects: {error}</p>
-        </div>
-      </section>
-    )
-  }
-
   return (
     <div className="md:min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
-      <GlassContainer className="w-full py-12 px-4">
+      <MotionGlassContainer
+        className={cn("backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg w-full py-12 px-4")}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+      >
         <div className="w-full mx-auto">
-          <div className="flex justify-center">
+          <motion.div
+            className="flex justify-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
             <div className="px-6 py-2">
-              <h2 className="text-lg md:text-3xl lg:text-4xl italic font-bold text-pd-green">Featured Projects</h2>
+              <h2 className="text-3xl lg:text-5xl italic font-bold text-pd-green">Featured Projects</h2>
             </div>
-          </div>
+          </motion.div>
           <Carousel
             opts={{
               align: "start",
-              loop: true,
+              loop: featuredProjects.length > 1,
             }}
             setApi={setApi}
             className="w-full"
           >
             <CarouselContent>
-              {projects.map((project, index) => (
-                <CarouselItem key={index}>
-                  <div className="flex flex-col items-center space-y-6">
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-center">
-                      <div className="space-y-4 text-center md:text-left order-2 md:order-1">
-                        <h3 className="text-xl md:text-3xl font-bold text-pd-purple">{project.title}</h3>
-                        <p className="text-white leading-relaxed text-sm md:text-xl px-4 md:px-0">
-                          {project.description}
-                        </p>
-                      </div>
-                      <div className="relative w-full mx-auto mb-6 rounded-lg overflow-hidden">
-                        <div className=" w-full"> 
-                          <iframe
-                            className="w-full h-50 md:h-96"
-                            src={project.embed_link || "https://www.youtube.com/embed/dQw4w9WgXcQ?si=zrlkSWI5oODbQC56"}
-                            title="YouTube video player"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            referrerPolicy="strict-origin-when-cross-origin"
-                            allowFullScreen
+              {featuredProjects.map((project, index) => (
+                <CarouselItem key={project.id}>
+                  <motion.div
+                    className="flex justify-center"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    <div className="overflow-hidden max-w-7xl w-full shadow-2xl flex flex-col md:flex-row">
+                      {/* YouTube Thumbnail */}
+                      <div className="relative h-[280px] md:h-[400px] md:w-1/2 overflow-hidden">
+                        {project.yt_id ? (
+                          <Image
+                            src={`https://img.youtube.com/vi/${project.yt_id}/hqdefault.jpg`}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
                           />
+                        ) : project.site_link && project.imgPreview ? (
+                          <Image
+                            src={project.imgPreview || "/placeholder.svg"}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                          />
+                        ) : null}
+                      </div>
+
+                      <div className="px-8 py-8 text-center md:w-1/2 md:flex md:flex-col md:justify-center">
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">{project.title}</h3>
+
+                        <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl">{project.description}</p>
+
+                        <div className="flex flex-wrap gap-2 mb-4 justify-start">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="bg-pd-purple/20 text-pd-purple px-3 py-1 rounded-full text-xs font-semibold"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+
+                        <div className="mb-6 flex flex-col md:flex-row md:items-center md:gap-4 gap-2 justify-between">
+                          <p className="text-white/80 text-sm md:text-base lg:text-lg mb-2 text-left md:mb-0">
+                            <span className="font-medium">
+                              {project.devs.length === 1 ? "Developer:" : "Developers:"} {" "}
+                            </span>
+                            {project.devs.join(", ")}
+                          </p>
+                          <Button
+                            className="font-medium w-min px-6 py-2 rounded-lg transition-colors"
+                            size="sm"
+                            variant="outline"
+                            asChild
+                          >
+                            <Link
+                              href={
+                                project.site_link ? project.site_link : `https://www.youtube.com/watch?v=${project.yt_id}`
+                              }
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="max-h-min">
+                              View Project
+                              <ArrowUpRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 </CarouselItem>
               ))}
             </CarouselContent>
           </Carousel>
         </div>
-      </GlassContainer>
+      </MotionGlassContainer>
     </div>
   )
 }

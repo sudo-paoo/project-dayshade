@@ -27,7 +27,7 @@ export default function SocialLinksSection() {
       name: "Discord",
       icon: MessageCircle,
       url: "https://discord.gg/bTXvdggz4g",
-      description: "Join our Discord server",
+      description: "Join the Official CCS Discord server",
       iconBg: "bg-indigo-600/50",
       iconColor: "text-indigo-400",
     },

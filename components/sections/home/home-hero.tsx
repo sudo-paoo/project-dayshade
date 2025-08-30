@@ -1,18 +1,34 @@
 import React from 'react';
 import Image from 'next/image';
-import Button from '@/components/global/button';
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-
+import { Canvas } from '@react-three/fiber';
+import { Environment, OrbitControls, OrthographicCamera  } from '@react-three/drei';
+import { PDLogo } from "@/components/logos/pd-logo";
+import { ChevronRight } from 'lucide-react';
 function HomeHero() {
+
   return (
     <div className="flex flex-col m-4 sm:mx-5 mx-6 p-2 items-center justify-between">
-      <div className="flex items-center justify-center p-4 max-w-[280px]">
-        <Image
+      <div className="h-72 md:h-auto md:aspect-video w-full max-w-[600px] mx-auto">
+        {/* <Image
           src="/assets/pd-logo.png"
           alt="pd-logo.png"
           width={451}
           height={413}
-        ></Image>
+        ></Image> */}
+      <Canvas className="w-full h-full" camera={{ position: [0, 0, 3], fov: 130 }}>
+        <OrthographicCamera
+          makeDefault
+          position={[0, 5, 120]}
+          zoom={40}
+          near={0.1}
+          far={1000}
+        />
+        <OrbitControls enableZoom={false} />
+        <Environment preset="forest" />
+        <PDLogo />
+      </Canvas>
       </div>
       <div className="flex items-center justify-center sm:px-22">
         <Image
@@ -28,16 +44,21 @@ function HomeHero() {
         </p>
         <Link href="/join">
           <Button
-            className="block py-1 px-18 rounded-lg hover:cursor-pointer"
-            variant="glass">
-            <p className="bg-gradient-to-r from-[var(--color-pd-green)] to-[#2C8A58] bg-clip-text text-transparent text-2xl">
-              JOIN
-            </p>
+            className="group relative px-10 py-4 text-2xl tracking-[1.5px]
+                      bg-primary text-black rounded-[10px] border-0
+                      shadow-[0_10px_0_0_rgb(34,197,94)] transition-all duration-300 ease-out cursor-pointer
+                      hover:bg-white hover:shadow-[0_7px_0_0_rgb(34,197,94)]
+                      active:bg-white active:shadow-[0_0px_0_0_rgb(34,197,94)] active:translate-y-[5px] active:duration-200
+                      focus-visible:ring-2 focus-visible:ring-pd-dark-grey focus-visible:ring-offset-2">
+            <span className="relative z-10 flex items-center gap-2">
+              Join
+              <ChevronRight />
+            </span>
           </Button>
         </Link>
       </div>
       <div className="flex flex-col mt-12 pb-10 md:mx-20">
-        <p className="font-bold sm:text-base text-[0.6rem] text-center">
+        <p className="font-bold md:text-xl text-center">
           Programmer's Den - The computer technology-focused college
           organization preparing students for industry practices in Design
           and Development
