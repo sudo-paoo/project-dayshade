@@ -1,6 +1,5 @@
 import React from "react";
 import { ImageCarousel } from "@/components/ui/ImageCarousel";
-import { TeamMemberCircles } from "@/components/sections/about/TeamMemberCircles";
 import Image from "next/image";
 import HeroSection from "@/components/sections/about/HeroSection";
 import ProgdenStory from "@/components/sections/about/ProgdenStory";
