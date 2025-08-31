@@ -1,6 +1,7 @@
 import * as React from "react";
-// on home page
+// * on home page, use currentShowcase
 export function MonthlyShowcase() {
+
   const currentShowcase = {
     title: "Simple Timer",
     description:

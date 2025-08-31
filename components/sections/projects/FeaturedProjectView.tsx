@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Star } from "lucide-react";
 import Link from "next/link";
-// on the projects page
+// * on the projects page, fetch all featured
 export default function FeaturedProjectsView() {
   // ! should fetch on server
   const projects = [

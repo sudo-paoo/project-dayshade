@@ -3,6 +3,7 @@
 import React, {useState, useEffect} from 'react'
 import { Card, CardHeader, CardTitle, CardContent  } from '@/components/ui/card'
 import { toast } from 'sonner'
+import { Label } from '@/components/ui/label'
 
 const ShowFeaturedProjects = () => {
   const [activeProjects, setActiveProjects] = useState<any[]>([]);
@@ -36,9 +37,9 @@ const ShowFeaturedProjects = () => {
       <CardContent className="space-y-2 text-sm">
         {activeProjects.length > 0 ? (
           activeProjects.map((project, i) => (
-            <p key={project.id}>
+            <Label key={project.id} className='text-md '>
               {i + 1}. {project.title}
-            </p>
+            </Label>
           ))
         ) : (
           <p>No featured projects available.</p>

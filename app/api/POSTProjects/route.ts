@@ -13,6 +13,7 @@ export async function POST(req: Request) {
   const devs = (formData.get("Developers") as string).split(",").map(d => d.trim());
   const tags = (formData.get("Tags") as string).split(",").map(t => t.trim());
   const embed_link = formData.get("YTLinks") as string;
+  const site_link = formData.get("SiteURL") as string;
   const published_date = formData.get("PublishedDate") as string;
 
   // Handle file
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
     devs,
     tags,
     embed_link,
+    site_link,
     published_date,
     image_url,
   }).select();

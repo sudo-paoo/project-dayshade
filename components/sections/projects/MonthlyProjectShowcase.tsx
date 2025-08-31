@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays, ChevronRight } from "lucide-react";
-// in projects page
+// * in projects page,  use currentShowcase
 export default function MonthlyProjectShowcase() {
   // ! should fetch on server
   const currentShowcase = {

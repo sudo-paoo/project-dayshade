@@ -36,7 +36,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 type EditProjectMenuProps = {
   project: any
 }
-
+// TODO: add the site links and be able to edit the image
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
   Developers: z.string().min(2, { message: "Developers are required" }),

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-// on the bloody home page
+// * on the bloody home page carousel, use featured ranking
 const MotionGlassContainer = motion.div
 
 const featuredProjects = [

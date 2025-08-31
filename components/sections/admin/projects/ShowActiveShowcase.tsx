@@ -39,7 +39,7 @@ const ShowActiveShowcase = () => {
         {showcase.length > 0 ? (
           showcase.map((project) => (
             <div key={project.id} className="flex flex-col items-start gap-1">
-              <Label className="text-base font-medium">{project.title}</Label>
+              <Label className="text-2xl font-bold">{project.title}</Label>
               <span className="text-sm text-muted-foreground">
                 By: {project.devs?.join(", ")}
               </span>
