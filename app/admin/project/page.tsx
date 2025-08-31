@@ -5,17 +5,17 @@ import { Label } from "@/components/ui/label"
 import { Card, CardHeader, CardTitle, CardContent  } from '@/components/ui/card'
 import AddProjectMenu from "@/components/sections/admin/projects/AddProjectMenu";
 import ProjectsListView from "@/components/sections/admin/projects/ProjectsListView";
+import ShowActiveProjects from "@/components/sections/admin/projects/ShowActiveProjects";
 
 const Page = () => {
-  // 🔹 Mock data
-  const activeProjects = ["Project Title A", "Project Title B", "Project Title C"];
 
+
+  // 🔹 Mock data
   const showcase = {
     title: "Spooky Sprout!",
     devs: "Dev Names",
     month: "August",
   };
-
 
 
   return (
@@ -38,19 +38,7 @@ const Page = () => {
       {/* Top Section */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Active Projects */}
-        <Card>
-          <CardHeader >
-            <CardTitle className="text-lg font-semibold">
-              Active Featured Projects -
-              <span className="text-sm text-muted-foreground"> Aug 20, 2025</span>
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm">
-            {activeProjects.map((title, i) => (
-              <p key={i}>{i + 1}. {title}</p>
-            ))}
-          </CardContent>
-        </Card>
+        <ShowActiveProjects/>
 
         {/* Active Project Showcase */}
         <Card>

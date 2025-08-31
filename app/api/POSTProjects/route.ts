@@ -5,9 +5,8 @@ import { NextResponse } from "next/server"
 
 export async function POST(req: Request){
 
-    const supabase = await createClient();
-
-    const body = await req.json();
+  const supabase = await createClient();
+  const body = await req.json();
 
     // Convert Developers into an array if it’s a string
   const devArray = typeof body.Developers === "string"

@@ -6,8 +6,6 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const supabase = await createClient();
 
-//   const body = await req.json();
-
   const { data, error } = await supabase
     .from("projects")
     .select("*")
