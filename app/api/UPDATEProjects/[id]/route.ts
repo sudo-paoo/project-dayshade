@@ -9,7 +9,7 @@ export async function PUT(
     const supabase = await createClient();
     const body = await req.json();
 
-    const { id } = await params; // ✅ works now because params is awaited in the function args
+    const { id } = await params;
 
     const { data, error } = await supabase
       .from("projects")

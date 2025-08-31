@@ -24,21 +24,32 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import { Checkbox } from '@/components/ui/checkbox'
+
 
 type EditProjectMenuProps = {
   project: any
 }
 
-// ✅ Schema aligned with DB
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
   Developers: z.string().min(2, { message: "Developers are required" }),
+  Tags: z.string().min(2, { message: "Tags are required" }),
   YTLinks: z.string().url({ message: "Enter a valid YouTube URL" }),
   PublishedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
     message: "PublishedDate must be in YYYY-MM-DD format",
   }),
   Description: z.string().min(5, { message: "Description is required" }),
-  is_monthly: z.boolean().optional(),
+  MonthlyShowcase: z.boolean().optional(),
+  FeaturedShowcase: z.boolean().optional(),
+  FeaturedOrder: z.enum(["1", "2", "3"]).optional(),
 })
 
 const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
@@ -49,14 +60,18 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
     resolver: zodResolver(ProjectSchema),
     defaultValues: {
       Title: project?.title || "",
-      Developers: project?.devs?.join(", ") || "", // ✅ join array into string for input
+      Developers: project?.devs?.join(", ") || "",
+      Tags: project?.tags?.join(", ") || "",
       YTLinks: project?.embed_link || "",
       PublishedDate: project?.published_date || "",
       Description: project?.description || "",
-      is_monthly: project?.is_monthly ?? false,
+      MonthlyShowcase: project?.MonthlyShowcase ?? false,
+      FeaturedShowcase: project?.FeaturedShowcase ?? false,
+      FeaturedOrder: project?.FeaturedOrder ? project.FeaturedOrder.toString() : undefined,
     },
     mode: "onChange",
   })
+
 
   async function onSubmit(values: z.infer<typeof ProjectSchema>) {
     try {
@@ -64,11 +79,14 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
 
       const payload = {
         title: values.Title,
-        devs: values.Developers.split(",").map((d) => d.trim()), // ✅ convert string -> array
+        devs: values.Developers.split(",").map((d) => d.trim()),
+        tags: values.Tags.split(",").map((t) => t.trim()),
         embed_link: values.YTLinks,
         published_date: values.PublishedDate,
         description: values.Description,
-        is_monthly: values.is_monthly ?? false,
+        is_monthly: values.MonthlyShowcase ?? false,
+        is_featured: values.FeaturedShowcase ?? false,
+        featured_order: values.FeaturedOrder,
       }
 
       const res = await fetch(`/api/UPDATEProjects/${project.id}`, {
@@ -146,6 +164,21 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                   )}
                 />
 
+                {/* Tags */}
+                <FormField
+                  control={form.control}
+                  name="Tags"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Tags*</FormLabel>
+                      <FormControl>
+                        <Input placeholder="e.g., Gaming, WebDev" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
                 {/* YouTube Link */}
                 <FormField
                   control={form.control}
@@ -185,6 +218,67 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                       <FormLabel className="text-primary font-bold">Description*</FormLabel>
                       <FormControl>
                         <Input placeholder="Enter project description" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Monthly Showcase */}
+                <FormField
+                  control={form.control}
+                  name="MonthlyShowcase"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between">
+                      <FormLabel className="text-primary font-bold">Monthly Showcase</FormLabel>
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Featured Showcase */}
+                <FormField
+                  control={form.control}
+                  name="FeaturedShowcase"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between">
+                      <FormLabel className="text-primary font-bold">Featured Showcase</FormLabel>
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                        />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                {/* Featured Order */}
+                <FormField
+                  control={form.control}
+                  name="FeaturedOrder"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-center justify-between">
+                      <FormLabel className="text-primary font-bold">Featured Order</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(val) => field.onChange(val)}
+                          value={field.value}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select order (1, 2, 3)" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="1">1</SelectItem>
+                            <SelectItem value="2">2</SelectItem>
+                            <SelectItem value="3">3</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </FormControl>
                       <FormMessage />
                     </FormItem>

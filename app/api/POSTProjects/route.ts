@@ -14,12 +14,18 @@ export async function POST(req: Request){
     ? body.Developers.split(",").map((d: string) => d.trim())
     : body.Developers;
 
+  const tagsArray = typeof body.Tags === "string"
+    ? body.Tags.split(",").map((d: string) => d.trim())
+    : body.Tags;
+
+
     const { data, error } = await supabase
         .from("projects")
         .insert({
             title: body.Title,
             devs: devArray,
             description: body.Description,
+            tags: tagsArray,
             embed_link: body.YTLinks,
             is_monthly: body.MonthlyShowcase ?? false,
             published_date: body.PublishedDate,
