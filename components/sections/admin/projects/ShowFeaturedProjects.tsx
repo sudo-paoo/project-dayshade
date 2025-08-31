@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react'
 import { Card, CardHeader, CardTitle, CardContent  } from '@/components/ui/card'
 import { toast } from 'sonner'
 
-const ShowActiveProjects = () => {
+const ShowFeaturedProjects = () => {
   const [activeProjects, setActiveProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -30,8 +30,7 @@ const ShowActiveProjects = () => {
     <Card>
       <CardHeader>
         <CardTitle className="text-lg font-semibold">
-          Active Featured Projects -
-          <span className="text-sm text-muted-foreground"> Aug 20, 2025</span>
+          Active Featured Projects
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-2 text-sm">
@@ -49,4 +48,4 @@ const ShowActiveProjects = () => {
   );
 }
 
-export default ShowActiveProjects
+export default ShowFeaturedProjects
