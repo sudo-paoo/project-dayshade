@@ -33,7 +33,6 @@ import {
 } from "@/components/ui/select"
 import { Checkbox } from '@/components/ui/checkbox'
 
-
 type EditProjectMenuProps = {
   project: any
 }
@@ -42,7 +41,7 @@ const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
   Developers: z.string().min(2, { message: "Developers are required" }),
   Tags: z.string().min(2, { message: "Tags are required" }),
-  YTLinks: z.string().url({ message: "Enter a valid YouTube URL" }),
+  YTLinks: z.url({ message: "Enter a valid YouTube URL" }),
   PublishedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
     message: "PublishedDate must be in YYYY-MM-DD format",
   }),
@@ -65,34 +64,22 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
       YTLinks: project?.embed_link || "",
       PublishedDate: project?.published_date || "",
       Description: project?.description || "",
-      MonthlyShowcase: project?.MonthlyShowcase ?? false,
-      FeaturedShowcase: project?.FeaturedShowcase ?? false,
-      FeaturedOrder: project?.FeaturedOrder ? project.FeaturedOrder.toString() : undefined,
+      MonthlyShowcase: project?.is_monthly ?? false,
+      FeaturedShowcase: project?.is_featured ?? false,
+      FeaturedOrder: project?.featured_order ? project.featured_order.toString() : undefined,
     },
     mode: "onChange",
   })
-
 
   async function onSubmit(values: z.infer<typeof ProjectSchema>) {
     try {
       setLoading(true)
 
-      const payload = {
-        title: values.Title,
-        devs: values.Developers.split(",").map((d) => d.trim()),
-        tags: values.Tags.split(",").map((t) => t.trim()),
-        embed_link: values.YTLinks,
-        published_date: values.PublishedDate,
-        description: values.Description,
-        is_monthly: values.MonthlyShowcase ?? false,
-        is_featured: values.FeaturedShowcase ?? false,
-        featured_order: values.FeaturedOrder,
-      }
-
+      // Send raw form values — let API handle mapping
       const res = await fetch(`/api/UPDATEProjects/${project.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(values),
       })
 
       if (!res.ok) {

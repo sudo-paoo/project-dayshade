@@ -1,32 +1,41 @@
-import { NextRequest, NextResponse } from "next/server";
-import { createClient } from "@/utils/supabase/server"; // adjust path if needed
+'use server'
 
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { id: string } }
-) {
-  try {
-    const supabase = await createClient();
-    const body = await req.json();
+import { createClient } from "@/utils/supabase/server";
+import { NextResponse } from "next/server";
 
-    const { id } = await params;
+export async function PUT(req: Request, { params }: { params: { id: string } }) {
+  const supabase = await createClient();
+  const body = await req.json();
+  const id = params.id;
 
-    const { data, error } = await supabase
-      .from("projects")
-      .update(body)
-      .eq("id", id)
-      .select();
+  // Map form values → DB column names
+  const payload = {
+    title: body.Title,
+    devs: body.Developers
+      ? body.Developers.split(",").map((d: string) => d.trim())
+      : [],
+    tags: body.Tags ? body.Tags.split(",").map((t: string) => t.trim()) : [],
+    embed_link: body.YTLinks,
+    published_date: body.PublishedDate || null,
+    description: body.Description,
+    is_monthly: body.MonthlyShowcase ?? false,
+    is_featured: body.FeaturedShowcase ?? false,
+    featured_order: body.FeaturedOrder ? parseInt(body.FeaturedOrder) : null,
+  };
 
-    if (error) {
-      return NextResponse.json({ error: error.message }, { status: 400 });
-    }
+  const { data, error } = await supabase
+    .from("projects")
+    .update(payload)
+    .eq("id", id)
+    .select();
 
-    return NextResponse.json({ data });
-  } catch (err) {
-    console.error(err);
+  if (error) {
+    console.error(error);
     return NextResponse.json(
-      { error: "Something went wrong" },
+      { success: false, error: "Failed to update project: " + error.message },
       { status: 500 }
     );
   }
+
+  return NextResponse.json({ success: true, data });
 }
