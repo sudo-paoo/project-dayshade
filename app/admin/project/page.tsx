@@ -41,12 +41,9 @@ const Page = () => {
         <Card>
           <CardHeader >
             <CardTitle className="text-lg font-semibold">
-              Active Projects -
+              Active Featured Projects -
               <span className="text-sm text-muted-foreground"> Aug 20, 2025</span>
             </CardTitle>
-
-
-
           </CardHeader>
           <CardContent className="space-y-2 text-sm">
             {activeProjects.map((title, i) => (

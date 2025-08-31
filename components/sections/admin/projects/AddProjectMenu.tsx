@@ -150,7 +150,7 @@ const AddProjectMenu = () => {
                     <FormItem>
                       <FormLabel className="text-primary font-bold">PublishedDate*</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g. 2024-11-01" {...field} />
+                        <Input type="date" placeholder="e.g. 2024-11-01" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>

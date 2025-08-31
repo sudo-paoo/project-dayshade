@@ -13,14 +13,14 @@ const ProjectsListView = () => {
     useEffect(() => {
         async function loadProjects() {
             try {
-            const res = await fetch("/api/GETProjects");
-            const json = await res.json();
-            if (json.success) setProjects(json.data);
+                const res = await fetch("/api/GETProjects");
+                const json = await res.json();
+                if (json.success) setProjects(json.data);
             } catch (error) {
-            console.error(error);
-            toast.error("Something went wrong.");
+                console.error(error);
+                toast.error("Something went wrong.");
             } finally {
-            setLoading(false);
+                setLoading(false);
             }
         }
         loadProjects();
@@ -42,7 +42,7 @@ const ProjectsListView = () => {
               )}
             </div>
             <div className="flex flex-col items-end gap-2">
-              <EditProjectMenu />
+              <EditProjectMenu project={p} />
             </div>
           </CardHeader>
           <CardContent>

@@ -9,10 +9,16 @@ export async function POST(req: Request){
 
     const body = await req.json();
 
+    // Convert Developers into an array if it’s a string
+  const devArray = typeof body.Developers === "string"
+    ? body.Developers.split(",").map((d: string) => d.trim())
+    : body.Developers;
+
     const { data, error } = await supabase
         .from("projects")
         .insert({
             title: body.Title,
+            devs: devArray,
             description: body.Description,
             embed_link: body.YTLinks,
             is_monthly: body.MonthlyShowcase ?? false,
