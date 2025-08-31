@@ -46,9 +46,9 @@ const ProjectsListView = () => {
             </div>
           </CardHeader>
           <CardContent>
-            {p.img ? (
+            {p.image_url ? (
               <Image
-                src={p.img}
+                src={p.image_url}
                 alt={p.title}
                 width={600}
                 height={400}

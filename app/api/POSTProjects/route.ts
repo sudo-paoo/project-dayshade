@@ -1,42 +1,61 @@
-"use server"
+"use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
-export async function POST(req: Request){
-
+export async function POST(req: Request) {
   const supabase = await createClient();
-  const body = await req.json();
+  const formData = await req.formData();
 
-    // Convert Developers into an array if it’s a string
-  const devArray = typeof body.Developers === "string"
-    ? body.Developers.split(",").map((d: string) => d.trim())
-    : body.Developers;
+  // Extract form fields
+  const title = formData.get("Title") as string;
+  const description = formData.get("Description") as string;
+  const devs = (formData.get("Developers") as string).split(",").map(d => d.trim());
+  const tags = (formData.get("Tags") as string).split(",").map(t => t.trim());
+  const embed_link = formData.get("YTLinks") as string;
+  const published_date = formData.get("PublishedDate") as string;
 
-  const tagsArray = typeof body.Tags === "string"
-    ? body.Tags.split(",").map((d: string) => d.trim())
-    : body.Tags;
+  // Handle file
+  const file = formData.get("Image") as File | null;
+  let image_url = null;
 
+  if (file) {
+    const filePath = `projects/${Date.now()}-${file.name}`;
+    const { error: uploadError } = await supabase.storage
+      .from("projects-image") // ✅ correct bucket
+      .upload(filePath, file, {
+        cacheControl: "3600",
+        upsert: false,
+      });
 
-    const { data, error } = await supabase
-        .from("projects")
-        .insert({
-            title: body.Title,
-            devs: devArray,
-            description: body.Description,
-            tags: tagsArray,
-            embed_link: body.YTLinks,
-            is_monthly: body.MonthlyShowcase ?? false,
-            published_date: body.PublishedDate,
-    });
+    if (uploadError) {
+      console.error("Upload failed:", uploadError.message);
+      return NextResponse.json({ error: "File upload failed" }, { status: 500 });
+    }
 
-   if (error) {
-    console.error(error);
+    // ✅ Correct way to get public URL
+    const { data } = supabase.storage.from("projects-image").getPublicUrl(filePath);
+    image_url = data.publicUrl;
+  }
+
+  // Insert project record
+  const { error: insertError, data: inserted } = await supabase.from("projects").insert({
+    title,
+    description,
+    devs,
+    tags,
+    embed_link,
+    published_date,
+    image_url,
+  }).select();
+
+  if (insertError) {
+    console.error(insertError);
     return NextResponse.json(
-      { error: "Database update failed: " + error.message },
+      { error: "Database insert failed: " + insertError.message },
       { status: 500 }
     );
   }
 
-  return NextResponse.json({ success: true, data });
+  return NextResponse.json({ success: true, data: inserted });
 }

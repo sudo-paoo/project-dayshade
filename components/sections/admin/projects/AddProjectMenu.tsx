@@ -34,6 +34,7 @@ const ProjectSchema = z.object({
     }),
   Tags: z.string().min(2, {message: "Tags are required"}),
   Description: z.string().min(5, { message: "Description is required" }),
+  Image: z.any().optional(),
 })
 
 const AddProjectMenu = () => {
@@ -49,39 +50,45 @@ const AddProjectMenu = () => {
       PublishedDate: "",
       Tags: "",
       Description: "",
+      Image: ""
     },
     mode: "onChange",
   })
 
-  async function onSubmit(values: z.infer<typeof ProjectSchema>) {
-    try {
-      setLoading(true)
+  async function onSubmit(values: any) {
+  try {
+    setLoading(true);
 
-      const res = await fetch("/api/POSTProjects", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
-      })
+    const formData = new FormData();
+    Object.keys(values).forEach((key) => {
+      formData.append(key, values[key]);
+    });
 
-      if (!res.ok) {
-        const error = await res.json()
-        console.error(error)
-        toast.error("Failed to save project.")
-        return
-      }
+    const res = await fetch("/api/POSTProjects", {
+      method: "POST",
+      body: formData,
+    });
 
-      const result = await res.json()
-      console.log("Inserted:", result)
-      toast.success("Project added successfully!")
-      form.reset()
-      setOpen(false)
-    } catch (error) {
-      console.error(error)
-      toast.error("Something went wrong.")
-    } finally {
-      setLoading(false)
+    if (!res.ok) {
+      const error = await res.json();
+      console.error(error);
+      toast.error("Failed to save project.");
+      return;
     }
+
+    const result = await res.json();
+    console.log("Inserted:", result);
+    toast.success("Project added successfully!");
+    form.reset();
+    setOpen(false);
+  } catch (error) {
+    console.error(error);
+    toast.error("Something went wrong.");
+  } finally {
+    setLoading(false);
   }
+}
+
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
@@ -115,6 +122,25 @@ const AddProjectMenu = () => {
                     </FormItem>
                   )}
                 />
+
+                <FormField
+                  control={form.control}
+                  name="Image"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Project Image</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => field.onChange(e.target.files?.[0])}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
 
                 <FormField
                   control={form.control}
@@ -185,8 +211,6 @@ const AddProjectMenu = () => {
                     </FormItem>
                   )}
                 />
-
-
 
                 <DialogFooter>
                   <Button type="submit" disabled={!form.formState.isValid || loading}>
