@@ -14,7 +14,7 @@ export const teamMembers: TeamMember[] = [
     id: 1,
     name: 'Nomar Lapitan',
     title: 'Adviser',
-    image: '/assets/team-pictures/test-pic.jpg',
+    image: '/assets/profile/adviser-lapitan-nomar.jpg',
     socials: {
       email: 'mailto:name@example.com',
     },
@@ -63,7 +63,7 @@ export const teamMembers: TeamMember[] = [
     id: 6,
     name: 'Carl Lawrence Maldong',
     title: 'VP of Competitive Programming',
-    image: 'assets/profile/vp-compe-carl.png',
+    image: 'assets/profile/vp-compe-carl.jpg',
     socials: {
       github: "https://github.com/RenceCLM"
     },
@@ -92,7 +92,7 @@ export const teamMembers: TeamMember[] = [
     id: 9,
     name: 'Elton John Lennan Bundukin',
     title: 'Head of Recruitment',
-    image: 'assets/profile/head-recruitment-elton.png',
+    image: 'assets/profile/head-recruitment.jpg',
     socials: {
       github: 'https://github.com/superEnne',
       email: 'mailto:bundukinelton@gmail.com',
