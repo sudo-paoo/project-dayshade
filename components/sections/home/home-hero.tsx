@@ -50,7 +50,7 @@ function HomeHero() {
                       hover:bg-white hover:shadow-[0_7px_0_0_rgb(34,197,94)]
                       active:bg-white active:shadow-[0_0px_0_0_rgb(34,197,94)] active:translate-y-[5px] active:duration-200
                       focus-visible:ring-2 focus-visible:ring-pd-dark-grey focus-visible:ring-offset-2">
-            <span className="relative z-10 flex items-center gap-2">
+            <span className="relative z-10 flex items-center gap-2 justify-center">
               Join
               <ChevronRight />
             </span>
