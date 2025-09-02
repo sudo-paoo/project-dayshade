@@ -81,7 +81,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 8,
     name: 'Neo Snifer Matias',
-    title: 'Head of System Innovation',
+    title: 'Head of Human Resources',
     image: 'assets/profile/head-hr-neo.png',
     socials: {
       github: 'https://github.com/Granger-spec',
@@ -101,7 +101,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 10,
     name: 'Menard Manlutac',
-    title: 'Head of Documentation',
+    title: 'Head of Communications',
     image: 'assets/profile/head-comm-mennard.png',
     socials: {
       github: 'https://github.com/unlockthecode',
@@ -121,7 +121,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 12,
     name: 'Luis Armando Barba',
-    title: 'Head of Promotions',
+    title: 'Secretary of Finances',
     image: 'assets/profile/sec-finance-luis.jpg',
     socials: {
       github: 'https://github.com/lacomms',
@@ -141,7 +141,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 14,
     name: 'Mharl Vincent Aquilos',
-    title: 'Task Force Manager',
+    title: 'Social Media Manager',
     image: 'assets/profile/socmed-manager-mharl.png',
     socials: {
       github: 'https://github.com/danimaaru',

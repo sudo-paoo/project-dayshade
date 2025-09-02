@@ -28,8 +28,8 @@ export default function NotFoundPage() {
 
 
       <GlassContainer
-        variant="card"
-        className="relative z-10 backdrop-blur-xl rounded-3xl p-12 text-center max-w-md mx-4 border-white/30"
+  variant="card"
+  className="relative z-10 backdrop-blur-3xl bg-white/2 rounded-3xl p-12 text-center max-w-3xl w-full mx-4 border-white/2 shadow-2xl"
       >
         <h1 className="text-8xl font-bold text-white mb-4 tracking-tight">404</h1>
         <h2 className="text-xl text-white/90 mb-2 font-medium">Oops! There's nothing here!</h2>

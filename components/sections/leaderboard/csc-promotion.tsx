@@ -16,7 +16,7 @@ const CSCPromotion = () => {
           <div className="flex justify-center">
             <div className="flex justify-center flex-wrap md:flex-nowrap lg:space-y-0 py-1 lg:py-0 gap-5 md:gap-10 lg:my-2 lg:mx-3">
               <Image
-                src="https://graph.facebook.com/TSUCCSCSC/picture?width=450&height=450"
+                src="https://graph.facebook.com/TSUCCSSC/picture?width=450&height=450"
                 alt="Facebook Profile"
                 width={350}
                 height={350}
@@ -26,7 +26,8 @@ const CSCPromotion = () => {
               <div className="w-full my-3 md:my-auto">
                 <div className="space-y-5 mb-8">
                   <p className="max-w-96 text-base md:text-lg">
-                    Official FB page for the TSU College of Computer Studies
+                    Official FB page for the 
+TSU College of Computer Studies Student Council
                     located at the San Isidro Extension Campus of TSU!
                   </p>
                   <h1 className="text-lg">#RedHawks 🦅</h1>
@@ -34,7 +35,7 @@ const CSCPromotion = () => {
                 </div>
                 <div className="flex justify-center">
                   <Link
-                    href="https://www.facebook.com/profile.php?id=100064229071495"
+                    href="https://www.facebook.com/TSUCCSSC"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-block"
