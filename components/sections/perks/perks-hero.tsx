@@ -25,7 +25,7 @@ function PerksHero() {
                 Membership perks
               </span>
             </h1>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg mb-2 text-muted-foreground">
               Join our community of passionate programmers and unlock amazing
               benefits
             </p>

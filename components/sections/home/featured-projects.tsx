@@ -26,7 +26,7 @@ const featuredProjects = [
     id: 2,
     title: "Pebbles Virtual Robotics",
     description:
-      "A software for learning robotics using virtual environments. Developed by alumni members of Programmers Den as their capstone project. With the help of current President Sigmund. Bringing robotics to life in the digital world",
+      "A software for learning robotics using virtual environments. Developed by alumni members of Programmers Den as their capstone project. With the help of former President Sigmund. Bringing robotics to life in the digital world",
     site_link: "https://pebbles-robotics.web.app/",
     imgPreview: "/assets/projects/pebbles.jpg",
     published_date: new Date("2024-11-13"),
@@ -69,7 +69,7 @@ export function FeaturedProjects() {
   }, [api])
 
   return (
-    <div className="md:min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+    <div className="h-full flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
       <MotionGlassContainer
         className={cn("backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg w-full py-12 px-4")}
         initial={{ opacity: 0, y: 20 }}
