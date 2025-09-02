@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form"
 import { Checkbox } from '@/components/ui/checkbox'
 import { Textarea } from "@/components/ui/textarea"
+import DelProjectButton from './DelProjectButton'
 
 type EditProjectMenuProps = {
   project: any
@@ -45,7 +46,7 @@ const ProjectSchema = z.object({
   Description: z.string().min(5, { message: "Description is required" }),
   MonthlyShowcase: z.boolean().optional(),
   FeaturedShowcase: z.boolean().optional(),
-  FeaturedOrder: z.number().optional(),
+  FeaturedOrder: z.string().optional(),
 })
 
 const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
@@ -251,7 +252,9 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                 )}/>
 
                 {/* Footer */}
-                <DialogFooter>
+                <DialogFooter className='flex items-center'>
+                  <DelProjectButton id={project.id}   />
+
                   <Button type="submit" disabled={loading}>
                     {loading ? "Saving..." : "Save Changes"}
                   </Button>
