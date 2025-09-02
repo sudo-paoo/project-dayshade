@@ -3,7 +3,14 @@
 import React, { useState, useEffect } from 'react'
 import EditProjectMenu from "@/components/sections/admin/projects/EditProjectMenu";
 import Image from 'next/image'
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardFooter
+} from '@/components/ui/card';
 import { toast } from 'sonner'
 
 const ProjectsListView = () => {

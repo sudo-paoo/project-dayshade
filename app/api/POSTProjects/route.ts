@@ -23,7 +23,7 @@ export async function POST(req: Request) {
   if (file) {
     const filePath = `projects/${Date.now()}-${file.name}`;
     const { error: uploadError } = await supabase.storage
-      .from("projects-image") // ✅ correct bucket
+      .from("projects-image") //
       .upload(filePath, file, {
         cacheControl: "3600",
         upsert: false,

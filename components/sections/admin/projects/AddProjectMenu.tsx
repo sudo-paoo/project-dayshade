@@ -24,9 +24,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Textarea } from "@/components/ui/textarea"
 
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
+  Image: z.any().optional(),
   Developers: z.string().min(2, { message: "Developers are required" }),
   YTLinks: z.union([z.url({ message: "Enter a valid YouTube URL" }), z.literal("")]).optional(),
   SiteURL: z.union([z.url({ message: "Enter a valid URL" }), z.literal("")]).optional(),
@@ -35,7 +37,6 @@ const ProjectSchema = z.object({
   }),
   Tags: z.string().min(2, { message: "Tags are required" }),
   Description: z.string().min(5, { message: "Description is required" }),
-  Image: z.any().optional(),
 })
 
 const AddProjectMenu = () => {
@@ -111,8 +112,10 @@ const AddProjectMenu = () => {
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className="flex flex-col gap-4"
+                className="flex flex-col gap-6"
               >
+                {/* First Row: Title + Published Date */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="Title"
@@ -123,41 +126,6 @@ const AddProjectMenu = () => {
                         </FormLabel>
                         <FormControl>
                           <Input placeholder="Enter project title" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="Developers"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-primary font-bold">
-                          Developers*
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter developer names"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                  <FormField
-                    control={form.control}
-                    name="Tags"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-primary font-bold">
-                          Tags*
-                        </FormLabel>
-                        <FormControl>
-                          <Input placeholder="Enter Tags" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -179,29 +147,66 @@ const AddProjectMenu = () => {
                       </FormItem>
                     )}
                   />
+                </div>
 
+                {/* Second Row: Tags + Developers */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
-                    name="Image"
+                    name="Tags"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-primary font-bold">
-                          Project Image
+                          Tags*
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            type="file"
-                            accept="image/*"
-                            onChange={(e) =>
-                              field.onChange(e.target.files?.[0])
-                            }
-                          />
+                          <Input placeholder="Enter tags" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
 
+                  <FormField
+                    control={form.control}
+                    name="Developers"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-primary font-bold">
+                          Developers*
+                        </FormLabel>
+                        <FormControl>
+                          <Input placeholder="Enter developer names" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Third Row: Image Upload */}
+                <FormField
+                  control={form.control}
+                  name="Image"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">
+                        Project Image
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => field.onChange(e.target.files?.[0])}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Fourth Row: Links */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <FormField
                     control={form.control}
                     name="SiteURL"
@@ -211,7 +216,7 @@ const AddProjectMenu = () => {
                           Site Link
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter Site Link" {...field} />
+                          <Input placeholder="Enter site link" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -227,44 +232,44 @@ const AddProjectMenu = () => {
                           YouTube Embed Link
                         </FormLabel>
                         <FormControl>
-                          <Input
-                            placeholder="Enter YouTube embed link"
-                            {...field}
-                          />
+                          <Input placeholder="Enter YouTube embed link" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
                     )}
                   />
+                </div>
 
-                  <FormField
-                    control={form.control}
-                    name="Description"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-primary font-bold">
-                          Description*
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Enter project description"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                {/* Fifth Row: Description */}
+                <FormField
+                  control={form.control}
+                  name="Description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">
+                        Description*
+                      </FormLabel>
+                      <FormControl>
+                        <Textarea
+                          placeholder="Enter project description"
+                          className="resize-y min-h-[120px]"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-                  <DialogFooter>
-                    <Button
-                      type="submit"
-                      disabled={!form.formState.isValid || loading}
-                    >
-                      {loading ? "Saving..." : "Add Project"}
-                    </Button>
-                  </DialogFooter>
-
+                {/* Footer */}
+                <DialogFooter>
+                  <Button
+                    type="submit"
+                    disabled={!form.formState.isValid || loading}
+                  >
+                    {loading ? "Saving..." : "Add Project"}
+                  </Button>
+                </DialogFooter>
               </form>
             </Form>
           </CardContent>

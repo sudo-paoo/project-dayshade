@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React, { useState } from 'react'
 import { Button } from "@/components/ui/button"
@@ -24,31 +24,28 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Checkbox } from '@/components/ui/checkbox'
+import { Textarea } from "@/components/ui/textarea"
 
 type EditProjectMenuProps = {
   project: any
 }
-// TODO: add the site links and be able to edit the image
+
+// ✅ Schema
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
+  Image: z.any().optional(),
   Developers: z.string().min(2, { message: "Developers are required" }),
   Tags: z.string().min(2, { message: "Tags are required" }),
-  YTLinks: z.url({ message: "Enter a valid YouTube URL" }),
+  YTLinks: z.union([z.url({ message: "Enter a valid YouTube URL" }), z.literal("")]).optional(),
+  SiteURL: z.union([z.url({ message: "Enter a valid URL" }), z.literal("")]).optional(),
   PublishedDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, {
-    message: "PublishedDate must be in YYYY-MM-DD format",
+    message: "Date must be in YYYY-MM-DD format",
   }),
   Description: z.string().min(5, { message: "Description is required" }),
   MonthlyShowcase: z.boolean().optional(),
   FeaturedShowcase: z.boolean().optional(),
-  FeaturedOrder: z.enum(["1", "2", "3"]).optional(),
+  FeaturedOrder: z.number().optional(),
 })
 
 const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
@@ -59,14 +56,16 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
     resolver: zodResolver(ProjectSchema),
     defaultValues: {
       Title: project?.title || "",
+      Image: project?.image_url || "",
       Developers: project?.devs?.join(", ") || "",
       Tags: project?.tags?.join(", ") || "",
       YTLinks: project?.embed_link || "",
+      SiteURL: project?.site_url || "",
       PublishedDate: project?.published_date || "",
       Description: project?.description || "",
       MonthlyShowcase: project?.is_monthly ?? false,
       FeaturedShowcase: project?.is_featured ?? false,
-      FeaturedOrder: project?.featured_order ? project.featured_order.toString() : undefined,
+      FeaturedOrder: project?.featured_order || undefined,
     },
     mode: "onChange",
   })
@@ -75,11 +74,20 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
     try {
       setLoading(true)
 
-      // Send raw form values — let API handle mapping
+      const formData = new FormData()
+      Object.entries(values).forEach(([key, value]) => {
+        if (value !== undefined && value !== null) {
+          formData.append(key, value as any)
+        }
+      })
+
+      if (typeof values.Image === "string") {
+        formData.append("ImageURL", values.Image)
+      }
+
       const res = await fetch(`/api/UPDATEProjects/${project.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        method: "PUT",
+        body: formData,
       })
 
       if (!res.ok) {
@@ -90,7 +98,6 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
       }
 
       toast.success("Project updated successfully!")
-      form.reset(values)
       setOpen(false)
     } catch (error) {
       console.error(error)
@@ -103,178 +110,150 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button
-          variant="secondary"
-          size="sm"
-          className="rounded-full px-4"
-        >
+        <Button variant="secondary" size="sm" className="rounded-full px-4">
           Edit
         </Button>
       </DialogTrigger>
 
-      <DialogContent>
+      <DialogContent className="max-w-3xl">
         <DialogHeader className="flex items-center">
-          <DialogTitle className="text-primary font-bold">EDIT PROJECT</DialogTitle>
+          <DialogTitle className="text-primary font-bold">Edit Project</DialogTitle>
         </DialogHeader>
 
         <Card>
           <CardContent>
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
-                {/* Title */}
-                <FormField
-                  control={form.control}
-                  name="Title"
-                  render={({ field }) => (
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+
+                {/* General Info */}
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField control={form.control} name="Title" render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-primary font-bold">Title*</FormLabel>
+                      <FormLabel className="text-primary font-bold">
+                        Title*
+                      </FormLabel>
                       <FormControl>
-                        <Input placeholder="Enter project title" {...field} />
+                        <Input
+                          {...field} />
+                        </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}/>
+                  <FormField control={form.control} name="PublishedDate" render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">
+                        Published Date*
+                        </FormLabel>
+                      <FormControl>
+                        <Input type="date"
+                        {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}
-                />
-
-                {/* Developers */}
-                <FormField
-                  control={form.control}
-                  name="Developers"
-                  render={({ field }) => (
+                  )}/>
+                  <FormField control={form.control} name="Developers" render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-primary font-bold">Developers*</FormLabel>
-                      <FormControl>
-                        <Input placeholder="e.g., Alice, Bob" {...field} />
-                      </FormControl>
+                      <FormLabel>Developers*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. Alice, Bob" {...field} />
+                        </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}
-                />
-
-                {/* Tags */}
-                <FormField
-                  control={form.control}
-                  name="Tags"
-                  render={({ field }) => (
+                  )}/>
+                  <FormField control={form.control} name="Tags" render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-primary font-bold">Tags*</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., Gaming, WebDev" {...field} />
+                        <Input placeholder="e.g. Gaming, WebDev" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}
-                />
+                  )}/>
+                </section>
 
-                {/* YouTube Link */}
-                <FormField
-                  control={form.control}
-                  name="YTLinks"
-                  render={({ field }) => (
+                {/* Media */}
+                <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormField control={form.control} name="Image" render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-primary font-bold">YT Embed Link*</FormLabel>
+                      <FormLabel className="text-primary font-bold">Project Image</FormLabel>
                       <FormControl>
-                        <Input placeholder="https://youtube.com/embed/..." {...field} />
+                        <Input type="file" accept="image/*" onChange={(e) => field.onChange(e.target.files?.[0])}/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}
-                />
-
-                {/* Published Date */}
-                <FormField
-                  control={form.control}
-                  name="PublishedDate"
-                  render={({ field }) => (
+                  )}/>
+                  <FormField control={form.control} name="YTLinks" render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-primary font-bold">Published Date*</FormLabel>
-                      <FormControl>
-                        <Input type="date" {...field} />
-                      </FormControl>
+                      <FormLabel className="text-primary font-bold">YouTube Link</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://youtube.com/embed/..." {...field} />
+                        </FormControl>
                       <FormMessage />
                     </FormItem>
-                  )}
-                />
+                  )}/>
+                  <FormField control={form.control} name="SiteURL" render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Website URL</FormLabel>
+                        <FormControl>
+                          <Input placeholder="https://example.com" {...field} />
+                        </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}/>
+                </section>
 
                 {/* Description */}
-                <FormField
-                  control={form.control}
-                  name="Description"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-primary font-bold">Description*</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Enter project description" {...field} />
+                <FormField control={form.control} name="Description" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-primary font-bold">Description*</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        className="min-h-[120px]" {...field} />
                       </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    <FormMessage />
+                  </FormItem>
+                )}/>
 
-                {/* Monthly Showcase */}
-                <FormField
-                  control={form.control}
-                  name="MonthlyShowcase"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between">
+                {/* Showcase Options */}
+                <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormField control={form.control} name="MonthlyShowcase" render={({ field }) => (
+                    <FormItem className="flex items-center justify-between rounded-md border p-3">
                       <FormLabel className="text-primary font-bold">Monthly Showcase</FormLabel>
                       <FormControl>
                         <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
-                        />
-                      </FormControl>
+                        checked={field.value}
+                        onCheckedChange={field.onChange} />
+                        </FormControl>
                     </FormItem>
-                  )}
-                />
-
-                {/* Featured Showcase */}
-                <FormField
-                  control={form.control}
-                  name="FeaturedShowcase"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between">
+                  )}/>
+                  <FormField control={form.control} name="FeaturedShowcase" render={({ field }) => (
+                    <FormItem className="flex items-center justify-between rounded-md border p-3">
                       <FormLabel className="text-primary font-bold">Featured Showcase</FormLabel>
                       <FormControl>
                         <Checkbox
-                          checked={field.value}
-                          onCheckedChange={field.onChange}
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
                         />
-                      </FormControl>
+                        </FormControl>
                     </FormItem>
-                  )}
-                />
+                  )}/>
+                </section>
 
                 {/* Featured Order */}
-                <FormField
-                  control={form.control}
-                  name="FeaturedOrder"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-row items-center justify-between">
-                      <FormLabel className="text-primary font-bold">Featured Order</FormLabel>
+                <FormField control={form.control} name="FeaturedOrder" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="text-primary font-bold">Featured Order</FormLabel>
                       <FormControl>
-                        <Select
-                          onValueChange={(val) => field.onChange(val)}
-                          value={field.value}
-                        >
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select order (1, 2, 3)" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="1">1</SelectItem>
-                            <SelectItem value="2">2</SelectItem>
-                            <SelectItem value="3">3</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <Input type="number" placeholder='e.g., 1, 2, 3...' {...field} />
                       </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                    <FormMessage />
+                  </FormItem>
+                )}/>
 
+                {/* Footer */}
                 <DialogFooter>
                   <Button type="submit" disabled={loading}>
-                    {loading ? "Saving..." : "Edit Project"}
+                    {loading ? "Saving..." : "Save Changes"}
                   </Button>
                 </DialogFooter>
               </form>
