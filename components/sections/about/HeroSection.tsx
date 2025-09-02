@@ -178,25 +178,25 @@ export default function HeroSection() {
             duration: 2,
           }}
         >
-          <GlassContainer className="sm:max-w-2xl mx-6">
-            <h1 className="sm:text-6xl text-2xl font-bold text-center">
-              ONLY THE{" "}
-              <span className="text-primary">
-                BEST
-                <br />
-              </span>
-              AMONG THE REST
-            </h1>
-            <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-center">
+          <h1 className="sm:text-8xl text-4xl font-extrabold text-center mb-10">
+            ONLY THE{" "}
+            <span className="text-primary">
+              BEST
+              <br />
+            </span>
+            AMONG THE REST
+          </h1>
+          <GlassContainer className="sm:max-w-4xl mx-6 p-10">
+            <div className="space-y-6">
+              <h3 className="sm:text-3xl text-2xl font-bold text-center">
                 Elite Programmers from BSIT, BSIS and BSCS
               </h3>
-              <p className="sm:text-lg text-center">
+              <p className="sm:text-xl text-lg text-center">
                 We are the Programmers' Den, an organization of Tarlac State
                 University - College of Computer Studies that was founded in
                 2013.
               </p>
-              <p className="sm:text-lg text-center">
+              <p className="sm:text-xl text-lg text-center">
                 The organization focuses on design and programming-related
                 activities, competitions, and development projects. Our goal is
                 to enhance its member capabilities to learn, adapt, and perform

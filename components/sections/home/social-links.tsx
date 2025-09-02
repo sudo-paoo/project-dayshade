@@ -43,15 +43,15 @@ export default function SocialLinksSection() {
 
   return (
       <div className="mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-5xl font-bold mb-4 text-white">Connect With CCS Programmers' Den</h2>
-          <p className="text-lg max-w-2xl mx-auto text-gray-300">
+        <div className="text-center mb-16">
+          <h2 className="text-2xl md:text-5xl font-bold mb-6 text-white">Connect With CCS Programmers' Den</h2>
+          <p className="text-lg max-w-2xl mx-auto text-gray-300 mb-4">
             Stay updated with Programmers' Den through our social links!
             Where great minds compile!
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mt-12">
           {socialLinks.map((link) => {
             const IconComponent = link.icon
             return (

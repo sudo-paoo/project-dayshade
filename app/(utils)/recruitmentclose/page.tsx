@@ -27,7 +27,7 @@ export default function ClosedRecruitment() {
 
       <GlassContainer
         variant="card"
-        className="relative z-10 backdrop-blur-xl rounded-3xl p-12 text-center max-w-3xl w-full mx-4 border-white/30"
+  className="relative z-10 backdrop-blur-3xl bg-white/2 rounded-3xl p-12 text-center max-w-3xl w-full mx-4 border-white/2 shadow-2xl"
       >
         <h1 className="text-8xl font-bold text-white mb-4 tracking-tight">
           CLOSED
