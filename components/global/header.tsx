@@ -21,7 +21,7 @@ export function NavbarDemo() {
     { name: "Projects", link: "/projects" },
     { name: "Leaderboard", link: "/leaderboard" },
     // { name: "Design System", link: "/design" },
-    { name: "Admin", link: "/admin" },
+    // { name: "Admin", link: "/admin" },
   ];
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

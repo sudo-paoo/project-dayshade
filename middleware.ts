@@ -1,9 +1,13 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { updateSession } from "@/utils/supabase/middleware";
+import { isRecruitmentOpen } from "@/lib/data/setting-queries";
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname == "/join") {
-    return NextResponse.rewrite(new URL("/recruitmentclose", request.url));
+  if (request.nextUrl.pathname === "/join") {
+    const data = await isRecruitmentOpen();
+    if (!data.is_recruitment_open) {
+      return NextResponse.rewrite(new URL("/recruitmentclose", request.url));
+    }
   }
   return await updateSession(request);
 }

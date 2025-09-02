@@ -46,11 +46,7 @@ export function LoginForm({
                   type="email"
                   placeholder="m@example.com"
                   required
-                  defaultValue={
-                    process.env.NODE_ENV === "development"
-                      ? "pd_superadmin@test.com"
-                      : undefined
-                  }
+                  autoComplete="off"
                 />
                 {state.errors.email && (
                   <p className="text-sm text-red-500">
@@ -66,13 +62,7 @@ export function LoginForm({
                   id="password"
                   name="password"
                   type="password"
-                  placeholder="••••••••"
                   required
-                  defaultValue={
-                    process.env.NODE_ENV === "development"
-                      ? "Password123!"
-                      : undefined
-                  }
                 />
                 {state.errors.password && (
                   <p className="text-sm text-red-500">

@@ -7,6 +7,7 @@ import {
   useReactTable,
   getPaginationRowModel,
 } from "@tanstack/react-table";
+import { Fragment } from "react";
 
 import {
   Table,
@@ -23,7 +24,7 @@ import { GlassContainer } from "@/components/shared/glass-container";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  dateUpdated: string;
+  dateUpdated: string | undefined;
 }
 
 export function DataTable<TData, TValue>({
@@ -38,16 +39,21 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
   });
 
+  const formattedDate = dateUpdated
+    ? new Date(dateUpdated).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "-";
+
   return (
     <div className="z-50 my-4 space-y-2">
       <GlassContainer className="lb-glass-plus overflow-hidden rounded-md border border-white/20 p-4">
         <Table className="border-collapse text-center">
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow
-                className="hover:bg-white/10"
-                key={headerGroup.id}
-              >
+              <TableRow className="hover:bg-white/10" key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
                     <TableHead
@@ -86,7 +92,18 @@ export function DataTable<TData, TValue>({
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length}>No results.</TableCell>
+                <TableCell colSpan={columns.length}>
+                  <div className="flex flex-col items-center justify-center gap-4 py-16">
+                    <div className="text-center space-y-2">
+                      <p className="text-2xl font-bold">
+                        Stay tuned! Rankings will be announced soon.
+                      </p>
+                      <p className="text-xs text-white/40 mt-4">
+                        Follow CSC announcements for updates
+                      </p>
+                    </div>
+                  </div>
+                </TableCell>
               </TableRow>
             )}
           </TableBody>
@@ -94,15 +111,7 @@ export function DataTable<TData, TValue>({
       </GlassContainer>
       <div className="flex items-center justify-between">
         <p className="text-base md:text-lg mb-2 z-50 italic">
-          Last updated:{" "}
-          {dateUpdated
-            ? new Date(dateUpdated).toLocaleDateString("en-US", {
-                weekday: "short",
-                month: "short",
-                day: "numeric",
-                year: "numeric",
-              })
-            : "-"}
+          Last updated:&nbsp;{formattedDate}
         </p>
         <span className="flex items-center justify-center md:justify-end space-x-3 pt-2">
           <Button
