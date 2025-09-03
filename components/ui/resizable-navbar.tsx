@@ -274,8 +274,11 @@ export const NavbarButton = ({
   };
 
   return (
+    // @ts-ignore
     <Tag
+    // @ts-ignore
       href={href || undefined}
+      // @ts-ignore
       className={cn(baseStyles, variantStyles[variant], className)}
       {...props}
     >

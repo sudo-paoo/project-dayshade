@@ -1,9 +1,9 @@
 "use client";
 
-import { LeaderboardEntries } from "@/lib/validation/leaderboard-entries";
+import { LeaderboardEntry } from "@/lib/validation/leaderboard-entries";
 import { ColumnDef } from "@tanstack/react-table";
 
-export const columns: ColumnDef<LeaderboardEntries>[] = [
+export const columns: ColumnDef<LeaderboardEntry>[] = [
   {
     accessorKey: "rank",
     header: "Rank",
