@@ -82,12 +82,10 @@ export default function SignUp() {
 							</CardTitle>
 						</CardHeader>
 						<CardContent>
-							<p className="px-6 text-lg">
+							<p className="px-8 text-lg break-words whitespace-pre-line">
 								King Paolo Franco, John Andrei Tacujan, Paula Joyce Ucol, Mark Louis
-								Cadiente, Marc Jersey Castro,
-								<br />
-								Brigitte Tamondong, Jenny Jane Flores, Kyran Emmanuel Solomon, and
-								Kharl Asuncion
+								Cadiente, Marc Jersey Castro, Eithan Mathew Malonzo, Gilbert Cura,
+								Kharl Asuncion, Brigitte Tamondong, Jenny Jane Flores, and Kyran Emmanuel Solomon
 							</p>
 						</CardContent>
 					</Card>

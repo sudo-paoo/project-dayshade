@@ -9,9 +9,9 @@ import { motion } from "framer-motion";
 
 export default function ProgdenStats() {
   const stats = {
-    activeMembers: 50,
-    projectsCount: 25,
-    yearsOfExcellence: 11,
+    activeMembers: 100,
+    projectsCount: 20,
+    yearsOfExcellence: 12,
   };
 
   return (

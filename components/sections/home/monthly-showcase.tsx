@@ -1,6 +1,5 @@
 import * as React from "react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils"
 
 export function MonthlyShowcase() {
   const currentShowcase = {
@@ -35,7 +34,7 @@ export function MonthlyShowcase() {
           </div>
           {/* Project Youtube Embed */}
             <div className="relative w-full flex items-center justify-center mx-auto mb-6 rounded-lg overflow-hidden">
-            <div className="w-[80%] h-[400px] md:h-[500px]">
+            <div className="md:w-[80%] h-[400px] md:h-[500px]">
               <iframe
               src={`https://www.youtube.com/embed/${currentShowcase.yt_id}`}
               title={currentShowcase.title}
