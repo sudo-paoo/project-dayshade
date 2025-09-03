@@ -230,7 +230,7 @@ export default function HeroSection() {
                     }}
                   >
                     <Image
-                      className="size-8 sm:size-16"
+                      className="size-8 sm:size-16 object-contain"
                       src={tech.icon}
                       alt={tech.alt}
                       width={64}
