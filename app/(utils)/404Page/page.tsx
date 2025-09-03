@@ -9,7 +9,7 @@ export default function NotFoundPage() {
  
       <div className="absolute inset-0 flex items-center justify-center">
         <Image
-          src="/assets/star-3.png"
+          src="/assets/Star-3.png"
           alt="decorative star"
           width={320}
           height={320}
@@ -17,7 +17,7 @@ export default function NotFoundPage() {
           unoptimized
         />
         <Image
-          src="/assets/star-4.png"
+          src="/assets/Star-4.png"
           alt="decorative star"
           width={384}
           height={384}
