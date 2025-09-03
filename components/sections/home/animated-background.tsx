@@ -1,7 +1,7 @@
-"use client"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import React from "react"
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import React from "react";
 
 export default function AnimatedBackground() {
   return (
@@ -17,9 +17,14 @@ export default function AnimatedBackground() {
           delay: 0.5,
           duration: 2,
         }}
-  className="absolute top-12 md:top-20 left-4 md:left-10"
+        className="absolute top-12 md:top-20 left-4 md:left-10"
       >
-  <Image src="/assets/circle-green.png" alt="Green circle" width={180} height={180} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={180}
+          height={180}
+        />
       </motion.div>
 
       {/* Top right purple circle */}
@@ -33,9 +38,14 @@ export default function AnimatedBackground() {
           delay: 0.8,
           duration: 2,
         }}
-  className="absolute top-16 md:top-32 right-6 md:right-16"
+        className="absolute top-16 md:top-32 right-6 md:right-16"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={65} height={70} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={65}
+          height={70}
+        />
       </motion.div>
 
       {/* Middle left purple circle */}
@@ -49,9 +59,14 @@ export default function AnimatedBackground() {
           delay: 1.1,
           duration: 2,
         }}
-  className="absolute top-1/2 left-4 md:left-8 transform -translate-y-1/2"
+        className="absolute top-1/2 left-4 md:left-8 transform -translate-y-1/2"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={80} height={80} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={80}
+          height={80}
+        />
       </motion.div>
 
       {/* Middle right green circle */}
@@ -65,9 +80,14 @@ export default function AnimatedBackground() {
           delay: 1.4,
           duration: 2,
         }}
-  className="absolute top-2/3 right-6 md:right-12"
+        className="absolute top-2/3 right-6 md:right-12"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={90} height={90} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={90}
+          height={90}
+        />
       </motion.div>
 
       {/* Bottom left large green circle */}
@@ -81,9 +101,14 @@ export default function AnimatedBackground() {
           delay: 1.6,
           duration: 2,
         }}
-  className="absolute bottom-12 md:bottom-20 left-[-2rem]"
+        className="absolute bottom-12 md:bottom-20 left-[-2rem]"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={200} height={200} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={200}
+          height={200}
+        />
       </motion.div>
 
       {/* Bottom right large purple circle */}
@@ -97,9 +122,14 @@ export default function AnimatedBackground() {
           delay: 1.9,
           duration: 2,
         }}
-  className="absolute bottom-[-2rem] md:bottom-[-3rem] right-[-2rem] md:right-[-3rem]"
+        className="absolute bottom-[-2rem] md:bottom-[-3rem] right-[-2rem] md:right-[-3rem]"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={250} height={250} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={250}
+          height={250}
+        />
       </motion.div>
 
       {/* Additional floating circles for more depth */}
@@ -122,9 +152,14 @@ export default function AnimatedBackground() {
             ease: "easeInOut",
           },
         }}
-  className="absolute top-1/4 left-1/4 md:left-1/3"
+        className="absolute top-1/4 left-1/4 md:left-1/3"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={60} height={60} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={60}
+          height={60}
+        />
       </motion.div>
 
       <motion.div
@@ -146,9 +181,14 @@ export default function AnimatedBackground() {
             ease: "easeInOut",
           },
         }}
-  className="absolute top-3/4 right-1/4 md:right-1/3"
+        className="absolute top-3/4 right-1/4 md:right-1/3"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={70} height={70} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={70}
+          height={70}
+        />
       </motion.div>
 
       {/* Small accent circles */}
@@ -171,9 +211,14 @@ export default function AnimatedBackground() {
             ease: "easeInOut",
           },
         }}
-  className="absolute top-12 md:top-16 left-1/2"
+        className="absolute top-12 md:top-16 left-1/2"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={40} height={40} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={40}
+          height={40}
+        />
       </motion.div>
 
       <motion.div
@@ -201,9 +246,14 @@ export default function AnimatedBackground() {
             ease: "easeInOut",
           },
         }}
-  className="absolute bottom-1/3 left-1/5 md:left-1/4"
+        className="absolute bottom-1/3 left-1/5 md:left-1/4"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={50} height={50} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={50}
+          height={50}
+        />
       </motion.div>
 
       {/* Medium circles for layering */}
@@ -234,7 +284,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-1/3 right-1/4"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={110} height={110} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={110}
+          height={110}
+        />
       </motion.div>
 
       <motion.div
@@ -258,7 +313,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute bottom-1/4 right-1/2"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={85} height={85} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={85}
+          height={85}
+        />
       </motion.div>
 
       {/* Tiny accent circles for sparkle effect */}
@@ -283,7 +343,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={30} height={30} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={30}
+          height={30}
+        />
       </motion.div>
 
       <motion.div
@@ -313,7 +378,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-2/3 left-2/3"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={35} height={35} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={35}
+          height={35}
+        />
       </motion.div>
 
       <motion.div
@@ -337,7 +407,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-1/6 right-1/3"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={45} height={45} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={45}
+          height={45}
+        />
       </motion.div>
 
       {/* First spinning star - top area */}
@@ -362,7 +437,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-65 right-1/4"
       >
-        <Image src="/assets/star-3.png" alt="Purple star" width={60} height={60} />
+        <Image
+          src="/assets/Star-3.png"
+          alt="Purple star"
+          width={60}
+          height={60}
+        />
       </motion.div>
 
       {/* Second spinning star - bottom area */}
@@ -387,9 +467,14 @@ export default function AnimatedBackground() {
         }}
         className="absolute bottom-1/7 left-1/3"
       >
-        <Image src="/assets/star-4.png" alt="Purple star" width={75} height={75} />
+        <Image
+          src="/assets/Star-4.png"
+          alt="Purple star"
+          width={75}
+          height={75}
+        />
       </motion.div>
-      
+
       <motion.div
         initial={{ scale: 0, opacity: 0 }}
         animate={{
@@ -417,7 +502,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-10 left-2/3"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={65} height={65} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={65}
+          height={65}
+        />
       </motion.div>
 
       <motion.div
@@ -447,7 +537,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-1/3 left-1/6"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={55} height={55} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={55}
+          height={55}
+        />
       </motion.div>
 
       <motion.div
@@ -471,7 +566,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute bottom-1/2 right-1/6"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={75} height={75} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={75}
+          height={75}
+        />
       </motion.div>
 
       <motion.div
@@ -501,7 +601,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-3/5 left-1/5"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={40} height={40} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={40}
+          height={40}
+        />
       </motion.div>
 
       <motion.div
@@ -531,7 +636,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-1/5 right-1/5"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={90} height={90} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={90}
+          height={90}
+        />
       </motion.div>
 
       <motion.div
@@ -561,7 +671,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute bottom-1/5 left-3/5"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={25} height={25} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={25}
+          height={25}
+        />
       </motion.div>
 
       <motion.div
@@ -591,7 +706,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-2/5 right-2/5"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={95} height={95} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={95}
+          height={95}
+        />
       </motion.div>
 
       <motion.div
@@ -621,7 +741,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute bottom-2/5 right-3/5"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={70} height={70} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={70}
+          height={70}
+        />
       </motion.div>
 
       <motion.div
@@ -645,7 +770,12 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-4/5 left-2/5"
       >
-        <Image src="/assets/circle-purple.png" alt="Purple circle" width={35} height={35} />
+        <Image
+          src="/assets/circle-purple.png"
+          alt="Purple circle"
+          width={35}
+          height={35}
+        />
       </motion.div>
 
       <motion.div
@@ -681,8 +811,13 @@ export default function AnimatedBackground() {
         }}
         className="absolute top-1/6 left-4/5"
       >
-        <Image src="/assets/circle-green.png" alt="Green circle" width={50} height={50} />
+        <Image
+          src="/assets/circle-green.png"
+          alt="Green circle"
+          width={50}
+          height={50}
+        />
       </motion.div>
     </div>
-  )
+  );
 }
