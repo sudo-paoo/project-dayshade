@@ -64,7 +64,7 @@ export function NavbarDemo() {
             ))}
             <div className="flex w-full flex-col gap-4">
               <NavbarButton
-                onClick={() => setIsMobileMenuOpen(false)}
+                 href="/join"
                 variant="primary"
                 className="w-full"
               >
