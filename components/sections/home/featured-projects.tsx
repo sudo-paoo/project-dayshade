@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import React, {useState, useEffect, useRef} from "react"
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/components/ui/carousel"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
@@ -8,38 +8,28 @@ import { cn } from "@/lib/utils"
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-// * on the bloody home page carousel, use featured ranking
+
 const MotionGlassContainer = motion.div
 
-const featuredProjects = [
-  {
-    id: 1,
-    title: "Nights in CCS",
-    description:
-      "Get ready to be spooked(or perhaps laugh) with Kharl Asuncion's Unreal Engine 5 horror game, where the goal is to find your lost Aquaflask in the CCS building while avoiding disastrous PNG monsters!",
-    yt_id: "I8WsKQK3bNk",
-    published_date: new Date("2024-11-01"),
-    tags: ["Unreal Engine 5", "Horror Game"],
-    devs: ["Kharl Asuncion"],
-  },
-  {
-    id: 2,
-    title: "Pebbles Virtual Robotics",
-    description:
-      "A software for learning robotics using virtual environments. Developed by alumni members of Programmers Den as their capstone project. With the help of current President Sigmund. Bringing robotics to life in the digital world",
-    site_link: "https://pebbles-robotics.web.app/",
-    imgPreview: "/assets/projects/pebbles.jpg",
-    published_date: new Date("2024-11-13"),
-    tags: ["Unity C#", "Blender", "Robotics"],
-    devs: ["Andrea Christela Adalem", "Iris", "Fernando", "Christler Neil Vinluan"],
-  },
-]
-
 export function FeaturedProjects() {
-  const [api, setApi] = React.useState<CarouselApi>()
-  const timeoutRef = React.useRef<NodeJS.Timeout | null>(null)
+  const [api, setApi] = useState<CarouselApi>()
+  const [featuredProjects,setFeaturedProjects] = useState<any[]>([]);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
+    async function loadProjects() {
+      try {
+        const res = await fetch('/api/GETFeatured');
+        const json = await res.json();
+        if (json.success) setFeaturedProjects(json.data);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    loadProjects();
+  }, []);
+
+  useEffect(() => {
     if (!api || featuredProjects.length <= 1) return
 
     const play = () => {
@@ -66,7 +56,7 @@ export function FeaturedProjects() {
       api.off("pointerUp", play)
       api.off("select", play)
     }
-  }, [api])
+  }, [api, featuredProjects.length])
 
   return (
     <div className="md:min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
@@ -109,22 +99,14 @@ export function FeaturedProjects() {
                   >
                     <div className="overflow-hidden max-w-7xl w-full shadow-2xl flex flex-col md:flex-row">
                       {/* YouTube Thumbnail */}
+                      {/* <pre>{JSON.stringify(featuredProjects, null, 2)}</pre> */}
                       <div className="relative h-[280px] md:h-[400px] md:w-1/2 overflow-hidden">
-                        {project.yt_id ? (
                           <Image
-                            src={`https://img.youtube.com/vi/${project.yt_id}/hqdefault.jpg`}
+                            src={project.image_url }
                             alt={project.title}
                             fill
                             className="object-cover"
                           />
-                        ) : project.site_link && project.imgPreview ? (
-                          <Image
-                            src={project.imgPreview || "/placeholder.svg"}
-                            alt={project.title}
-                            fill
-                            className="object-cover"
-                          />
-                        ) : null}
                       </div>
 
                       <div className="px-8 py-8 text-center md:w-1/2 md:flex md:flex-col md:justify-center">
@@ -133,7 +115,7 @@ export function FeaturedProjects() {
                         <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl">{project.description}</p>
 
                         <div className="flex flex-wrap gap-2 mb-4 justify-start">
-                          {project.tags.map((tag) => (
+                          {project.tags.map((tag: string) => (
                             <span
                               key={tag}
                               className="bg-pd-purple/20 text-pd-purple px-3 py-1 rounded-full text-xs font-semibold"
@@ -158,7 +140,7 @@ export function FeaturedProjects() {
                           >
                             <Link
                               href={
-                                project.site_link ? project.site_link : `https://www.youtube.com/watch?v=${project.yt_id}`
+                                project.site_link ? project.site_link : project.embed_link
                               }
                               target="_blank"
                               rel="noopener noreferrer"

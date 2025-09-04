@@ -32,7 +32,6 @@ type EditProjectMenuProps = {
   project: any
 }
 
-// ✅ Schema
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
   Image: z.any().optional(),
@@ -46,7 +45,8 @@ const ProjectSchema = z.object({
   Description: z.string().min(5, { message: "Description is required" }),
   MonthlyShowcase: z.boolean().optional(),
   FeaturedShowcase: z.boolean().optional(),
-  FeaturedOrder: z.string().optional(),
+  CurrentShowcase: z.boolean().optional(),
+  FeaturedOrder: z.string().optional()
 })
 
 const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
@@ -66,6 +66,7 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
       Description: project?.description || "",
       MonthlyShowcase: project?.is_monthly ?? false,
       FeaturedShowcase: project?.is_featured ?? false,
+      CurrentShowcase: project?.is_showcase ?? false,
       FeaturedOrder: project?.featured_order || undefined,
     },
     mode: "onChange",
@@ -122,7 +123,7 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
         </DialogHeader>
 
         <Card>
-          <CardContent>
+          <CardContent className="min-h-[70vh] max-h-[80vh] overflow-y-auto">
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
 
@@ -152,21 +153,21 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                       <FormMessage />
                     </FormItem>
                   )}/>
-                  <FormField control={form.control} name="Developers" render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Developers*</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g. Alice, Bob" {...field} />
-                        </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}/>
                   <FormField control={form.control} name="Tags" render={({ field }) => (
                     <FormItem>
                       <FormLabel className="text-primary font-bold">Tags*</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g. Gaming, WebDev" {...field} />
                       </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}/>
+                  <FormField control={form.control} name="Developers" render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">Developers*</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g. Alice, Bob" {...field} />
+                        </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}/>
@@ -216,7 +217,18 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                 )}/>
 
                 {/* Showcase Options */}
-                <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                   <FormField control={form.control} name="CurrentShowcase" render={({ field }) => (
+                    <FormItem className="flex items-center justify-between rounded-md border p-3">
+                      <FormLabel className="text-primary font-bold">Current Showcase</FormLabel>
+                      <FormControl>
+                        <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                        />
+                        </FormControl>
+                    </FormItem>
+                  )}/>
                   <FormField control={form.control} name="MonthlyShowcase" render={({ field }) => (
                     <FormItem className="flex items-center justify-between rounded-md border p-3">
                       <FormLabel className="text-primary font-bold">Monthly Showcase</FormLabel>
@@ -252,7 +264,7 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                 )}/>
 
                 {/* Footer */}
-                <DialogFooter className='flex items-center'>
+                <DialogFooter className='flex flex-row items-center justify-end'>
                   <DelProjectButton id={project.id}   />
 
                   <Button type="submit" disabled={loading}>

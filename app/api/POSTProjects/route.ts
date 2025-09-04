@@ -40,7 +40,9 @@ export async function POST(req: Request) {
   }
 
   // Insert project record
-  const { error: insertError, data: inserted } = await supabase.from("projects").insert({
+  const { error: insertError, data: inserted } = await supabase
+  .from("projects")
+  .insert({
     title,
     description,
     devs,

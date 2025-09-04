@@ -4,7 +4,6 @@ import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
 
 function extractPathFromUrl(url: string) {
-
   const parts = url.split("/projects-image/");
   return parts.length > 1 ? parts[1] : null;
 }
@@ -43,9 +42,6 @@ export async function PUT( req: Request, { params }: { params: { id: string } })
     const { data } = supabase.storage.from("projects-image").getPublicUrl(filePath);
     image_url = data.publicUrl;
 
-    // 🔹 Delete old file if exists
-  console.log(filePath)
-
     if (existing?.image_url) {
       const oldPath = extractPathFromUrl(existing.image_url);
       if (oldPath) {
@@ -79,6 +75,7 @@ export async function PUT( req: Request, { params }: { params: { id: string } })
     description: formData.get("Description"),
     is_monthly: formData.get("MonthlyShowcase") === "true",
     is_featured: formData.get("FeaturedShowcase") === "true",
+    is_showcase: formData.get('Currenthowcase') === 'true',
     featured_order: formData.get("FeaturedOrder")
       ? Number(formData.get("FeaturedOrder"))
       : null,

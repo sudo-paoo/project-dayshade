@@ -1,205 +1,33 @@
+'use client'
 import Image from "next/image";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Star } from "lucide-react";
 import Link from "next/link";
-// * on the projects page, fetch all featured
+import { useState, useEffect } from "react";
+
 export default function FeaturedProjectsView() {
-  // ! should fetch on server
-  const projects = [
-    {
-      title: "Nights in CCS",
-      description:
-        "Get ready to be spooked(or perhaps laugh) with Kharl Asuncion's Unreal Engine 5 horror game, where the goal is to find your lost Aquaflask in the CCS building while avoiding disastrous PNG monsters!",
-      is_monthly: true,
-      is_featured: true,
-      yt_id: "I8WsKQK3bNk",
-      published_date: new Date("2024-11-01"),
-      tags: ["Unreal Engine 5", "Horror Game"],
-      devs: ["Kharl Asuncion"],
-    },
-    {
-      title: "Pebbles Virtual Robotics",
-      description:
-        "A software for learning robotics using virtual environments. Developed by alumni members of Programmers Den as their capstone project. With the help of current President Sigmund. Bringing robotics to life in the digital world",
-      is_monthly: true,
-      is_featured: true,
-      site_link: "https://pebbles-robotics.web.app/",
-      imgPreview: "/assets/projects/pebbles.jpg",
-      published_date: new Date("2024-11-13"),
-      tags: ["Unity C#", "Blender", "Robotics"],
-      devs: ["Andrea Christela Adalem", "Iris", "Fernando", "Christler Neil Vinluan"],
-    },
-    {
-      title: "Kasene Teto Fanart",
-      description:
-        "Delve in the world of 3D modelling and take a look at the creativity and artistry of Darrel Joshua Ocampo's 3D model fanart of Kasane Teto, crafted from scratch in Blender!",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "xllgLhNAvFc",
-      published_date: new Date("2024-12-01"),
-      tags: ["Blender", "3D Modeling", "Fanart"],
-      devs: ["Darrel Joshua Ocampo"],
-    },
-    {
-      title: "QuickList: To-do task App",
-      description: "A web app that is used for tracking tasks and note taking.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "0x8S2bHtzw8",
-      published_date: new Date("2024-11-02"),
-      tags: ["Web App", "Productivity"],
-      devs: [
-        "Luis Armann Barba",
-        "Dustin Elie Gualberto",
-        "Elton John Lennon Bundukin",
-        "Arian Espino",
-      ],
-    },
-    {
-      title: "A Traditional Knight Game",
-      description: "A platformer game made with the Godot Engine.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "TNT2c-cY8po",
-      published_date: new Date("2024-11-03"),
-      tags: ["Game Development"],
-      devs: [
-        "Edward Keith Duque",
-        "Jian Carlo Capili",
-        "Jonyl Ard Chriztan Tagaro",
-        "Renz Chloe Nicdao",
-        "Wendell Iverson Marzan",
-      ],
-    },
-    {
-      title: "Vending Machine GUI",
-      description: "A GUI project simulating a vending machine.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "zzFijPTnvic",
-      published_date: new Date("2024-11-04"),
-      tags: ["Java", "GUI"],
-      devs: [
-        "Neo Seifer Matias",
-        "Allen Ferdinald Torres",
-        "Charmaine Bamba",
-        "Justine Manaloto",
-        "Kelvin Rivera",
-        "Mharl Vincent Aguilos",
-      ],
-    },
-    {
-      title: "Spooky Sprout",
-      description: "A fun and spooky-themed game.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "NPx0o8G1uf4",
-      published_date: new Date("2024-11-05"),
-      tags: ["Game Development"],
-      devs: [
-        "George Henry De Guzman",
-        "Eithan Mathew Malonzo",
-        "Kurt Angel Mamuad",
-        "Daniel Sta. Maria",
-        "Justin Cosme",
-      ],
-    },
-    {
-      title: "Flappy Ponyo",
-      description:
-        "A flappy bird inspired game but based in the world of Ponyo, built with the help of Godot Engine.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "f-3pSHMfXiw",
-      published_date: new Date("2024-11-06"),
-      tags: ["Godot Engine", "Game Development"],
-      devs: ["Charmaine Bamba"],
-    },
-    {
-      title: "Programmers' Den Christmas Countdown",
-      description:
-        "Get into the holiday spirit with Programmers' Den! We're counting down to Christmas with exciting activities, festive events, and surprises for everyone.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "YmjX_ErFlAk",
-      published_date: new Date("2024-11-07"),
-      tags: ["Event", "Christmas", "Community"],
-      devs: [
-        "Carla Angelene Carpio",
-        "Lourainne Flores",
-        "Clarissa Kassidy Pangilinan",
-        "Jerome Ramos",
-        "Beverlyn Raquel",
-        "Shantrelle Louise Reinoso",
-      ],
-    },
-    {
-      title: "Tarlac Province Emergency Hotline",
-      description:
-        "A website used to showcase emergency contact numbers of all municipalities of Tarlac.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "_PSZVR1grSI",
-      published_date: new Date("2024-11-08"),
-      tags: ["Website", "Emergency"],
-      devs: ["John Andrei Chavenia", "John Stephen Martinez"],
-    },
-    {
-      title: "Dino Aalto",
-      description: "A game inspired by the Dinosaur game, made in Godot Engine.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "p8lA9JKGuPA",
-      published_date: new Date("2024-11-09"),
-      tags: ["Godot Engine", "Game Development"],
-      devs: ["Allen Ferdinald Torres"],
-    },
-    {
-      title: "Profile Website",
-      description:
-        "A portfolio website-- shows services offered, projects developed, and a way to get in contact with the owner of the site.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "k0F43Rs7xgg",
-      published_date: new Date("2024-11-10"),
-      tags: ["Portfolio", "Website"],
-      devs: ["Catherine Ramos", "Dave Marthin Sayo", "Chantelle Claveria"],
-    },
-    {
-      title: "TSU Campus Showcase",
-      description:
-        "A website to showcase and explain different areas of Tarlac State University.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "UKsQ0FvB4jw",
-      published_date: new Date("2024-11-11"),
-      tags: ["Website", "Campus"],
-      devs: [
-        "Philip Abraham Kipte",
-        "Janssen Carl Espedido",
-        "Dessiree Camille Pasion",
-        "Luis Antonio Magdangal",
-        "John Ryu Dayrit",
-        "Adriel John Pascual",
-      ],
-    },
-    {
-      title: "Stacks",
-      description: "An addicting stack game made in the Unity Engine.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "JcLiwmk_sCY",
-      published_date: new Date("2024-11-12"),
-      tags: ["Unity Engine", "Game Development"],
-      devs: ["Justine Manaloto"],
-    },
-  ];
+
+  const [projects, setProjects] = useState<any[]>([])
+
+   useEffect(() => {
+      async function loadProjects() {
+          try {
+              const res = await fetch("/api/GETProjects");
+              const json = await res.json();
+              if (json.success) setProjects(json.data);
+          } catch (error) {
+              console.error(error);
+          }
+      }
+      loadProjects();
+    }, []);
+
   //removes the duplicate projects by youtube id and keep the newest by published_date
   const uniqueProjects: typeof projects = Object.values(
     projects.reduce((acc: Record<string, typeof projects[number]>, p) => {
-      const key = p.yt_id || `${p.title}-${p.published_date}`;
+      const key = p.id || `${p.title}-${p.published_date}`;
       if (!acc[key]) acc[key] = p;
       else {
         // prefer the most recent published_date when duplicates exist
@@ -217,10 +45,10 @@ export default function FeaturedProjectsView() {
     .filter((p) => Boolean(p.is_featured))
     .slice(0, 3);
 
-  const featuredIds = new Set(featuredSorted.map((p) => p.yt_id));
+  const featuredIds = new Set(featuredSorted.map((p) => p.id));
 
   const remainingSorted: typeof projects = uniqueProjects
-    .filter((p) => !featuredIds.has(p.yt_id))
+    .filter((p) => !featuredIds.has(p.id))
     .sort((a, b) => new Date(b.published_date as any).getTime() - new Date(a.published_date as any).getTime());
 
   const displayProjects: typeof projects = [...featuredSorted, ...remainingSorted];
@@ -248,22 +76,12 @@ export default function FeaturedProjectsView() {
               <Card className="overflow-hidden bg-gradient-to-br from-black via-pd-dark-grey/50 to-black border border-white/10 hover:border-pd-purple/50 transition-all duration-300 h-full">
                 {/* Image Container */}
                 <div className="relative h-[240px] overflow-hidden">
-                  {project.yt_id ? (
                     <Image
-                      src={`https://img.youtube.com/vi/${project.yt_id}/hqdefault.jpg`}
+                      src={project.image_url}
                       alt={project.title}
                       fill
                       className="object-cover transition-transform duration-500 hover:scale-105"
                     />
-                  ) : project.site_link && project.imgPreview ? (
-                    <Image
-                      src={project.imgPreview}
-                      alt={project.title}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                  ) : null}
-
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
 
                   {/* Featured Badge */}
@@ -284,7 +102,7 @@ export default function FeaturedProjectsView() {
                 {/* Content */}
                 <div className="px-6">
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
+                    {project.tags.map((tag: string) => (
                       <Badge key={tag} variant="purple" className="text-xs">
                         {tag}
                       </Badge>
@@ -317,7 +135,7 @@ export default function FeaturedProjectsView() {
                         href={
                           project.site_link
                             ? project.site_link
-                            : `https://www.youtube.com/watch?v=${project.yt_id}`
+                            : project.embed_link
                         }
                         target="_blank"
                         rel="noopener noreferrer"
