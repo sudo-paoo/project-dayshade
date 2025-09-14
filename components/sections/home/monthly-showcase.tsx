@@ -1,7 +1,8 @@
 'use client'
 
 import { useState, useEffect } from "react";
-// * on home page, use project
+import { getCurrentShowcase } from "@/lib/projects/getCurrentShowcase";
+
 export function MonthlyShowcase() {
 
     const [project, setProject] = useState<any | null>(null);
@@ -14,11 +15,8 @@ export function MonthlyShowcase() {
     useEffect(() => {
       async function load() {
         try {
-          const res = await fetch("/api/GETCurrentShowcase");
-          const json = await res.json();
-          if (json.success && json.data?.length) {
-            setProject(json.data[0]);
-          }
+          const data = await getCurrentShowcase();
+          setProject(data);
         } catch (e) {
           console.error(e);
         }

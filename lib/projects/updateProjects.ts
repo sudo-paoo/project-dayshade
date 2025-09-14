@@ -1,18 +1,14 @@
-'use server'
+"use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { NextResponse } from "next/server";
 
 function extractPathFromUrl(url: string) {
   const parts = url.split("/projects-image/");
   return parts.length > 1 ? parts[1] : null;
 }
 
-export async function PUT( req: Request, { params }: { params: { id: string } }) {
+export async function updateProject(id: string, formData: FormData) {
   const supabase = await createClient();
-  const formData = await req.formData();
-
-  const { id } = await params;
 
   const { data: existing, error: fetchError } = await supabase
     .from("projects")
@@ -25,19 +21,15 @@ export async function PUT( req: Request, { params }: { params: { id: string } })
   }
 
   const file = formData.get("Image") as File | null;
-  let image_url = formData.get("ImageURL") as string | null; // default to existing
+  let image_url = formData.get("ImageURL") as string | null;
 
   if (file && file.size > 0) {
-    // 🔹 Upload new file
     const filePath = `projects/${Date.now()}-${file.name}`;
     const { error: uploadError } = await supabase.storage
       .from("projects-image")
       .upload(filePath, file, { cacheControl: "3600", upsert: false });
 
-    if (uploadError) {
-      console.error("Upload failed:", uploadError.message);
-      return NextResponse.json({ error: "File upload failed" }, { status: 500 });
-    }
+    if (uploadError) throw new Error("File upload failed");
 
     const { data } = supabase.storage.from("projects-image").getPublicUrl(filePath);
     image_url = data.publicUrl;
@@ -45,24 +37,14 @@ export async function PUT( req: Request, { params }: { params: { id: string } })
     if (existing?.image_url) {
       const oldPath = extractPathFromUrl(existing.image_url);
       if (oldPath) {
-        const { error: deleteError } = await supabase
-          .storage
-          .from("projects-image")
-          .remove([oldPath]);
-
-        if (deleteError) {
-          console.warn("Failed to delete old image:", deleteError.message);
-        } else {
-          console.log("Old image deleted:", oldPath);
-        }
+        await supabase.storage.from("projects-image").remove([oldPath]);
       }
     }
-
   }
 
   const payload = {
     title: formData.get("Title"),
-    image_url, // ✅ always use latest resolved url
+    image_url,
     devs: formData.get("Developers")
       ? (formData.get("Developers") as string).split(",").map(d => d.trim())
       : [],
@@ -75,7 +57,7 @@ export async function PUT( req: Request, { params }: { params: { id: string } })
     description: formData.get("Description"),
     is_monthly: formData.get("MonthlyShowcase") === "true",
     is_featured: formData.get("FeaturedShowcase") === "true",
-    is_showcase: formData.get('Currenthowcase') === 'true',
+    is_showcase: formData.get("Currenthowcase") === "true",
     featured_order: formData.get("FeaturedOrder")
       ? Number(formData.get("FeaturedOrder"))
       : null,
@@ -87,10 +69,7 @@ export async function PUT( req: Request, { params }: { params: { id: string } })
     .eq("id", id)
     .select();
 
-  if (error) {
-    console.error(error);
-    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
-  }
+  if (error) throw new Error(error.message);
 
-  return NextResponse.json({ success: true, data: updated });
+  return updated;
 }

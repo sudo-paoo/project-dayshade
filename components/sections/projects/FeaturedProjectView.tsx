@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowUpRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { getProjects } from "@/lib/projects/getProjects";
 
 export default function FeaturedProjectsView() {
 
@@ -14,9 +15,9 @@ export default function FeaturedProjectsView() {
    useEffect(() => {
       async function loadProjects() {
           try {
-              const res = await fetch("/api/GETProjects");
-              const json = await res.json();
-              if (json.success) setProjects(json.data);
+              const data = await getProjects();
+              setProjects(data);
+
           } catch (error) {
               console.error(error);
           }

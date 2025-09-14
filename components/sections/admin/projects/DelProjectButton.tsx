@@ -13,6 +13,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import { toast } from "sonner"
+import { deleteProject } from '@/lib/projects/deleteProjects'
 
 type DeleteProps = {
   id: string
@@ -26,19 +27,10 @@ const DelProjectButton = ({ id }: DeleteProps) => {
     try {
       setLoading(true)
 
-      const res = await fetch(`/api/DELETEProjects/${id}`, {
-        method: 'DELETE',
-      })
+      await deleteProject(id);
 
-      const data = await res.json()
-
-      if (data.success) {
-        console.log('Project deleted')
-        toast.success("Project deleted successfully!")
-      } else {
-        console.error('Delete failed:', data.error)
-        toast.error("Delete failed")
-      }
+      console.log('Project deleted')
+      toast.success("Project deleted successfully!")
     } catch (error) {
       console.error('Error deleting project:', error)
       toast.error("Something went wrong.")

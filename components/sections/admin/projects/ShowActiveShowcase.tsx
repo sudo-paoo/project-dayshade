@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { Label } from "@/components/ui/label"
 import { toast } from 'sonner'
+import { getMonthly } from '@/lib/projects/getMonthly'
 
 const ShowActiveShowcase = () => {
   const [showcase, setShowcase] = useState<any[]>([])
@@ -12,9 +13,8 @@ const ShowActiveShowcase = () => {
   useEffect(() => {
     async function loadProjects() {
       try {
-        const res = await fetch("/api/GETMonthly")
-        const json = await res.json()
-        if (json.success) setShowcase(json.data)
+         const data = await getMonthly();
+        setShowcase(data);
       } catch (error) {
         console.error(error)
         toast.error("Something went wrong.")

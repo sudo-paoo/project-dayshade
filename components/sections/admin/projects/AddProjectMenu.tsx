@@ -25,6 +25,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
+import { addProject } from "@/lib/projects/postProjects"
 
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
@@ -60,35 +61,24 @@ const AddProjectMenu = () => {
 
   async function onSubmit(values: any) {
     try {
-      setLoading(true)
+      setLoading(true);
 
-      const formData = new FormData()
+      const formData = new FormData();
       Object.keys(values).forEach((key) => {
-        formData.append(key, values[key])
-      })
+        formData.append(key, values[key]);
+      });
 
-      const res = await fetch("/api/POSTProjects", {
-        method: "POST",
-        body: formData,
-      })
+      const result = await addProject(formData);
+      console.log("Inserted:", result);
 
-      if (!res.ok) {
-        const error = await res.json()
-        console.error(error)
-        toast.error("Failed to save project.")
-        return
-      }
-
-      const result = await res.json()
-      console.log("Inserted:", result)
-      toast.success("Project added successfully!")
-      form.reset()
-      setOpen(false)
+      toast.success("Project added successfully!");
+      form.reset();
+      setOpen(false);
     } catch (error) {
-      console.error(error)
-      toast.error("Something went wrong.")
+      console.error(error);
+      toast.error("Something went wrong.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 

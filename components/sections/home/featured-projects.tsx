@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils"
 import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import { getFeatured } from "@/lib/projects/getFeatured"
 
 const MotionGlassContainer = motion.div
 
@@ -19,9 +20,8 @@ export function FeaturedProjects() {
   useEffect(() => {
     async function loadProjects() {
       try {
-        const res = await fetch('/api/GETFeatured');
-        const json = await res.json();
-        if (json.success) setFeaturedProjects(json.data);
+        const data = await getFeatured();
+        setFeaturedProjects(data);
       } catch (error) {
         console.error(error);
       }

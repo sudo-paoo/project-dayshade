@@ -1,11 +1,9 @@
 "use server";
 
 import { createClient } from "@/utils/supabase/server";
-import { NextResponse } from "next/server";
 
-export async function POST(req: Request) {
+export async function addProject(formData: FormData) {
   const supabase = await createClient();
-  const formData = await req.formData();
 
   // Extract form fields
   const title = formData.get("Title") as string;
@@ -18,12 +16,12 @@ export async function POST(req: Request) {
 
   // Handle file
   const file = formData.get("Image") as File | null;
-  let image_url = null;
+  let image_url: string | null = null;
 
   if (file) {
     const filePath = `projects/${Date.now()}-${file.name}`;
     const { error: uploadError } = await supabase.storage
-      .from("projects-image") //
+      .from("projects-image")
       .upload(filePath, file, {
         cacheControl: "3600",
         upsert: false,
@@ -31,35 +29,32 @@ export async function POST(req: Request) {
 
     if (uploadError) {
       console.error("Upload failed:", uploadError.message);
-      return NextResponse.json({ error: "File upload failed" }, { status: 500 });
+      throw new Error("File upload failed");
     }
 
-    // ✅ Correct way to get public URL
     const { data } = supabase.storage.from("projects-image").getPublicUrl(filePath);
     image_url = data.publicUrl;
   }
 
   // Insert project record
   const { error: insertError, data: inserted } = await supabase
-  .from("projects")
-  .insert({
-    title,
-    description,
-    devs,
-    tags,
-    embed_link,
-    site_link,
-    published_date,
-    image_url,
-  }).select();
+    .from("projects")
+    .insert({
+      title,
+      description,
+      devs,
+      tags,
+      embed_link,
+      site_link,
+      published_date,
+      image_url,
+    })
+    .select();
 
   if (insertError) {
-    console.error(insertError);
-    return NextResponse.json(
-      { error: "Database insert failed: " + insertError.message },
-      { status: 500 }
-    );
+    console.error("Insert failed:", insertError.message);
+    throw new Error("Database insert failed: " + insertError.message);
   }
 
-  return NextResponse.json({ success: true, data: inserted });
+  return inserted;
 }

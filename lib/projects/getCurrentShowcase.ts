@@ -1,7 +1,6 @@
-'use server'
+"use server";
 
-import { createClient } from "@/utils/supabase/server"
-import { NextResponse } from "next/server"
+import { createClient } from "@/utils/supabase/server";
 
 function extractYouTubeId(input?: string): string | null {
   if (!input) return null;
@@ -24,7 +23,11 @@ function extractYouTubeId(input?: string): string | null {
     // /embed/ID
     const parts = url.pathname.split("/");
     const embedIndex = parts.indexOf("embed");
-    if (embedIndex >= 0 && parts[embedIndex + 1] && /^[A-Za-z0-9_-]{11}$/.test(parts[embedIndex + 1])) {
+    if (
+      embedIndex >= 0 &&
+      parts[embedIndex + 1] &&
+      /^[A-Za-z0-9_-]{11}$/.test(parts[embedIndex + 1])
+    ) {
       return parts[embedIndex + 1];
     }
 
@@ -34,7 +37,7 @@ function extractYouTubeId(input?: string): string | null {
   }
 }
 
-export async function GET(req: Request) {
+export async function getCurrentShowcase() {
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -44,23 +47,20 @@ export async function GET(req: Request) {
     .limit(1);
 
   if (error) {
-    console.error(error);
-    return NextResponse.json(
-      { success: false, error: "Failed to fetch projects: " + error.message },
-      { status: 500 }
-    );
+    console.error("Error fetching showcase:", error.message);
+    throw new Error("Failed to fetch showcase project");
   }
 
-  if (data && data.length > 0) {
-    const project = data[0];
-    const ytId = extractYouTubeId(project.embed_link);
-
-    // Attach normalized embed URL or ID
-    project.youtubeId = ytId;
-    project.embed_url = ytId ? `https://www.youtube.com/embed/${ytId}` : null;
-
-    return NextResponse.json({ success: true, data: [project] });
+  if (!data || data.length === 0) {
+    return null;
   }
 
-  return NextResponse.json({ success: true, data: [] });
+  const project = data[0];
+  const ytId = extractYouTubeId(project.embed_link);
+
+  return {
+    ...project,
+    youtubeId: ytId,
+    embed_url: ytId ? `https://www.youtube.com/embed/${ytId}` : null,
+  };
 }

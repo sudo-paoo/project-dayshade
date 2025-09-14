@@ -5,10 +5,11 @@ import { Card } from "@/components/ui/card";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { CalendarDays, ChevronRight } from "lucide-react";
+import { getCurrentShowcase } from "@/lib/projects/getCurrentShowcase";
 
 export default function MonthlyProjectShowcase() {
   const [project, setProject] = useState<any | null>(null);
-  const [mounted, setMounted] = useState(false); // avoids hydration mismatch
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -17,11 +18,8 @@ export default function MonthlyProjectShowcase() {
   useEffect(() => {
     async function load() {
       try {
-        const res = await fetch("/api/GETCurrentShowcase");
-        const json = await res.json();
-        if (json.success && json.data?.length) {
-          setProject(json.data[0]); // contains embed_url + youtubeId already
-        }
+        const showcase = await getCurrentShowcase();
+        setProject(showcase);
       } catch (e) {
         console.error(e);
       }

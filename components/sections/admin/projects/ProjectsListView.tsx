@@ -12,32 +12,32 @@ import {
   CardFooter
 } from '@/components/ui/card';
 import { toast } from 'sonner'
+import { getProjects } from '@/lib/projects/getProjects';
 
 const ProjectsListView = () => {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        async function loadProjects() {
-            try {
-                const res = await fetch("/api/GETProjects");
-                const json = await res.json();
-                if (json.success) setProjects(json.data);
-            } catch (error) {
-                console.error(error);
-                toast.error("Something went wrong.");
-            } finally {
-                setLoading(false);
-            }
-        }
-        loadProjects();
+      async function loadProjects() {
+          try {
+            const data = await getProjects();
+            setProjects(data);
+          } catch (error) {
+              console.error(error);
+              toast.error("Something went wrong.");
+          } finally {
+              setLoading(false);
+          }
+      }
+      loadProjects();
     }, []);
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {/* <pre>{JSON.stringify(projects, null, 2)}</pre> */}
+
       {projects.map((p, i) => (
         <Card key={i}>
           <CardHeader className="flex flex-row justify-between items-start">

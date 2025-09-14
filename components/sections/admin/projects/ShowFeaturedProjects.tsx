@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react'
 import { Card, CardHeader, CardTitle, CardContent  } from '@/components/ui/card'
 import { toast } from 'sonner'
 import { Label } from '@/components/ui/label'
+import { getFeatured } from '@/lib/projects/getFeatured'
 
 const ShowFeaturedProjects = () => {
   const [activeProjects, setActiveProjects] = useState<any[]>([]);
@@ -12,9 +13,8 @@ const ShowFeaturedProjects = () => {
   useEffect(() => {
     async function loadProjects() {
       try {
-        const res = await fetch('/api/GETFeatured');
-        const json = await res.json();
-        if (json.success) setActiveProjects(json.data);
+        const data = await getFeatured();
+        setActiveProjects(data);
       } catch (error) {
         console.error(error);
         toast.error("Something went wrong.");

@@ -27,6 +27,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox'
 import { Textarea } from "@/components/ui/textarea"
 import DelProjectButton from './DelProjectButton'
+import { updateProject } from '@/lib/projects/updateProjects'
 
 type EditProjectMenuProps = {
   project: any
@@ -87,17 +88,7 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
         formData.append("ImageURL", values.Image)
       }
 
-      const res = await fetch(`/api/UPDATEProjects/${project.id}`, {
-        method: "PUT",
-        body: formData,
-      })
-
-      if (!res.ok) {
-        const error = await res.json()
-        console.error(error)
-        toast.error("Failed to save project.")
-        return
-      }
+      await updateProject(project.id, formData)
 
       toast.success("Project updated successfully!")
       setOpen(false)
