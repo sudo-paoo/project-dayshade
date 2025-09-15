@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { getCurrentShowcase } from "@/lib/projects/getCurrentShowcase";
+import * as React from "react";
+import { motion } from "framer-motion";
 
 export function MonthlyShowcase() {
 
@@ -36,8 +38,10 @@ export function MonthlyShowcase() {
       );
     }
 
+  const MotionGlassContainer = motion.div
+
   return (
-    <section className="w-full md:min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+    <section className="w-full h-full p-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-8xl mx-auto">
         {/* Header */}
         <div className="text-center mb-4">
@@ -52,7 +56,6 @@ export function MonthlyShowcase() {
               {project.title}
             </h3>
           </div>
-
           {/* Project Youtube Embed */}
           <div className="relative w-full flex items-center justify-center mx-auto mb-6 rounded-lg overflow-hidden">
             <div className="md:w-[80%] h-[400px] md:h-[500px]">
@@ -65,14 +68,12 @@ export function MonthlyShowcase() {
                 className="w-full h-full"
               />
             </div>
-          </div>
-
+            </div>
           {/* Credits */}
           <p className="text-white text-sm text-left mb-4 leading-relaxed">
             <span className="font-medium">Developer:</span>{" "}
             {project.devs.join(", ")}
           </p>
-
           {/* Description */}
           <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl">
             {project.description}

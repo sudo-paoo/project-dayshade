@@ -7,6 +7,7 @@ import Image from 'next/image';
 const images = [
 	'/assets/about-pics/carousel-1.png',
 	'/assets/about-pics/carousel-2.png',
+	'/assets/about-pics/carousel-7.jpg',
 	'/assets/about-pics/carousel-3.png',
 	'/assets/about-pics/carousel-4.png',
 	'/assets/about-pics/carousel-5.png',

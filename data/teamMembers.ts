@@ -14,7 +14,7 @@ export const teamMembers: TeamMember[] = [
     id: 1,
     name: 'Nomar Lapitan',
     title: 'Adviser',
-    image: '/assets/team-pictures/test-pic.jpg',
+    image: '/assets/profile/adviser-lapitan-nomar.jpg',
     socials: {
       email: 'mailto:name@example.com',
     },
@@ -63,7 +63,7 @@ export const teamMembers: TeamMember[] = [
     id: 6,
     name: 'Carl Lawrence Maldong',
     title: 'VP of Competitive Programming',
-    image: 'assets/profile/vp-compe-carl.png',
+    image: 'assets/profile/vp-compe-carl.jpg',
     socials: {
       github: "https://github.com/RenceCLM"
     },
@@ -81,7 +81,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 8,
     name: 'Neo Snifer Matias',
-    title: 'Head of System Innovation',
+    title: 'Head of Human Resources',
     image: 'assets/profile/head-hr-neo.png',
     socials: {
       github: 'https://github.com/Granger-spec',
@@ -92,7 +92,7 @@ export const teamMembers: TeamMember[] = [
     id: 9,
     name: 'Elton John Lennan Bundukin',
     title: 'Head of Recruitment',
-    image: 'assets/profile/head-recruitment-elton.png',
+    image: 'assets/profile/head-recruitment.jpg',
     socials: {
       github: 'https://github.com/superEnne',
       email: 'mailto:bundukinelton@gmail.com',
@@ -101,7 +101,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 10,
     name: 'Menard Manlutac',
-    title: 'Head of Documentation',
+    title: 'Head of Communications',
     image: 'assets/profile/head-comm-mennard.png',
     socials: {
       github: 'https://github.com/unlockthecode',
@@ -121,7 +121,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 12,
     name: 'Luis Armando Barba',
-    title: 'Head of Promotions',
+    title: 'Secretary of Finances',
     image: 'assets/profile/sec-finance-luis.jpg',
     socials: {
       github: 'https://github.com/lacomms',
@@ -141,7 +141,7 @@ export const teamMembers: TeamMember[] = [
   {
     id: 14,
     name: 'Mharl Vincent Aquilos',
-    title: 'Task Force Manager',
+    title: 'Social Media Manager',
     image: 'assets/profile/socmed-manager-mharl.png',
     socials: {
       github: 'https://github.com/danimaaru',

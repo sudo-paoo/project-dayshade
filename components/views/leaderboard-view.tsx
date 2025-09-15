@@ -13,7 +13,7 @@ export default async function LeaderboardView() {
         <DataTable
           columns={columns}
           data={leaderboard_entries}
-          dateUpdated={new Date().toLocaleDateString()}
+          dateUpdated={leaderboard_entries[0]?.date_uploaded}
         />
       </div>
     </div>

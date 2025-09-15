@@ -59,7 +59,7 @@ export function FeaturedProjects() {
   }, [api, featuredProjects.length])
 
   return (
-    <div className="md:min-h-screen flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
+    <div className="h-full flex flex-col items-center justify-center py-8 px-4 sm:px-6 lg:px-8">
       <MotionGlassContainer
         className={cn("backdrop-blur-sm bg-white/5 border border-white/10 rounded-lg w-full py-12 px-4")}
         initial={{ opacity: 0, y: 20 }}
