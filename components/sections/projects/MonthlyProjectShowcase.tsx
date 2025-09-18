@@ -7,15 +7,15 @@ import { CalendarDays, ChevronRight } from "lucide-react";
 export default function MonthlyProjectShowcase() {
   // ! should fetch on server
   const currentShowcase = {
-      title: "Simple Timer",
-      description:
-        "A simple timer with optional custom audio upload built with HTML, CSS, and JavaScript.",
-      is_monthly: true,
-      is_featured: false,
-      yt_id: "bne750Ylf0Y",
-      published_date: new Date("2025-08-01"),
-      tags: ["Web App", "Timer", "JavaScript"],
-      devs: ["Mennard Ezekiel M. Manlutac"],
+    title: "Web Based RFID Students Attendance Monitoring System",
+    description:
+      "The RFID Attendance System is a sophisticated application designed to help the monitoring of students physically attending education institutions with the help of RFID technology.",
+    is_monthly: true,
+    is_featured: false,
+    yt_id: "mGBOs5Lq7kk",
+    published_date: new Date("2025-09-15"),
+    tags: ["Web App", "Web Development", "PHP"],
+    devs: ["Christian Angel M. Geronimo"],
   };
 
   return (
@@ -63,7 +63,7 @@ export default function MonthlyProjectShowcase() {
               {currentShowcase.title}
             </h3>
 
-            <p className="text-white/80 text-lg md:text-xl max-w-3xl mb-6">
+            <p className="text-white/80 text-lg md:text-xl max-w-3xl mb-6 line-clamp-2">
               {currentShowcase.description}
             </p>
 
