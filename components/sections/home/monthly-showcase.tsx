@@ -5,15 +5,15 @@ import { motion } from "framer-motion";
 
 export function MonthlyShowcase() {
   const currentShowcase = {
-    title: "Simple Timer",
+    title: "Web Based RFID Students Attendance Monitoring System",
     description:
-      "A simple timer with optional custom audio upload built with HTML, CSS, and JavaScript.",
+      "The RFID Attendance System is a sophisticated application designed to help the monitoring of students physically attending education institutions with the help of RFID technology.",
     is_monthly: true,
     is_featured: false,
-    yt_id: "bne750Ylf0Y",
-    published_date: new Date("2025-08-01"),
-    tags: ["Web App", "Timer", "JavaScript"],
-    devs: ["Mennard Ezekiel M. Manlutac"],
+    yt_id: "mGBOs5Lq7kk",
+    published_date: new Date("2025-09-15"),
+    tags: ["Web App", "Web Development", "PHP"],
+    devs: ["Christian Angel M. Geronimo"],
   };
 
   const MotionGlassContainer = motion.div
@@ -52,7 +52,7 @@ export function MonthlyShowcase() {
             {currentShowcase.devs.join(", ")}
           </p>
           {/* Description */}
-          <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl">
+          <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl line-clamp-2">
             {currentShowcase.description}
           </p>
           {/* Tags */}

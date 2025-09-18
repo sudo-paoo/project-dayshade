@@ -195,6 +195,17 @@ export default function FeaturedProjectsView() {
       tags: ["Unity Engine", "Game Development"],
       devs: ["Justine Manaloto"],
     },
+    {
+      title: "Simple Timer",
+      description:
+        "A simple timer with optional custom audio upload built with HTML, CSS, and JavaScript.",
+      is_monthly: true,
+      is_featured: false,
+      yt_id: "bne750Ylf0Y",
+      published_date: new Date("2025-08-01"),
+      tags: ["Web App", "Timer", "JavaScript"],
+      devs: ["Mennard Ezekiel M. Manlutac"],
+    }
   ];
   //removes the duplicate projects by youtube id and keep the newest by published_date
   const uniqueProjects: typeof projects = Object.values(
