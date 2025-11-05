@@ -205,6 +205,17 @@ export default function FeaturedProjectsView() {
       published_date: new Date("2025-08-01"),
       tags: ["Web App", "Timer", "JavaScript"],
       devs: ["Mennard Ezekiel M. Manlutac"],
+    },
+    {
+      title: "ProgDen F4U-A1 Warthunder Custom Skin and Mascot",
+      description:
+        "Soar and conquer the skies with the custom ProgDen F4U-A1 Corsair War Thunder skin featuring our brand-new mascot. Custom skin on the F4U-A1 Corsair in the realistic and immersive game combat simulator War Thunder. Flying the classic and signature colors of Programmers Den delivered in a cinematic video.",
+      is_monthly: true,
+      is_featured: false,
+      yt_id: "pt07ibtb8SM",
+      published_date: new Date("2025-10-01"),
+      tags: ["Custom Skin", "Game Design", "War Thunder Custom Skin"],
+      devs: ["Mharl Vincent M. Aguilos", "Christian Kevin Y. Macale"],
     }
   ];
   //removes the duplicate projects by youtube id and keep the newest by published_date
