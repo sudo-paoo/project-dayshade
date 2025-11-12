@@ -207,6 +207,17 @@ export default function FeaturedProjectsView() {
       devs: ["Mennard Ezekiel M. Manlutac"],
     },
     {
+      title: "Web Based RFID Students Attendance Monitoring System",
+      description:
+        "The RFID Attendance System is a sophisticated application designed to help the monitoring of students physically attending education institutions with the help of RFID technology.",
+      is_monthly: true,
+      is_featured: false,
+      yt_id: "mGBOs5Lq7kk",
+      published_date: new Date("2025-09-15"),
+      tags: ["Web App", "Web Development", "PHP"],
+      devs: ["Christian Angel M. Geronimo"],
+    },
+    {
       title: "ProgDen F4U-A1 Warthunder Custom Skin and Mascot",
       description:
         "Soar and conquer the skies with the custom ProgDen F4U-A1 Corsair War Thunder skin featuring our brand-new mascot. Custom skin on the F4U-A1 Corsair in the realistic and immersive game combat simulator War Thunder. Flying the classic and signature colors of Programmers Den delivered in a cinematic video.",
