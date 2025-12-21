@@ -8,6 +8,9 @@ import { Button } from '@/components/ui/button';
 import { Star, Film, Users, Trophy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { getRecruitmentStatus, updateRecruitmentStatus } from '@/lib/data/setting-queries';
+import { getMembersStats } from '@/lib/members/getMembers';
+import { getLeaderboardStats } from '@/lib/data/leaderboard-queries';
+import { getProjectsStats } from '@/lib/projects/getProjects';
 import { toast } from 'sonner';
 
 // Static UI Config
@@ -86,34 +89,81 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    // Simulate fetch per card
-    setFeaturedProjects({
-      stat: { value: 10, label: 'total' },
-      content: [
-        { left: 'Project #1', right: 'Dev Name' },
-        { left: 'Project #2', right: 'Dev Name' },
-        { left: 'Project #3', right: 'Dev Name' },
-      ],
-    });
+    // Fetch all dynamic data from database
+    const fetchDynamicData = async () => {
+      try {
+        // Fetch projects stats
+        const projectsData = await getProjectsStats();
+        
+        setFeaturedProjects({
+          stat: { value: projectsData.totalProjects, label: 'total' },
+          content: projectsData.featuredProjects.map(project => {
+            const devsString = Array.isArray(project.devs) 
+              ? project.devs.join(', ') 
+              : project.devs;
+            
+            // Truncate devs
+            const truncatedDevs = devsString.length > 30 
+              ? devsString.substring(0, 30) + '...' 
+              : devsString;
 
-    setProjectShowcase({
-      stat: { value: 5, label: 'showcases' },
-      showcase: { name: 'Spooky Sprout!', devs: 'Dev Names' },
-    });
+            return {
+              left: project.title,
+              right: truncatedDevs,
+            };
+          }),
+        });
 
-    setActiveMembers({
-      stat: { value: 98, label: 'members' },
-      extra: { pending: 10, lastApp: 'Aug 15, 2025' },
-    });
+        setProjectShowcase({
+          stat: { value: projectsData.showcasesCount, label: 'showcases' },
+          showcase: projectsData.currentShowcase
+            ? {
+                name: projectsData.currentShowcase.title,
+                devs: Array.isArray(projectsData.currentShowcase.devs)
+                  ? projectsData.currentShowcase.devs.join(', ')
+                  : projectsData.currentShowcase.devs,
+              }
+            : { name: 'No showcase', devs: 'N/A' },
+        });
 
-    setLeaderboards({
-      stat: { value: 'Aug 18, 2025', label: 'last update' },
-      content: [
-        { left: '1. John Doe', right: '2500' },
-        { left: '2. Jane Doe', right: '2300' },
-        { left: '3. Sam Smith', right: '2100' },
-      ],
-    });
+        // Fetch members stats
+        const membersData = await getMembersStats();
+        const lastAppDate = membersData.lastApplicationDate 
+          ? new Date(membersData.lastApplicationDate).toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: 'numeric', 
+              year: 'numeric' 
+            })
+          : 'No applications yet';
+
+        setActiveMembers({
+          stat: { value: membersData.totalMembers, label: 'members' },
+          extra: { pending: membersData.pendingCount, lastApp: lastAppDate },
+        });
+
+        // Fetch leaderboard stats
+        const leaderboardData = await getLeaderboardStats();
+        const lastUpdate = leaderboardData.lastUpdate
+          ? new Date(leaderboardData.lastUpdate).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            })
+          : 'No data yet';
+
+        setLeaderboards({
+          stat: { value: lastUpdate, label: 'last update' },
+          content: leaderboardData.topEntries.map(entry => ({
+            left: `${entry.rank}. ${entry.name}`,
+            right: entry.points.toString(),
+          })),
+        });
+      } catch (error) {
+        console.error("Failed to fetch dynamic data:", error);
+      }
+    };
+
+    fetchDynamicData();
   }, []);
 
   // 🔹 Map IDs to individual states
