@@ -7,6 +7,8 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Star, Film, Users, Trophy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { getRecruitmentStatus, updateRecruitmentStatus } from '@/lib/data/setting-queries';
+import { toast } from 'sonner';
 
 // Static UI Config
 const uiCards = [
@@ -44,12 +46,44 @@ const uiCards = [
 const AdminDashboard = () => {
   const router = useRouter();
   const [Active, isActive] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // 🔹 Separate Mock Data Sets
   const [featuredProjects, setFeaturedProjects] = useState<any>(null);
   const [projectShowcase, setProjectShowcase] = useState<any>(null);
   const [activeMembers, setActiveMembers] = useState<any>(null);
   const [leaderboards, setLeaderboards] = useState<any>(null);
+
+  // Fetch recruitment status from database
+  useEffect(() => {
+    const fetchRecruitmentStatus = async () => {
+      try {
+        const { is_open_recruitment } = await getRecruitmentStatus();
+        isActive(is_open_recruitment);
+      } catch (error) {
+        console.error("Failed to fetch recruitment status:", error);
+        toast.error("Failed to load recruitment status");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchRecruitmentStatus();
+  }, []);
+
+  // Handle switch toggle
+  const handleRecruitmentToggle = async (checked: boolean) => {
+    isActive(checked);
+    try {
+      await updateRecruitmentStatus(checked);
+      toast.success(`Recruitment is now ${checked ? 'open' : 'closed'}`);
+    } catch (error: any) {
+      console.error("Failed to update recruitment status:", error);
+      toast.error(error.message || "Failed to update recruitment status");
+      // Revert on error
+      isActive(!checked);
+    }
+  };
 
   useEffect(() => {
     // Simulate fetch per card
@@ -107,10 +141,11 @@ const AdminDashboard = () => {
             <Switch
               id="recruitment"
               checked={Active}
-              onCheckedChange={isActive}
+              onCheckedChange={handleRecruitmentToggle}
+              disabled={loading}
             />
             <Label htmlFor="recruitment">
-              {Active ? 'Active' : 'Not Active'}
+              {loading ? 'Loading...' : Active ? 'Active' : 'Not Active'}
             </Label>
           </div>
         </div>
