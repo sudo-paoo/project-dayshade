@@ -7,6 +7,11 @@ import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter }
 import { Button } from '@/components/ui/button';
 import { Star, Film, Users, Trophy } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { getRecruitmentStatus, updateRecruitmentStatus } from '@/lib/data/setting-queries';
+import { getMembersStats } from '@/lib/members/getMembers';
+import { getLeaderboardStats } from '@/lib/data/leaderboard-queries';
+import { getProjectsStats } from '@/lib/projects/getProjects';
+import { toast } from 'sonner';
 
 // Static UI Config
 const uiCards = [
@@ -44,6 +49,7 @@ const uiCards = [
 const AdminDashboard = () => {
   const router = useRouter();
   const [Active, isActive] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // 🔹 Separate Mock Data Sets
   const [featuredProjects, setFeaturedProjects] = useState<any>(null);
@@ -51,35 +57,113 @@ const AdminDashboard = () => {
   const [activeMembers, setActiveMembers] = useState<any>(null);
   const [leaderboards, setLeaderboards] = useState<any>(null);
 
+  // Fetch recruitment status from database
   useEffect(() => {
-    // Simulate fetch per card
-    setFeaturedProjects({
-      stat: { value: 10, label: 'total' },
-      content: [
-        { left: 'Project #1', right: 'Dev Name' },
-        { left: 'Project #2', right: 'Dev Name' },
-        { left: 'Project #3', right: 'Dev Name' },
-      ],
-    });
+    const fetchRecruitmentStatus = async () => {
+      try {
+        const { is_open_recruitment } = await getRecruitmentStatus();
+        isActive(is_open_recruitment);
+      } catch (error) {
+        console.error("Failed to fetch recruitment status:", error);
+        toast.error("Failed to load recruitment status");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    setProjectShowcase({
-      stat: { value: 5, label: 'showcases' },
-      showcase: { name: 'Spooky Sprout!', devs: 'Dev Names' },
-    });
+    fetchRecruitmentStatus();
+  }, []);
 
-    setActiveMembers({
-      stat: { value: 98, label: 'members' },
-      extra: { pending: 10, lastApp: 'Aug 15, 2025' },
-    });
+  // Handle switch toggle
+  const handleRecruitmentToggle = async (checked: boolean) => {
+    isActive(checked);
+    try {
+      await updateRecruitmentStatus(checked);
+      toast.success(`Recruitment is now ${checked ? 'open' : 'closed'}`);
+    } catch (error: any) {
+      console.error("Failed to update recruitment status:", error);
+      toast.error(error.message || "Failed to update recruitment status");
+      // Revert on error
+      isActive(!checked);
+    }
+  };
 
-    setLeaderboards({
-      stat: { value: 'Aug 18, 2025', label: 'last update' },
-      content: [
-        { left: '1. John Doe', right: '2500' },
-        { left: '2. Jane Doe', right: '2300' },
-        { left: '3. Sam Smith', right: '2100' },
-      ],
-    });
+  useEffect(() => {
+    // Fetch all dynamic data from database
+    const fetchDynamicData = async () => {
+      try {
+        // Fetch projects stats
+        const projectsData = await getProjectsStats();
+        
+        setFeaturedProjects({
+          stat: { value: projectsData.totalProjects, label: 'total' },
+          content: projectsData.featuredProjects.map(project => {
+            const devsString = Array.isArray(project.devs) 
+              ? project.devs.join(', ') 
+              : project.devs;
+            
+            // Truncate devs
+            const truncatedDevs = devsString.length > 30 
+              ? devsString.substring(0, 30) + '...' 
+              : devsString;
+
+            return {
+              left: project.title,
+              right: truncatedDevs,
+            };
+          }),
+        });
+
+        setProjectShowcase({
+          stat: { value: projectsData.showcasesCount, label: 'showcases' },
+          showcase: projectsData.currentShowcase
+            ? {
+                name: projectsData.currentShowcase.title,
+                devs: Array.isArray(projectsData.currentShowcase.devs)
+                  ? projectsData.currentShowcase.devs.join(', ')
+                  : projectsData.currentShowcase.devs,
+              }
+            : { name: 'No showcase', devs: 'N/A' },
+        });
+
+        // Fetch members stats
+        const membersData = await getMembersStats();
+        const lastAppDate = membersData.lastApplicationDate 
+          ? new Date(membersData.lastApplicationDate).toLocaleDateString('en-US', { 
+              month: 'short', 
+              day: 'numeric', 
+              year: 'numeric' 
+            })
+          : 'No applications yet';
+
+        setActiveMembers({
+          stat: { value: membersData.totalMembers, label: 'members' },
+          extra: { pending: membersData.pendingCount, lastApp: lastAppDate },
+        });
+
+        // Fetch leaderboard stats
+        const leaderboardData = await getLeaderboardStats();
+        const lastUpdate = leaderboardData.lastUpdate
+          ? new Date(leaderboardData.lastUpdate).toLocaleDateString('en-US', {
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric'
+            })
+          : 'No data yet';
+
+        setLeaderboards({
+          stat: { value: lastUpdate, label: 'last update' },
+          content: leaderboardData.topEntries.map(entry => ({
+            left: `${entry.rank}. ${entry.name}`,
+            right: entry.points.toString(),
+          })),
+        });
+      } catch (error) {
+        console.error("Failed to fetch dynamic data:", error);
+      }
+    };
+
+    fetchDynamicData();
   }, []);
 
   // 🔹 Map IDs to individual states
@@ -107,10 +191,11 @@ const AdminDashboard = () => {
             <Switch
               id="recruitment"
               checked={Active}
-              onCheckedChange={isActive}
+              onCheckedChange={handleRecruitmentToggle}
+              disabled={loading}
             />
             <Label htmlFor="recruitment">
-              {Active ? 'Active' : 'Not Active'}
+              {loading ? 'Loading...' : Active ? 'Active' : 'Not Active'}
             </Label>
           </div>
         </div>
