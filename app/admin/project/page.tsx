@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useState, useCallback } from "react";
 import { Label } from "@/components/ui/label"
 import AddProjectMenu from "@/components/sections/admin/projects/AddProjectMenu";
 import ProjectsListView from "@/components/sections/admin/projects/ProjectsListView";
@@ -6,6 +8,11 @@ import ShowFeaturedProjects from "@/components/sections/admin/projects/ShowFeatu
 import ShowActiveShowcase from "@/components/sections/admin/projects/ShowActiveShowcase";
 
 const Page = () => {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleRefresh = useCallback(() => {
+    setRefreshKey(prev => prev + 1);
+  }, []);
 
   return (
     <section className="p-6">
@@ -21,21 +28,21 @@ const Page = () => {
         </div>
 
          {/* Add Project Button */}
-          <AddProjectMenu />
+          <AddProjectMenu onSuccess={handleRefresh} />
       </header>
 
       {/* Top Section */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
         {/* Active Projects */}
-        <ShowFeaturedProjects/>
+        <ShowFeaturedProjects key={`featured-${refreshKey}`} />
 
         {/* Active Project Showcase */}
-        <ShowActiveShowcase/>
+        <ShowActiveShowcase key={`showcase-${refreshKey}`} />
 
       </section>
 
       {/* Project Cards */}
-      <ProjectsListView />
+      <ProjectsListView onRefresh={handleRefresh} />
 
     </section>
   )

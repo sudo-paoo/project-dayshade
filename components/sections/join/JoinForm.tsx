@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { addMember } from "@/lib/members/postMember";
 
@@ -74,6 +75,7 @@ const checkboxItems = [
 
 export function JoinForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -106,6 +108,7 @@ export function JoinForm() {
 
       toast.success("Application submitted successfully! We'll contact you soon.");
       form.reset();
+      router.push("/");
     } catch (error: any) {
       console.error(error);
       toast.error(error.message || "Failed to submit application. Please try again.");
@@ -124,7 +127,7 @@ export function JoinForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} autoComplete="off" />
+                <Input placeholder="John Doe" {...field} autoComplete="off" className="placeholder:text-gray-400" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -141,6 +144,7 @@ export function JoinForm() {
                   placeholder="ex. 20256xxxxx"
                   {...field}
                   autoComplete="off"
+                  className="placeholder:text-gray-400"
                 />
               </FormControl>
               <FormMessage />
@@ -213,6 +217,7 @@ export function JoinForm() {
                   placeholder="ex. j.doe00001@student.tsu.edu.ph"
                   {...field}
                   autoComplete="off"
+                  className="placeholder:text-gray-400"
                 />
               </FormControl>
               <FormMessage />
@@ -230,6 +235,7 @@ export function JoinForm() {
                   placeholder="https://facebook.com/johndoe"
                   {...field}
                   autoComplete="off"
+                  className="placeholder:text-gray-400"
                 />
               </FormControl>
               <FormMessage />

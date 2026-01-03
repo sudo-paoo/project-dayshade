@@ -12,7 +12,7 @@ export async function updateProject(id: string, formData: FormData) {
 
   const { data: existing, error: fetchError } = await supabase
     .from("projects")
-    .select("image_url")
+    .select("image_url, is_featured, featured_order")
     .eq("id", id)
     .single();
 
@@ -42,6 +42,51 @@ export async function updateProject(id: string, formData: FormData) {
     }
   }
 
+  const is_featured = formData.get("FeaturedShowcase") === "true";
+  const featured_order = formData.get("FeaturedOrder") ? Number(formData.get("FeaturedOrder")) : null;
+
+  // Validate featured order
+  if (is_featured && featured_order) {
+    if (featured_order < 1 || featured_order > 3) {
+      throw new Error("Featured order must be 1, 2, or 3");
+    }
+
+    // Check for duplicate featured_order (excluding current project)
+    const { data: existingOrder } = await supabase
+      .from("projects")
+      .select("id")
+      .eq("featured_order", featured_order)
+      .eq("is_featured", true)
+      .neq("id", id);
+
+    if (existingOrder && existingOrder.length > 0) {
+      throw new Error(`Featured order ${featured_order} is already taken by another project`);
+    }
+  }
+
+  // Check if trying to add featured when already 3 exist
+  if (is_featured && !existing?.is_featured) {
+    const { count } = await supabase
+      .from("projects")
+      .select("*", { count: "exact", head: true })
+      .eq("is_featured", true);
+
+    if (count && count >= 3) {
+      throw new Error("Maximum of 3 featured projects allowed. Please unfeature another project first.");
+    }
+  }
+
+  const is_showcase = formData.get("CurrentShowcase") === "true";
+
+  // If setting as current showcase, unset all other showcases
+  if (is_showcase) {
+    await supabase
+      .from("projects")
+      .update({ is_showcase: false })
+      .eq("is_showcase", true)
+      .neq("id", id);
+  }
+
   const payload = {
     title: formData.get("Title"),
     image_url,
@@ -56,11 +101,9 @@ export async function updateProject(id: string, formData: FormData) {
     published_date: formData.get("PublishedDate"),
     description: formData.get("Description"),
     is_monthly: formData.get("MonthlyShowcase") === "true",
-    is_featured: formData.get("FeaturedShowcase") === "true",
-    is_showcase: formData.get("Currenthowcase") === "true",
-    featured_order: formData.get("FeaturedOrder")
-      ? Number(formData.get("FeaturedOrder"))
-      : null,
+    is_featured,
+    is_showcase,
+    featured_order,
   };
 
   const { data: updated, error } = await supabase

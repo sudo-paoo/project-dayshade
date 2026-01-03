@@ -88,7 +88,7 @@ export default function MonthlyProjectShowcase() {
               {project.title}
             </h3>
 
-            <p className="text-white/80 text-lg md:text-xl max-w-3xl mb-6">
+            <p className="text-white/80 text-lg md:text-xl mb-6 line-clamp-3">
               {project.description}
             </p>
 

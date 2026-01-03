@@ -9,6 +9,7 @@ import { ArrowUpRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 import { getFeatured } from "@/lib/projects/getFeatured"
+import { getProjectImageUrl } from "@/lib/projects/utils"
 
 const MotionGlassContainer = motion.div
 
@@ -102,7 +103,7 @@ export function FeaturedProjects() {
                       {/* <pre>{JSON.stringify(featuredProjects, null, 2)}</pre> */}
                       <div className="relative h-[280px] md:h-[400px] md:w-1/2 overflow-hidden">
                           <Image
-                            src={project.image_url }
+                            src={getProjectImageUrl(project.embed_link, project.image_url)}
                             alt={project.title}
                             fill
                             className="object-cover"
@@ -112,7 +113,7 @@ export function FeaturedProjects() {
                       <div className="px-8 py-8 text-center md:w-1/2 md:flex md:flex-col md:justify-center">
                         <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">{project.title}</h3>
 
-                        <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl">{project.description}</p>
+                        <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl line-clamp-3">{project.description}</p>
 
                         <div className="flex flex-wrap gap-2 mb-4 justify-start">
                           {project.tags.map((tag: string) => (

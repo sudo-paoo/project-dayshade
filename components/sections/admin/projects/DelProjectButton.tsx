@@ -17,9 +17,10 @@ import { deleteProject } from '@/lib/projects/deleteProjects'
 
 type DeleteProps = {
   id: string
+  onSuccess?: () => void;
 }
 
-const DelProjectButton = ({ id }: DeleteProps) => {
+const DelProjectButton = ({ id, onSuccess }: DeleteProps) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -31,6 +32,10 @@ const DelProjectButton = ({ id }: DeleteProps) => {
 
       console.log('Project deleted')
       toast.success("Project deleted successfully!")
+      
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       console.error('Error deleting project:', error)
       toast.error("Something went wrong.")

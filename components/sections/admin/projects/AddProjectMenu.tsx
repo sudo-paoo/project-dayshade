@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -25,7 +25,13 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { Textarea } from "@/components/ui/textarea"
+import { Checkbox } from "@/components/ui/checkbox"
 import { addProject } from "@/lib/projects/postProjects"
+import { getProjects } from "@/lib/projects/getProjects"
+
+type AddProjectMenuProps = {
+  onSuccess?: () => void;
+}
 
 const ProjectSchema = z.object({
   Title: z.string().min(2, { message: "Title is required" }),
@@ -38,11 +44,38 @@ const ProjectSchema = z.object({
   }),
   Tags: z.string().min(2, { message: "Tags are required" }),
   Description: z.string().min(5, { message: "Description is required" }),
+  MonthlyShowcase: z.boolean().optional(),
+  FeaturedShowcase: z.boolean().optional(),
+  CurrentShowcase: z.boolean().optional(),
+  FeaturedOrder: z.string().refine(
+    (val) => !val || (Number(val) >= 1 && Number(val) <= 3),
+    { message: "Featured order must be 1, 2, or 3" }
+  ).optional(),
 })
 
-const AddProjectMenu = () => {
+const AddProjectMenu = ({ onSuccess }: AddProjectMenuProps = {}) => {
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
+  const [usedOrders, setUsedOrders] = useState<number[]>([])
+
+  // Load featured projects when dialog opens
+  useEffect(() => {
+    if (open) {
+      loadFeaturedProjects()
+    }
+  }, [open])
+
+  async function loadFeaturedProjects() {
+    try {
+      const data = await getProjects()
+      const featured = data.filter((p: any) => p.is_featured)
+      setFeaturedProjects(featured)
+      setUsedOrders(featured.map((p: any) => p.featured_order).filter(Boolean))
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const form = useForm<z.infer<typeof ProjectSchema>>({
     resolver: zodResolver(ProjectSchema),
@@ -55,6 +88,10 @@ const AddProjectMenu = () => {
       Tags: "",
       Description: "",
       Image: "",
+      MonthlyShowcase: false,
+      FeaturedShowcase: false,
+      CurrentShowcase: false,
+      FeaturedOrder: "",
     },
     mode: "onChange",
   })
@@ -74,6 +111,10 @@ const AddProjectMenu = () => {
       toast.success("Project added successfully!");
       form.reset();
       setOpen(false);
+      
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       console.error(error);
       toast.error("Something went wrong.");
@@ -90,7 +131,7 @@ const AddProjectMenu = () => {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-3xl">
+      <DialogContent className="max-w-3xl max-h-[85vh] overflow-y-auto">
         <DialogHeader className="flex items-center">
           <DialogTitle className="text-primary font-bold">
             ADD PROJECT
@@ -115,7 +156,7 @@ const AddProjectMenu = () => {
                           Title*
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter project title" {...field} />
+                          <Input placeholder="Enter project title" {...field} className="placeholder:text-muted-foreground" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -150,7 +191,7 @@ const AddProjectMenu = () => {
                           Tags*
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter tags" {...field} />
+                          <Input placeholder="Enter tags" {...field} className="placeholder:text-muted-foreground" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -166,7 +207,7 @@ const AddProjectMenu = () => {
                           Developers*
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter developer names" {...field} />
+                          <Input placeholder="Enter developer names" {...field} className="placeholder:text-muted-foreground" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -206,7 +247,7 @@ const AddProjectMenu = () => {
                           Site Link
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter site link" {...field} />
+                          <Input placeholder="Enter site link" {...field} className="placeholder:text-muted-foreground" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -222,7 +263,7 @@ const AddProjectMenu = () => {
                           YouTube Embed Link
                         </FormLabel>
                         <FormControl>
-                          <Input placeholder="Enter YouTube embed link" {...field} />
+                          <Input placeholder="Enter YouTube embed link" {...field} className="placeholder:text-muted-foreground" />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -247,6 +288,95 @@ const AddProjectMenu = () => {
                         />
                       </FormControl>
                       <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {/* Showcase Options */}
+                <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <FormField
+                    control={form.control}
+                    name="CurrentShowcase"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center justify-between rounded-md border p-3">
+                        <FormLabel className="text-primary font-bold">
+                          Current Showcase
+                        </FormLabel>
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="MonthlyShowcase"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center justify-between rounded-md border p-3">
+                        <FormLabel className="text-primary font-bold">
+                          Monthly Showcase
+                        </FormLabel>
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="FeaturedShowcase"
+                    render={({ field }) => (
+                      <FormItem className="flex items-center justify-between rounded-md border p-3">
+                        <FormLabel className="text-primary font-bold">
+                          Featured Showcase
+                        </FormLabel>
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                            disabled={featuredProjects.length >= 3 && !field.value}
+                          />
+                        </FormControl>
+                      </FormItem>
+                    )}
+                  />
+                </section>
+
+                {/* Featured Order */}
+                <FormField
+                  control={form.control}
+                  name="FeaturedOrder"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-primary font-bold">
+                        Featured Order (1, 2, or 3)
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min="1"
+                          max="3"
+                          placeholder="e.g., 1, 2, or 3"
+                          disabled={
+                            !form.watch("FeaturedShowcase") ||
+                            (featuredProjects.length >= 3 && !form.getValues("FeaturedShowcase"))
+                          }
+                          className="placeholder:text-muted-foreground"
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                      {usedOrders.length > 0 && (
+                        <p className="text-xs text-muted-foreground">
+                          Orders in use: {usedOrders.join(", ")}
+                        </p>
+                      )}
                     </FormItem>
                   )}
                 />
