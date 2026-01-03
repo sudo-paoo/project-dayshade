@@ -7,6 +7,7 @@ import { ArrowUpRight, Star } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { getProjects } from "@/lib/projects/getProjects";
+import { getProjectImageUrl } from "@/lib/projects/utils";
 
 export default function FeaturedProjectsView() {
 
@@ -78,7 +79,7 @@ export default function FeaturedProjectsView() {
                 {/* Image Container */}
                 <div className="relative h-[240px] overflow-hidden">
                     <Image
-                      src={project.image_url}
+                      src={getProjectImageUrl(project.embed_link, project.image_url)}
                       alt={project.title}
                       fill
                       className="object-cover transition-transform duration-500 hover:scale-105"
@@ -114,7 +115,7 @@ export default function FeaturedProjectsView() {
                     {project.title}
                   </h3>
                   <p
-                    className="text-white/70 mb-4 line-clamp-2"
+                    className="text-white/70 mb-4 line-clamp-3"
                     title={project.description}
                   >
                     {project.description}

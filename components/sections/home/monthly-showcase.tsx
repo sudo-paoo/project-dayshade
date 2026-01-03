@@ -75,7 +75,7 @@ export function MonthlyShowcase() {
             {project.devs.join(", ")}
           </p>
           {/* Description */}
-          <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl">
+          <p className="text-white/90 mb-6 leading-relaxed text-left text-base md:text-lg lg:text-xl line-clamp-3">
             {project.description}
           </p>
 

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -28,9 +28,11 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Textarea } from "@/components/ui/textarea"
 import DelProjectButton from './DelProjectButton'
 import { updateProject } from '@/lib/projects/updateProjects'
+import { getProjects } from '@/lib/projects/getProjects'
 
 type EditProjectMenuProps = {
   project: any
+  onSuccess?: () => void;
 }
 
 const ProjectSchema = z.object({
@@ -47,12 +49,17 @@ const ProjectSchema = z.object({
   MonthlyShowcase: z.boolean().optional(),
   FeaturedShowcase: z.boolean().optional(),
   CurrentShowcase: z.boolean().optional(),
-  FeaturedOrder: z.string().optional()
+  FeaturedOrder: z.string().refine(
+    (val) => !val || (Number(val) >= 1 && Number(val) <= 3),
+    { message: "Featured order must be 1, 2, or 3" }
+  ).optional()
 })
 
-const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
+const EditProjectMenu = ({ project, onSuccess }: EditProjectMenuProps) => {
   const [loading, setLoading] = useState(false)
   const [open, setOpen] = useState(false)
+  const [featuredProjects, setFeaturedProjects] = useState<any[]>([])
+  const [usedOrders, setUsedOrders] = useState<number[]>([])
 
   const form = useForm<z.infer<typeof ProjectSchema>>({
     resolver: zodResolver(ProjectSchema),
@@ -62,16 +69,48 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
       Developers: project?.devs?.join(", ") || "",
       Tags: project?.tags?.join(", ") || "",
       YTLinks: project?.embed_link || "",
-      SiteURL: project?.site_url || "",
+      SiteURL: project?.site_link || "",
       PublishedDate: project?.published_date || "",
       Description: project?.description || "",
       MonthlyShowcase: project?.is_monthly ?? false,
       FeaturedShowcase: project?.is_featured ?? false,
       CurrentShowcase: project?.is_showcase ?? false,
-      FeaturedOrder: project?.featured_order || undefined,
+      FeaturedOrder: project?.featured_order?.toString() || "",
     },
     mode: "onChange",
   })
+
+  useEffect(() => {
+    if (open) {
+      loadFeaturedProjects()
+      // Reset form to current project values when dialog opens
+      form.reset({
+        Title: project?.title || "",
+        Image: project?.image_url || "",
+        Developers: project?.devs?.join(", ") || "",
+        Tags: project?.tags?.join(", ") || "",
+        YTLinks: project?.embed_link || "",
+        SiteURL: project?.site_link || "",
+        PublishedDate: project?.published_date || "",
+        Description: project?.description || "",
+        MonthlyShowcase: project?.is_monthly ?? false,
+        FeaturedShowcase: project?.is_featured ?? false,
+        CurrentShowcase: project?.is_showcase ?? false,
+        FeaturedOrder: project?.featured_order?.toString() || "",
+      })
+    }
+  }, [open, project])
+
+  async function loadFeaturedProjects() {
+    try {
+      const data = await getProjects()
+      const featured = data.filter((p: any) => p.is_featured && p.id !== project.id)
+      setFeaturedProjects(featured)
+      setUsedOrders(featured.map((p: any) => p.featured_order).filter(Boolean))
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   async function onSubmit(values: z.infer<typeof ProjectSchema>) {
     try {
@@ -92,6 +131,11 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
 
       toast.success("Project updated successfully!")
       setOpen(false)
+      
+      // Call onSuccess to refresh parent components
+      if (onSuccess) {
+        onSuccess();
+      }
     } catch (error) {
       console.error(error)
       toast.error("Something went wrong.")
@@ -237,6 +281,7 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                         <Checkbox
                         checked={field.value}
                         onCheckedChange={field.onChange}
+                        disabled={featuredProjects.length >= 3 && !project?.is_featured}
                         />
                         </FormControl>
                     </FormItem>
@@ -246,17 +291,29 @@ const EditProjectMenu = ({ project }: EditProjectMenuProps) => {
                 {/* Featured Order */}
                 <FormField control={form.control} name="FeaturedOrder" render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-primary font-bold">Featured Order</FormLabel>
+                    <FormLabel className="text-primary font-bold">Featured Order (1, 2, or 3)</FormLabel>
                       <FormControl>
-                        <Input type="number" placeholder='e.g., 1, 2, 3...' {...field} />
+                        <Input 
+                          type="number" 
+                          min="1"
+                          max="3"
+                          placeholder='e.g., 1, 2, 3' 
+                          disabled={!form.watch("FeaturedShowcase")}
+                          {...field} 
+                        />
                       </FormControl>
                     <FormMessage />
+                    {usedOrders.length > 0 && (
+                      <p className="text-xs text-muted-foreground">
+                        Orders in use: {usedOrders.join(", ")}
+                      </p>
+                    )}
                   </FormItem>
                 )}/>
 
                 {/* Footer */}
                 <DialogFooter className='flex flex-row items-center justify-end'>
-                  <DelProjectButton id={project.id}   />
+                  <DelProjectButton id={project.id} onSuccess={onSuccess} />
 
                   <Button type="submit" disabled={loading}>
                     {loading ? "Saving..." : "Save Changes"}

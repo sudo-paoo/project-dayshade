@@ -13,25 +13,35 @@ import {
 } from '@/components/ui/card';
 import { toast } from 'sonner'
 import { getProjects } from '@/lib/projects/getProjects';
+import { getProjectImageUrl } from '@/lib/projects/utils';
 
-const ProjectsListView = () => {
+type ProjectsListViewProps = {
+  onRefresh?: () => void;
+}
+
+const ProjectsListView = ({ onRefresh }: ProjectsListViewProps = {}) => {
   const [projects, setProjects] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-      async function loadProjects() {
-          try {
-            const data = await getProjects();
-            setProjects(data);
-          } catch (error) {
-              console.error(error);
-              toast.error("Something went wrong.");
-          } finally {
-              setLoading(false);
-          }
+  async function loadProjects() {
+    try {
+      const data = await getProjects();
+      setProjects(data);
+      // Call parent refresh to update showcase cards
+      if (onRefresh) {
+        onRefresh();
       }
-      loadProjects();
-    }, []);
+    } catch (error) {
+      console.error(error);
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    loadProjects();
+  }, []);
 
   if (loading) return <p>Loading...</p>;
 
@@ -49,13 +59,13 @@ const ProjectsListView = () => {
               )}
             </div>
             <div className="flex flex-col items-end gap-2">
-              <EditProjectMenu project={p} />
+              <EditProjectMenu project={p} onSuccess={loadProjects} />
             </div>
           </CardHeader>
           <CardContent>
-            {p.image_url ? (
+            {p.image_url || p.embed_link ? (
               <Image
-                src={p.image_url}
+                src={getProjectImageUrl(p.embed_link, p.image_url)}
                 alt={p.title}
                 width={600}
                 height={400}
