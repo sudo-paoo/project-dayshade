@@ -10,10 +10,14 @@ async function isRecruitmentOpen(): Promise<Settings> {
     const { data, error } = await supabase
       .from("settings")
       .select("is_open_recruitment")
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error("Error fetching recruitment status:", error);
+      return { is_recruitment_open: false };
+    }
+
+    if (!data) {
       return { is_recruitment_open: false };
     }
 
@@ -33,10 +37,14 @@ async function getRecruitmentStatus() {
     .from("settings")
     .select("is_open_recruitment")
     .eq("id", 1)
-    .single();
+    .maybeSingle();
 
   if (error) {
     console.error("Error fetching recruitment status:", error);
+    return { is_open_recruitment: false };
+  }
+
+  if (!data) {
     return { is_open_recruitment: false };
   }
 
