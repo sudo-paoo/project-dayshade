@@ -3,6 +3,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { addMember } from "@/lib/members/postMember";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -48,9 +52,6 @@ const formSchema = z.object({
   }),
   team: z.array(z.enum(["WADT", "GDT", "CPT", "MMT"]))
     .min(1, { message: "Please select at least one team." }),
-  status: z.enum(["accepted", "rejected"], {
-    message: "Please select a valid status."
-  })
 });
 
 const checkboxItems = [
@@ -73,6 +74,9 @@ const checkboxItems = [
 ] as const;
 
 export function JoinForm() {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -86,8 +90,31 @@ export function JoinForm() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("studentNumber", values.studentNumber);
+      formData.append("course", values.course);
+      formData.append("yearLevel", values.yearLevel);
+      formData.append("studentEmail", values.studentEmail);
+      formData.append("fbLink", values.fbLink);
+      // Convert array to comma-separated string for database
+      formData.append("team", values.team.join(", "));
+
+      await addMember(formData);
+
+      toast.success("Application submitted successfully! We'll contact you soon.");
+      form.reset();
+      router.push("/");
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.message || "Failed to submit application. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -100,7 +127,7 @@ export function JoinForm() {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder="John Doe" {...field} autoComplete="off" />
+                <Input placeholder="John Doe" {...field} autoComplete="off" className="placeholder:text-gray-400" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -117,6 +144,7 @@ export function JoinForm() {
                   placeholder="ex. 20256xxxxx"
                   {...field}
                   autoComplete="off"
+                  className="placeholder:text-gray-400"
                 />
               </FormControl>
               <FormMessage />
@@ -189,6 +217,7 @@ export function JoinForm() {
                   placeholder="ex. j.doe00001@student.tsu.edu.ph"
                   {...field}
                   autoComplete="off"
+                  className="placeholder:text-gray-400"
                 />
               </FormControl>
               <FormMessage />
@@ -206,6 +235,7 @@ export function JoinForm() {
                   placeholder="https://facebook.com/johndoe"
                   {...field}
                   autoComplete="off"
+                  className="placeholder:text-gray-400"
                 />
               </FormControl>
               <FormMessage />
@@ -249,7 +279,9 @@ export function JoinForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">Submit</Button>
+        <Button type="submit" className="w-full" disabled={loading}>
+          {loading ? "Submitting..." : "Submit"}
+        </Button>
       </form>
     </Form>
   );
