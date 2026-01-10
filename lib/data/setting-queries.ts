@@ -10,6 +10,7 @@ async function isRecruitmentOpen(): Promise<Settings> {
     const { data, error } = await supabase
       .from("settings")
       .select("is_open_recruitment")
+      .eq("id", 1)
       .maybeSingle();
 
     if (error) {
