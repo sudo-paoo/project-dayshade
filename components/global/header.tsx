@@ -19,7 +19,7 @@ export function NavbarDemo() {
     { name: "About", link: "/about" },
     { name: "Perks", link: "/perks" },
     { name: "Projects", link: "/projects" },
-    { name: "Leaderboard", link: "/leaderboard" },
+    { name: "Events", link: "/404Page" },
     // { name: "Design System", link: "/design" },
     // { name: "Admin", link: "/admin" },
   ];
