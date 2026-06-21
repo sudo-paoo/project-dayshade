@@ -59,8 +59,8 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/leaderboards" className="hover:text-pd-purple transition-colors">
-                    Leaderboards
+                  <Link href="/404Page" className="hover:text-pd-purple transition-colors">
+                    Events
                   </Link>
                 </li>
               </ul>
