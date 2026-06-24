@@ -22,10 +22,54 @@ import {
 import { Button } from "@/components/ui/button";
 import * as React from "react";
 import { Input } from "@/components/ui/input";
+import { Download } from "lucide-react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+}
+
+const exportColumns = [
+  { key: "name", label: "Name" },
+  { key: "studentNum", label: "Student Number" },
+  { key: "course", label: "Course" },
+  { key: "YrLevel", label: "Year Level" },
+  { key: "StudEmail", label: "Student Email" },
+  { key: "FBLink", label: "FB Link" },
+  { key: "team", label: "Team" },
+  { key: "status", label: "Status" },
+];
+
+function formatCsvValue(value: unknown) {
+  const rawValue = Array.isArray(value) ? value.join(", ") : String(value ?? "");
+  const safeValue = /^[=+\-@\t\r]/.test(rawValue) ? `'${rawValue}` : rawValue;
+
+  return `"${safeValue.replace(/"/g, '""')}"`;
+}
+
+function downloadCsv<TData>(rows: TData[]) {
+  const csvRows = [
+    exportColumns.map((column) => formatCsvValue(column.label)).join(","),
+    ...rows.map((row) => {
+      const record = row as Record<string, unknown>;
+
+      return exportColumns
+        .map((column) => formatCsvValue(record[column.key]))
+        .join(",");
+    }),
+  ];
+
+  const blob = new Blob([csvRows.join("\n")], {
+    type: "text/csv;charset=utf-8;",
+  });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  const date = new Date().toISOString().slice(0, 10);
+
+  link.href = url;
+  link.download = `recruitment-${date}.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
 }
 
 export function DataTable<TData, TValue>({
@@ -51,9 +95,11 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  const filteredRows = table.getFilteredRowModel().rows.map((row) => row.original);
+
   return (
     <div>
-      <div className="flex items-center py-4 gap-4">
+      <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-center sm:justify-between">
         <Input
           placeholder="Filter names"
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
@@ -63,6 +109,16 @@ export function DataTable<TData, TValue>({
           autoComplete="off"
           className="max-w-sm"
         />
+        <Button
+          type="button"
+          variant="outline"
+          onClick={() => downloadCsv(filteredRows)}
+          disabled={!filteredRows.length}
+          className="w-full sm:w-auto"
+        >
+          <Download className="mr-2 h-4 w-4" />
+          Download CSV
+        </Button>
       </div>
       <div className="overflow-hidden rounded-md border">
         <Table>
